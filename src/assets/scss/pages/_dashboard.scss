@@ -1,0 +1,367 @@
+//
+// Dashboard 1
+//
+
+.manage-tabs {
+    .nav-item {
+        .nav-link {
+            color: rgba($white, 0.6);
+            background: $info;
+            border: 0;
+            padding: 20px;
+            border-radius: 0;
+            position: relative;
+
+            &.active {
+                color: $white;
+
+                ::after {
+                    position: absolute;
+                    top: 100%;
+                    left: 50%;
+                    margin-left: -10px;
+                    width: 0;
+                    height: 0;
+                    border: solid transparent;
+                    border-width: 10px;
+                    border-top-color: $info;
+                    content: "";
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+}
+
+.manage-table {
+    thead {
+        tr {
+            th {
+                color: $gray-700;
+                font-weight: 500;
+            }
+        }
+    }
+
+    table {
+        border-collapse: separate !important;
+        border-spacing: 0 15px !important;
+    }
+
+    tr.advanced-table {
+        color: $gray-600;
+
+        td {
+            border-top: 2px solid $border-color !important;
+            border-bottom: 2px solid $border-color !important;
+
+            &:first-child {
+                border-left: 2px solid $border-color !important;
+            }
+
+            &:last-child {
+                border-right: 2px solid $border-color !important;
+            }
+        }
+
+        &.active {
+            td {
+                border-top: 2px solid $info !important;
+                border-bottom: 2px solid $info !important;
+
+                &:first-child {
+                    border-left: 2px solid $info !important;
+                }
+
+                &:last-child {
+                    border-right: 2px solid $info !important;
+                }
+            }
+        }
+
+        td {
+            vertical-align: middle;
+            font-size: 16px;
+            background: $white;
+            font-weight: 300;
+        }
+    }
+}
+
+.user-table {
+    thead {
+        tr {
+            th a,
+            th {
+                text-transform: uppercase;
+                color: $body-color;
+                font-weight: 500 !important;
+            }
+        }
+    }
+
+    td,
+    th {
+        padding: 0.9375rem 0.4rem !important;
+
+        &:first-child {
+            padding-left: 24px !important;
+        }
+    }
+
+    .ng2-smart-filters {
+        display: none;
+    }
+
+    .ng2-smart-action-edit-edit i,
+    .ng2-smart-action-delete-delete i,
+    .ng2-smart-action-edit-save i,
+    .ng2-smart-action-edit-cancel i {
+        width: 20px;
+        height: 20px;
+        padding: 7px 8px;
+        font-size: 15px;
+        line-height: 23px;
+        border-radius: 100%;
+    }
+
+    .ng2-smart-action-edit-save i {
+        border: 1px solid $success;
+        color: $success;
+    }
+
+    .ng2-smart-action-delete-delete i,
+    .ng2-smart-action-edit-cancel i {
+        border: 1px solid $danger;
+        color: $danger;
+    }
+
+    .ng2-smart-action-edit-edit i {
+        border: 1px solid $info;
+        color: $info;
+    }
+
+    tbody {
+        tr {
+            .category-select {
+                max-width: 150px;
+                border-radius: 20px;
+            }
+        }
+    }
+}
+
+.chat-list {
+    li {
+        .chat-icon {
+            display: none;
+        }
+
+        &:hover {
+            .chat-icon {
+                display: block;
+            }
+        }
+    }
+}
+
+//
+// Dashboard 2
+//
+
+.calendar-schedule-table {
+    width: 100%;
+
+    td {
+        padding: 17px 13px;
+        text-align: center;
+        font-weight: 400;
+
+        .month-option {
+            text-align: left;
+            color: $white;
+            font-weight: 400;
+            padding-left: 30px;
+        }
+
+        &.cal-active {
+            border-radius: 60px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+    }
+}
+
+.custom-datepicker {
+    .form-select {
+        border-color: $border-color;
+    }
+    .ngb-dp-arrow-btn {
+        color: $dark !important;
+    }
+    .ngb-dp-header {
+        background-color: $light-primary !important;
+        border-radius: 0 !important;
+    }
+
+    .ngb-dp-weekday {
+        color: $white !important;
+    }
+}
+
+.weight-border {
+    border-top: 2px solid $success;
+    height: 2px;
+    width: 100px;
+    display: inline-block;
+}
+
+.bottom-text {
+    position: absolute;
+    bottom: 1.57rem;
+}
+
+@media (max-width: 767px) {
+    .bottom-text {
+        right: 1.57rem;
+    }
+}
+
+.mailbox-widget {
+    .nav-tabs {
+        border-bottom: 0;
+
+        .nav-link {
+            border-bottom: 3px solid transparent;
+            border: 0;
+            color: $muted;
+
+            &.active {
+                border-bottom: 3px solid $success;
+                color: $success;
+            }
+        }
+    }
+}
+
+@keyframes dasharray-craziness {
+    0% {
+        stroke-dasharray: 5px;
+    }
+
+    50% {
+        stroke-dasharray: 6px;
+    }
+
+    100% {
+        stroke-dasharray: 7px;
+    }
+}
+
+ngb-datepicker {
+    &.custom-datepicker {
+        width: 100%;
+        border: none !important;
+        .bg-light {
+            background-color: #707cd2 !important;
+        }
+
+        .text-muted {
+            color: $white !important;
+        }
+
+        .custom-select {
+            background-color: rgba(0, 0, 0, 0.1);
+            border: none;
+            color: $white;
+            margin: 0 2px;
+        }
+
+        .ngb-dp-arrow-btn {
+            box-shadow: none;
+            color: $white;
+            outline: none;
+        }
+
+        .ngb-dp-header {
+            padding: 15px 0 !important;
+        }
+
+        .ngb-dp-navigation-chevron {
+            border-width: 0.1em 0.1em 0 0 !important;
+            width: 0.5em !important;
+            height: 0.5em !important;
+        }
+
+        .ngb-dp-day {
+            width: unset;
+            margin-bottom: -1px;
+            margin: 13px 0;
+
+            .btn-light {
+                color: $white;
+                font-weight: 400;
+
+                &:hover {
+                    border-radius: 60px;
+                    background: rgba(0, 0, 0, 0.1);
+                }
+            }
+        }
+
+        .ngb-dp-today {
+            border-radius: 60px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .ngb-dp-weekday {
+            margin-bottom: -1px;
+            font-style: normal;
+            text-transform: uppercase;
+            color: $white;
+            font-weight: 400;
+        }
+
+        .ngb-dp-weekdays {
+            border-bottom: none;
+        }
+
+        [ngbDatepickerDayView] {
+            border-radius: 50%;
+            box-shadow: none;
+        }
+
+        .ngb-dp-month {
+            width: 100%;
+
+            .ngb-dp-week {
+                justify-content: space-evenly;
+                padding: 0 !important;
+            }
+        }
+    }
+}
+
+//
+// Dashboard 3
+//
+
+.weather-report {
+    .weather-type {
+        color: $gray-200;
+    }
+
+    &.active {
+        border-bottom: 2px solid $danger;
+
+        .weather-type {
+            color: $danger;
+        }
+    }
+}
+
+.primary-carousel {
+    .p-img {
+        height: 353px;
+        width: 100%;
+    }
+}

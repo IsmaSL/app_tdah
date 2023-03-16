@@ -1,0 +1,26 @@
+<div class="card shadow">
+    <div class="p-4 border-bottom">
+        <div class="align-items-center">
+            <div class="text-center">
+                <h4 class="mb-0 fw-light">Pacientes Atendidos Recientemente</h4>
+            </div>
+        </div>
+    </div>
+    <div class="card-body bg-light">
+        <div class="d-flex align-items-center py-3" *ngFor="let e of earning">
+            <img src="{{e.img}}" class="rounded-circle" width="60">
+            <div class="ms-3">
+                <h4 class="fw-normal mb-0">{{e.name}}</h4>
+                <span class="text-muted">{{e.date}}</span>
+            </div>
+            <div class="ms-auto">
+                <h2 class="mb-0 text-info font-medium">
+                    <i [ngClass]="[e.icon]"></i>
+                </h2>
+            </div>
+        </div>
+        <div class="pt-3">
+            <a href="/app/patients" type="button" class="btn btn-info text-white btn-rounded d-block w-100">Ver todos los pacientes</a>
+        </div>
+    </div>
+</div>

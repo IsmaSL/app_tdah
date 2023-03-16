@@ -1,0 +1,219 @@
+<div class="row">
+    <!-- Column -->
+    <div class="col-lg-4 col-xlg-3 col-md-5">
+        <div class="card shadow">
+            <div class="card-body pb-1">
+                <div class="mt-4 text-center">
+                    <img src="assets/images/users/patient-user.jpg" class="rounded-circle" width="150" />
+                    <h3 class="card-title font-medium mt-3">Brandon Azael Muciño Santiesteban</h3>
+                    <h4 class="card-subtitle">Estudiante de primaria</h4>
+                    <div class="row text-center justify-content-md-center mt-4">
+                        <div class="col-5">
+                            <a href="javascript:void(0)" class="link">
+                                <h4 class="">
+                                    <i class="fas fa-child me-2"></i>
+                                    6 Años
+                                </h4>
+                            </a>
+                        </div>
+                        <div class="col-5">
+                            <a href="javascript:void(0)" class="link">
+                                <h4 class="">
+                                    <i class="fas fa-stethoscope me-2"></i>
+                                    4 Pruebas
+                                </h4>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row text-center justify-content-md-center mt-4">
+                        <span class="card-title">Probabilidad</span>
+                        <span class="h4 rounded-pill font-medium bg-success text-white py-1 col-3">85%</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <hr>
+            </div>
+            <div class="card-body pt-2">
+                <button type="button" class="btn btn-info text-white btn-rounded d-block w-100">
+                    <i class="fas fa-stethoscope"></i> Iniciar prueba
+                </button>
+                <button type="button" class="btn btn-success text-white btn-rounded d-block w-100 mt-3">
+                    <i class="fa fas fa-download"></i> Exportar información
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <!-- Column -->
+    <div class="col-lg-8 col-xlg-9 col-md-7">
+        <div class="card shadow">
+            <div class="card-body">
+                <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills">
+                    <li [ngbNavItem]="1">
+                        <a ngbNavLink>Seguimiento</a>
+                        <ng-template ngbNavContent>
+                            <div class="row pt-3">
+                                <app-history-tdah-tests></app-history-tdah-tests>
+                            </div>
+                            <hr>
+                            <div class="row px-3">
+                                <app-table-results-test></app-table-results-test>
+                            </div>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="2">
+                        <a ngbNavLink>Perfil</a>
+                        <ng-template ngbNavContent>
+                            <div class="card-body">
+                                <!-- <div class="row">
+                                    <quill-editor></quill-editor>
+                                </div> -->
+                                <div class="row mt-auto">
+                                    <div class="col-md-3 col-xs-6 b-r">
+                                        <strong>Fecha de registro</strong>
+                                        <br>
+                                        <p class="text-muted">21/12/2022</p>
+                                    </div>
+                                    <div class="col-md-3 col-xs-6 b-r">
+                                        <strong>Celular</strong>
+                                        <br>
+                                        <p class="text-muted">(123) 456 7890</p>
+                                    </div>
+                                    <div class="col-md-3 col-xs-6 b-r">
+                                        <strong>Correo</strong>
+                                        <br>
+                                        <p class="text-muted">johnathan@admin.com</p>
+                                    </div>
+                                    <div class="col-md-3 col-xs-6">
+                                        <strong>Ciudad</strong>
+                                        <br>
+                                        <p class="text-muted">Orizaba, Ver.</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h3>Descripción del paciente</h3>
+                                <p class="mt-4">Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In
+                                    enim justo, rhoncus ut,
+                                    imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+                                    Integer
+                                    tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend
+                                    tellus.
+                                    Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                    Ipsum has been
+                                    the industry's standard dummy text ever since the 1500s, when an unknown printer
+                                    took a galley
+                                    of type and scrambled it to make a type specimen book. It has survived not only five
+                                    centuries
+                                </p>
+                                <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem
+                                    Ipsum passages,
+                                    and more recently with desktop publishing software like Aldus PageMaker including
+                                    versions
+                                    of Lorem Ipsum.</p>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="mt-3">Padecimientos previos</h4>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item px-0">
+                                                <i class="fas fa-heartbeat"></i> Trastorno Ejemplo 1
+                                            </li>
+                                            <li class="list-group-item px-0">
+                                                <i class="fas fa-heartbeat"></i> Trastorno Ejemplo 2
+                                            </li>
+                                            <li class="list-group-item px-0">
+                                                <i class="fas fa-heartbeat"></i> Trastorno Ejemplo 3
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <h4 class="mt-3">Tratamientos</h4>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item px-0">
+                                                <i class="fas fa-pills"></i> Tratamiento Ejemplo 1
+                                            </li>
+                                            <li class="list-group-item px-0">
+                                                <i class="fas fa-pills"></i> Tratamiento Ejemplo 2
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-md-end">
+                                <a href="" class="btn btn-success btn-rounded">
+                                    <i class="fas fa-edit"></i> Editar información
+                                </a>
+                            </div>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="3">
+                        <a ngbNavLink>Settings</a>
+                        <ng-template ngbNavContent>
+                            <div class="card-body">
+                                <form class="form-horizontal form-material">
+                                    <div class="mb-3">
+                                        <label class="col-md-12">Full Name</label>
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="Johnathan Doe"
+                                                class="form-control form-control-line">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="example-email" class="col-md-12">Email</label>
+                                        <div class="col-md-12">
+                                            <input type="email" placeholder="johnathan@admin.com"
+                                                class="form-control form-control-line" name="example-email"
+                                                id="example-email">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="col-md-12">Password</label>
+                                        <div class="col-md-12">
+                                            <input type="password" value="password"
+                                                class="form-control form-control-line">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="col-md-12">Phone No</label>
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="123 456 7890"
+                                                class="form-control form-control-line">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="col-md-12">Message</label>
+                                        <div class="col-md-12">
+                                            <textarea rows="5" class="form-control form-control-line"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="col-sm-12">Select Country</label>
+                                        <div class="col-sm-12">
+                                            <select class="form-select form-control-line">
+                                                <option>London</option>
+                                                <option>India</option>
+                                                <option>Usa</option>
+                                                <option>Canada</option>
+                                                <option>Thailand</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="col-sm-12">
+                                            <button class="btn btn-success">Update Profile</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </ng-template>
+                    </li>
+                </ul>
+                <div [ngbNavOutlet]="nav" class="mt-2"></div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Column -->
+</div>

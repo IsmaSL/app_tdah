@@ -1,0 +1,27 @@
+
+<div class="d-md-flex align-items-center px-3">
+    <h4 class="mb-0">Prevalencia del TDAH</h4>
+    <div class="ms-auto mt-3 mt-md-0">
+        <ul class="list-inline mb-0">
+            <li class="list-inline-item text-info">
+                <i class="fa fa-circle"></i> Déficit de Atención
+            </li>
+            <li class="list-inline-item text-muted">
+                <i class="fa fa-circle"></i> Hiperactividad
+            </li>
+            <li class="list-inline-item text-danger">
+                <i class="fa fa-circle"></i> Ambos
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="mb-0 mt-2 d-flex flex-column w-100" style="height: 360px">
+    <apx-chart [series]="yearlyproductsalesChartOptions.series" [chart]="yearlyproductsalesChartOptions.chart"
+        [xaxis]="yearlyproductsalesChartOptions.xaxis" [yaxis]="yearlyproductsalesChartOptions.yaxis"
+        [grid]="yearlyproductsalesChartOptions.grid" [stroke]="yearlyproductsalesChartOptions.stroke"
+        [tooltip]="yearlyproductsalesChartOptions.tooltip" [fill]="yearlyproductsalesChartOptions.fill"
+        [dataLabels]="yearlyproductsalesChartOptions.dataLabels" [legend]="yearlyproductsalesChartOptions.legend"
+        [colors]="yearlyproductsalesChartOptions.colors" [markers]="yearlyproductsalesChartOptions.markers">
+    </apx-chart>
+</div>

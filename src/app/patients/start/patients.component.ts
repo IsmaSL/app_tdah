@@ -1,0 +1,13 @@
+import { Component, AfterViewInit } from '@angular/core';
+
+@Component({
+  // selector: 'app-patients',
+  templateUrl: './patients.component.html',
+  styleUrls: ['./patients.component.scss']
+})
+export class PatientsComponent implements AfterViewInit {
+
+  constructor() { }
+
+  ngAfterViewInit() { }
+}
