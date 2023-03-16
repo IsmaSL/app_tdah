@@ -48,7 +48,7 @@ export const tableList: Table[] = [
     },
     {
         Id: 6,
-        Name: 'Santa Teresita Gonzales Tezoco',
+        Name: 'Santa Teresita González Tezoco',
         Contact: 'fake_email@gmail.com',
         Diagnosis: 'TDAH-1',
         LastDate: '01/03/2023',

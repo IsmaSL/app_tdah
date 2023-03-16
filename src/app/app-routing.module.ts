@@ -36,6 +36,10 @@ const Approutes: Routes = [
         ]
       },
       {
+        path: 'tests',
+        loadChildren: () => import('./tests/tests.module').then(m => m.TestsModule)
+      },
+      {
         path: 'component',
         loadChildren: () => import('./component/component.module').then(m => m.ComponentsModule)
       },

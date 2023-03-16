@@ -61,11 +61,15 @@
         </tbody>
     </table>
 </div>
-<div class="d-flex justify-content-between p-2">
-    <ngb-pagination [(page)]="cpage" [pageSize]="cpageSize" [collectionSize]="clientList.length"></ngb-pagination>
-    <select class="form-select" style="width: auto" [(ngModel)]="cpageSize">
-        <option [ngValue]="2">2 items por página</option>
-        <option [ngValue]="4">4 items por página</option>
-        <option [ngValue]="6">6 items por página</option>
-    </select>
+<div class="d-flex justify-content-between flex-column flex-lg-row">
+    <div>
+        <ngb-pagination [(page)]="cpage" [pageSize]="cpageSize" [collectionSize]="clientList.length"></ngb-pagination>
+    </div>
+    <div>
+        <select class="form-select" style="width: auto" [(ngModel)]="cpageSize">
+            <option [ngValue]="2">2 items por página</option>
+            <option [ngValue]="4">4 items por página</option>
+            <option [ngValue]="6">6 items por página</option>
+        </select>
+    </div>
 </div>

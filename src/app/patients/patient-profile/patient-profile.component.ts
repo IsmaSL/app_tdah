@@ -6,7 +6,7 @@ import { Component, AfterViewInit } from '@angular/core';
   styleUrls: ['./patient-profile.component.scss']
 })
 export class PatientProfileComponent {
-  active = 2;
+  active = 1;
 
   subtitle: string;
   constructor() {
