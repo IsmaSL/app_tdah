@@ -1,0 +1,34 @@
+<!-- Navbar for Wizard Starts -->
+<ul class="wizard-navbar">
+    <div class="liner"></div>
+
+    <li class="active flex-fill">
+        <a [ngClass]="(page==='Dispositivos')?'nav-link active':'nav-link'" uiSrefActive="active" uiSref="dispositivos" data-toggle="tab" title="dispositivos">
+            <span class="round-tabs one">
+                <i class="mdi mdi-cellphone-link font-medium-2"></i>
+            </span>
+        </a>
+    </li>
+    <li class="flex-fill">
+        <a [ngClass]="(page==='Pruebas')?'nav-link active':'nav-link'" uiSrefActive="active" uiSref="pruebas" data-toggle="tab" title="pruebas">
+            <span class="round-tabs two">
+                <i class="mdi mdi-heart-pulse font-medium-2"></i>
+            </span> 
+        </a>
+    </li>
+    <li class="flex-fill">
+        <a [ngClass]="(page==='Address')?'nav-link active':'nav-link'" uiSrefActive="active" uiSref="address" data-toggle="tab" title="address">
+            <span class="round-tabs three">
+                <i class="mdi mdi-comment-question-outline font-medium-2"></i>
+            </span>
+        </a>
+    </li>
+    <li class="flex-fill">
+        <a [ngClass]="(page==='Result')?'nav-link active':'nav-link'" uiSrefActive="active" uiSref="result" data-toggle="tab" title="completed">
+            <span class="round-tabs four">
+                <i class="mdi mdi-comment-question-outline font-medium-2"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+<!-- Navbar for Wizard Ends -->
