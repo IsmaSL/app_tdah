@@ -2,7 +2,7 @@ import { Table } from './table-patients';
 
 export const tableList: Table[] = [
     {
-        Id: 1,
+        Id: 123456,
         Name: 'Adolfo Meza Romero',
         Contact: 'fake_email@gmail.com',
         Diagnosis: 'TDAH-1',
@@ -11,7 +11,7 @@ export const tableList: Table[] = [
         imagePath: 'assets/images/users/user1.jpg'
     },
     {
-        Id: 2,
+        Id: 234567,
         Name: 'Brandon Azael Muciño Santiesteban',
         Contact: 'fake_email@gmail.com',
         Diagnosis: 'TDAH-2',
@@ -20,7 +20,7 @@ export const tableList: Table[] = [
         imagePath: 'assets/images/users/user2.jpg'
     },
     {
-        Id: 3,
+        Id: 345678,
         Name: 'Ismael Santarrosa López',
         Contact: 'fake_email@gmail.com',
         Diagnosis: 'TDAH-3',
@@ -29,7 +29,7 @@ export const tableList: Table[] = [
         imagePath: 'assets/images/users/user3.jpg'
     },
     {
-        Id: 4,
+        Id: 456789,
         Name: 'Óscar Crecencio Rico',
         Contact: 'fake_email@gmail.com',
         Diagnosis: 'Normal',
@@ -38,7 +38,7 @@ export const tableList: Table[] = [
         imagePath: 'assets/images/users/user4.jpg'
     },
     {
-        Id: 5,
+        Id: 567890,
         Name: 'Lissete Rosete Rosas',
         Contact: 'fake_email@gmail.com',
         Diagnosis: 'Normal',
@@ -47,7 +47,7 @@ export const tableList: Table[] = [
         imagePath: 'assets/images/users/user5.jpg'
     },
     {
-        Id: 6,
+        Id: 678901,
         Name: 'Santa Teresita González Tezoco',
         Contact: 'fake_email@gmail.com',
         Diagnosis: 'TDAH-1',
@@ -56,7 +56,7 @@ export const tableList: Table[] = [
         imagePath: 'assets/images/users/user1.jpg'
     },
     {
-        Id: 7,
+        Id: 789012,
         Name: 'Luis Rodolfo Cabrera Elías',
         Contact: 'fake_email@gmail.com',
         Diagnosis: 'TDAH-2',
@@ -65,7 +65,7 @@ export const tableList: Table[] = [
         imagePath: 'assets/images/users/user1.jpg'
     },
     {
-        Id: 8,
+        Id: 890123,
         Name: 'Artuto Uriel Reyes García',
         Contact: 'fake_email@gmail.com',
         Diagnosis: 'TDAH-3',
@@ -74,7 +74,7 @@ export const tableList: Table[] = [
         imagePath: 'assets/images/users/user2.jpg'
     },
     {
-        Id: 9,
+        Id: 901234,
         Name: 'Ángela López Ochoa',
         Contact: 'fake_email@gmail.com',
         Diagnosis: 'Normal',

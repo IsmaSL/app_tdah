@@ -15,7 +15,6 @@ import { NotFoundComponent } from './error/not-found/not-found.component';
 import { VerticalNavigationComponent } from './shared/vertical-header/vertical-navigation.component';
 import { VerticalSidebarComponent } from './shared/vertical-sidebar/vertical-sidebar.component';
 import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
-// import { HorizontalNavigationComponent } from './shared/horizontal-header/horizontal-navigation.component';
 import { HorizontalSidebarComponent } from './shared/horizontal-sidebar/horizontal-sidebar.component';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -54,7 +53,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     VerticalNavigationComponent,
     BreadcrumbComponent,
     VerticalSidebarComponent,
-    // HorizontalNavigationComponent,
     HorizontalSidebarComponent,
     LoginComponent,
     NotFoundComponent,

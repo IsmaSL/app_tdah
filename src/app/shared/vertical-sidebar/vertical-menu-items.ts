@@ -18,7 +18,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: []
   },
   {
-    path: '',
+    path: '/app/devices',
     title: 'Dispositivos',
     icon: 'mdi mdi-cellphone-link',
     class: '',
