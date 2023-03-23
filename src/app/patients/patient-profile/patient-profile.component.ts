@@ -1,16 +1,26 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-patient-profile',
   templateUrl: './patient-profile.component.html',
-  styleUrls: ['./patient-profile.component.scss']
+  styleUrls: ['./patient-profile.component.scss'],
+  providers: [NgbModalConfig, NgbModal],
 })
 export class PatientProfileComponent {
   active = 1;
 
   subtitle: string;
-  constructor() {
-    this.subtitle = 'This is some text within a card block.';
+  constructor(config: NgbModalConfig, private modalService: NgbModal) {
+    config.backdrop = 'static';
+		config.keyboard = false;
+    config.centered = false;
+    config.animation = true;
+    config.size = "sm"
   }
+
+  open(content) {
+		this.modalService.open(content);
+	}
 
 }
