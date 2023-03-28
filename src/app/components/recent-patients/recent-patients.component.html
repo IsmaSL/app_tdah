@@ -1,5 +1,5 @@
 <div class="card shadow">
-    <div class="p-4 border-bottom">
+    <div class="p-4 border-bottom bg-info text-white">
         <div class="align-items-center">
             <div class="text-center">
                 <h4 class="mb-0 fw-light">Pacientes Atendidos Recientemente</h4>
@@ -8,7 +8,7 @@
     </div>
     <div class="card-body bg-light">
         <div class="d-flex align-items-center py-3 my-hover" *ngFor="let e of earning">
-            <img src="{{e.img}}" class="rounded-circle" width="60">
+            <img [src]="e.img" class="rounded-circle" width="60" />
             <div class="ms-3">
                 <h4 class="fw-normal mb-0">{{e.name}}</h4>
                 <span class="text-muted">{{e.date}}</span>

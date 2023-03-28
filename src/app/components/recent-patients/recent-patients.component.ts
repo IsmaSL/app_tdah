@@ -11,21 +11,21 @@ export class RecentPatientsComponent {
 
   earning: Object[] = [
     {
-      img: 'assets/images/users/user1.jpg',
-      name: 'Andrew Simon',
-      date: '10-11-2016',
+      img: 'assets/images/users/user_1.jpg',
+      name: 'Adolfo Meza Romero',
+      date: '10-11-2022',
       icon: 'mdi mdi-open-in-new'
     },
     {
-      img: 'assets/images/users/user2.jpg',
-      name: 'John Deo',
-      date: '01-11-2018',
+      img: 'assets/images/users/user_2.jpg',
+      name: 'Brandon Azael Muciño Santiesteban',
+      date: '01-11-2022',
       icon: 'mdi mdi-open-in-new'
     },
     {
-      img: 'assets/images/users/user3.jpg',
-      name: 'Shaina Nehwal',
-      date: '26-03-2018',
+      img: 'assets/images/users/user_3.jpg',
+      name: 'Lissete Rosete Rosas',
+      date: '26-03-2023',
       icon: 'mdi mdi-open-in-new'
     }
   ];
