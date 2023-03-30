@@ -13,8 +13,8 @@ export class TestsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.router.navigate(['/app/tests/devices'], { skipLocationChange: true });
-    this.router.navigate(['/app/tests/sync'], { skipLocationChange: true });
+    this.router.navigate(['/app/tests/devices'], { skipLocationChange: true });
+    //this.router.navigate(['/app/tests/sync'], { skipLocationChange: true });
   }
 
 }
