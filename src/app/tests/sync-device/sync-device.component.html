@@ -1,0 +1,30 @@
+<form #workForm="ngForm" class="editForm" novalidate>
+    <div>
+        <div class="tab-pane active">
+            <h4 class="head text-center">{{title}}</h4>
+            <br />
+            <div class="row">
+                <div class="col-12 text-center">
+                    <!-- <p class="display-1">Hola</p>  -->
+                    <div *ngIf="showDiv">
+                        <span class="loader mt-4"></span>
+                        <span class="loader2 mt-1 mb-5"></span>
+                    </div>
+                    <div *ngIf="!showDiv">
+                        <div class="d-flex justify-content-center">
+                            <div class="success-icon mt-3 mb-5">
+                                <div class="success-icon__tip"></div>
+                                <div class="success-icon__long"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group text-center space-20">
+                <button uiSref="dispositivos" type="button" class="btn btn-raised btn-secondary me-1"
+                    (click)="cancel()"> Anterior </button>
+                <button uiSref="#" type="button" class="btn btn-raised btn-info" [disabled]="buttonDisabled" (click)="save()"> Siguiente </button>
+            </div>
+        </div>
+    </div>
+</form>

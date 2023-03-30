@@ -4,6 +4,8 @@ import { Routes, RouterModule } from "@angular/router";
 import { TestsComponent } from "./tests.component";
 import { SelectDeviceComponent } from "./select-device/select-device.component";
 import { SelectTestComponent } from "./select-test/select-test.component";
+import { SyncDeviceComponent } from "./sync-device/sync-device.component";
+import { StartTestComponent } from "./start-test/start-test.component";
 
 const routes: Routes = [
     {
@@ -26,7 +28,21 @@ const routes: Routes = [
                 data: {
                     title: 'Pruebas'
                 }
-            }
+            },
+            {
+                path: 'sync',
+                component: SyncDeviceComponent,
+                data: {
+                    title: 'Sincronizar Dispositivo'
+                }
+            },
+            {
+                path: 'start',
+                component: StartTestComponent,
+                data: {
+                    title: 'Iniciar Prueba'
+                }
+            },
         ]
     }
 ];

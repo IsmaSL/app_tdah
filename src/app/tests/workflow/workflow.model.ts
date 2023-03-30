@@ -1,5 +1,7 @@
 export const STEPS = {
     devices: 'devices',
-    tests: 'tests'
+    tests: 'tests',
+    sync: 'sync',
+    start: 'start'
 };
 
