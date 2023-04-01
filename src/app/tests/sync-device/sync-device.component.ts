@@ -24,7 +24,7 @@ export class SyncDeviceComponent implements OnInit {
     setTimeout(() => {
       this.showDiv = false;
       this.buttonDisabled = false;
-    }, 7000); 
+    }, 4000); 
   }
 
   save() {
