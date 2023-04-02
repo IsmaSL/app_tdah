@@ -12,7 +12,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 
 export class SelectTestComponent implements OnInit {
-  title = 'Selecciona un tipo de prueba';
+  title = 'Detalles del dispositivo';
 
   constructor(
     private router: Router,

@@ -1,1 +1,44 @@
-<p>start-test works!</p>
+<form #workForm="ngForm" class="editForm" novalidate>
+    <div>
+        <div class="tab-pane active">
+            <h4 class="head text-center">Iniciar prueba</h4>
+            <br />
+            <div class="row mb-5">
+                <div class="col-12 fs-4">
+                    <p class=" text-center">Antes de empezar, lea con atención los siguientes recomnedaciones para obtener un resultado más preciso</p>
+                    <div class="row justify-content-md-center">
+                        <div class="col-auto"></div>
+                        <div class="col-7">
+                            <p>
+                                1.- No utilice el dispositivo si la bateria se encuentra a menos del 50% de su capacidad. <br>
+                                2.- Ajuste correctamente el dispositivo para obtener valores precisos. <br>
+                                3.- La prueba debe tener una duración mínima de 20 minutos. <br>
+                                4.- Ante cualquier interrupción se recomienda iniciar la prueba de nuevo. <br>
+                                5.- Mantenga un ambiente libre de estrés y distracciones. <br>
+                            </p>
+                        </div>
+                        <div class="col-auto"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mi modal Start -->
+            <ng-template #content let-c="close" let-d="dismiss">
+                <div class="modal-header bg-success text-white">
+                    <h4 class="modal-title" id="modal-basic-title">Iniciando prueba...</h4>
+                    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+                </div>
+                <div class="modal-body fs-4">
+                    <div class="row p-5 justify-content-md-center">
+                        <span class="loader3"></span>
+                        <p class="text-center">Preparando todo...</p>
+                    </div>
+                </div>
+            </ng-template>
+            <!-- Mi modal End -->
+            <div class="form-group text-center space-20">
+                <button uiSref="#" type="button" class="btn btn-raised btn-lg btn-danger me-1" (click)="cancel()"> CANCELAR </button>
+                <button uiSref="#" type="button" class="btn btn-raised btn-lg btn-success" (click)="open(content)"> INICIAR PRUEBA </button>
+            </div>
+        </div>
+    </div>
+</form>

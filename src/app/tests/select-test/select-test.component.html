@@ -1,14 +1,38 @@
 <form #workForm="ngForm" class="editForm" novalidate>
-    <div >
+    <div>
         <div class="tab-pane active">
             <h4 class="head text-center">{{title}}</h4>
-            <br/>
-            <div class="row">
-                <p class="text-center">En desarrollo, disculpe las molestias</p> 
+            <br />
+            <div class="row mb-4 px-5 fs-4">
+                <div class="col-lg-3 col-sm-12 mb-sm-3">
+                    <img src="assets/images/devices/device_1.jpg" class="img-fluid img-thumbnail" alt="">
+                </div>
+                <div class="col-lg-5 col-sm-12 mb-sm-3">
+                    <p><span class="font-medium">Nombre:</span> Muse Band 2</p>
+                    <p><span class="font-medium">Modelo:</span> MU-03-GY-ML</p>
+                    <p><span class="font-medium">Características:</span></p>
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="true" aria-label="...">
+                    Lectura de EEG en tiempo real <br>
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="true" aria-label="...">
+                    Medición de ritmo cardíaco <br>
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="true" aria-label="...">
+                    Acelerómetro para la actividad física <br>
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="true" aria-label="...">
+                    Medición de respiración y presión sanguínea
+                </div>
+                <div class="col-lg-4 col-sm-12">
+                    <p><span class="font-medium">Marca:</span> MUSE</p>
+                    <p>
+                        <span class="font-medium">Descripción:</span><br>
+                        Diadema de detección cerebral multisensor de meditación y retroalimentación sensible 
+                        para ondas cerebrales, corazón, cuerpo y actividad respiratoria
+                    </p>
+                    <!-- <p><span class="font-medium">Último uso:</span> 10/03/2023</p> -->
+                </div>
             </div>
             <div class="form-group text-center space-20">
-                <button uiSref="dispositivos" type="button" class="btn btn-raised btn-secondary me-1" (click)="cancel()"> Anterior </button>
-                <button uiSref="#" type="button" class="btn btn-raised btn-info" (click)="save()"> Siguiente </button>
+                <button uiSref="#" type="button" class="btn btn-raised btn-lg btn-info me-1" (click)="cancel()"> Anterior </button>
+                <button uiSref="#" type="button" class="btn btn-raised btn-lg btn-success" (click)="save()"> Siguiente </button>
             </div>
         </div>
     </div>

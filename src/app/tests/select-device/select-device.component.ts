@@ -14,7 +14,7 @@ import { NgbCarouselConfig, NgbCarousel} from '@ng-bootstrap/ng-bootstrap';
 })
 export class SelectDeviceComponent implements OnInit {
 
-  title = 'Por favor seleccione el dispositivo a usar.';
+  title = 'Por favor seleccione el dispositivo a usar';
   images = [
     'assets/images/devices/device_1.jpg',
     'assets/images/devices/device_2.jpg',

@@ -26,7 +26,7 @@ const routes: Routes = [
                 path: 'tests',
                 component: SelectTestComponent,
                 data: {
-                    title: 'Pruebas'
+                    title: 'Detalles del dispositivo'
                 }
             },
             {

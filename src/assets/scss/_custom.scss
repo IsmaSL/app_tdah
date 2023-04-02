@@ -1,1 +1,21 @@
 // In this scss you can overwrite all our scss, we suggested you to add your scss into this, so whenever the update comes it will not affect your code.
+/* Works on Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #00aeff #e3e3e3;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #e3e3e3;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #00aeff;
+    border-radius: 20px;
+    border: 1px solid #e3e3e3;
+}
