@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouteInfo } from './vertical-sidebar.metadata';
 import { VerticalSidebarService } from './vertical-sidebar.service';
@@ -10,55 +10,31 @@ import { VerticalSidebarService } from './vertical-sidebar.service';
 })
 export class VerticalSidebarComponent {
   showMenu = '';
-  showSubMenu = '';
   public sidebarnavItems: RouteInfo[] = [];
   path = '';
-  public isCollapsed = true;
-
-  @Input() showClass: boolean = false;
-  @Output() notify: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-
-  handleNotify() {
-    this.notify.emit(!this.showClass);
-  }
 
   constructor(private menuServise: VerticalSidebarService, private router: Router) {
     this.menuServise.items.subscribe(menuItems => {
       this.sidebarnavItems = menuItems;
-
+      
       // Active menu 
-      this.sidebarnavItems.filter(m => m.submenu.filter(
+      this.sidebarnavItems.filter(m => (
         (s) => {
           if (s.path === this.router.url) {
             this.path = m.title;
           }
         }
       ));
-      this.addExpandClass(this.path);
+      
+      // this.addExpandClass(this.path);
     });
   }
 
   addExpandClass(element: any) {
-    if (element === this.showMenu) {
-      this.showMenu = '0';
-    } else {
-      this.showMenu = element;
-    }
+    this.showMenu = element;
   }
 
-  addActiveClass(element: any) {
-    if (element === this.showSubMenu) {
-      this.showSubMenu = '0';
-    } else {
-      this.showSubMenu = element;
-    }
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
+  isLinkActive(linkPath: string): boolean {
+    return this.router.isActive(linkPath, false);
   }
-
-
 }

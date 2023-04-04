@@ -40,9 +40,13 @@ const Approutes: Routes = [
         loadChildren: () => import('./devices/devices.module').then(m => m.DevicesModule)
       },
       {
-        path: 'tests',
-        loadChildren: () => import('./tests/tests.module').then(m => m.TestsModule)
+        path: 'prepare-test',
+        loadChildren: () => import('./prepare-test/prepare-test.module').then(m => m.PrepareTestModule)
       },
+      {
+        path: 'test',
+        loadChildren: () => import('./test/test.module').then(m => m.TestModule)
+      }
     ]
   },
   {

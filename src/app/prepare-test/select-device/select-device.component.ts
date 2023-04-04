@@ -39,6 +39,6 @@ export class SelectDeviceComponent implements OnInit {
     let firstState = this.workflowService.getFirstInvalidStep(STEPS.tests);
     if (firstState.length > 0) {
     };
-    this.router.navigateByUrl('/app/tests/tests', { skipLocationChange: true });
+    this.router.navigateByUrl('/app/prepare-test/tests', { skipLocationChange: true });
   }
 }

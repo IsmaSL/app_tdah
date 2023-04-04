@@ -48,7 +48,10 @@
               "src/assets/scss/style.scss",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "ng2-charts"
+            ]
           },
           "configurations": {
             "production": {

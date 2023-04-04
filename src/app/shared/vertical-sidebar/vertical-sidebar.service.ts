@@ -17,6 +17,5 @@ export class VerticalSidebarService {
 
     items = new BehaviorSubject<RouteInfo[]>(this.MENUITEMS);
 
-    constructor() {
-    }
+    constructor() {}
 }

@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
-import { TestsComponent } from "./tests.component";
+import { PrepareTestComponent } from "./prepare-test.component";
 import { SelectDeviceComponent } from "./select-device/select-device.component";
 import { SelectTestComponent } from "./select-test/select-test.component";
 import { SyncDeviceComponent } from "./sync-device/sync-device.component";
@@ -10,7 +10,7 @@ import { StartTestComponent } from "./start-test/start-test.component";
 const routes: Routes = [
     {
         path: '',
-        component: TestsComponent,
+        component: PrepareTestComponent,
         data: {
             title: 'Iniciar Prueba'
         },
@@ -51,6 +51,6 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class TestsRoutingModule { }
+export class PrepareTestRoutingModule { }
 
-export const routedComponents = [ TestsComponent ]
+export const routedComponents = [ PrepareTestComponent ]

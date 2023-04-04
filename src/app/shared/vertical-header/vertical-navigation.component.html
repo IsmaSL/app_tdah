@@ -1,7 +1,7 @@
 <!-- ============================================================== -->
 <!-- toggle and nav items -->
 <!-- ============================================================== -->
-<ul class="navbar-nav float-start me-auto">
+<ul class="navbar-nav float-start me-auto"></ul>
     <!-- ============================================================== -->
     <!-- Logo -->
     <!-- ============================================================== -->
@@ -15,7 +15,7 @@
     <!-- ============================================================== -->
     <!-- Messages -->
     <!-- ============================================================== -->
-    <li class="nav-item dropdown" ngbDropdown display="static">
+    <!-- <li class="nav-item dropdown" ngbDropdown display="static">
         <a ngbDropdownToggle class="nav-link dropdown-toggle waves-effect waves-dark" href="javascript:void(0)" id="2"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fs-5 mdi mdi-gmail"></i>
@@ -33,7 +33,9 @@
                 </li>
                 <li>
                     <div class="message-center message-body" [perfectScrollbar]="config">
+                    -->
                         <!-- Message -->
+                    <!--
                         <a href="javascript:void(0)" class="message-item border-bottom d-block text-decoration-none" *ngFor="let mymessage of mymessages">
                             <span class="user-img position-relative d-inline-block">
                                 <img src="{{ mymessage.useravatar }}" alt="user" class="rounded-circle" />
@@ -61,10 +63,11 @@
                 </li>
             </ul>
         </div>
-    </li>
+    </li> -->
     <!-- ============================================================== -->
     <!-- Comment -->
     <!-- ============================================================== -->
+    <!--
     <li class="nav-item dropdown" ngbDropdown display="static">
         <a ngbDropdownToggle class="nav-link dropdown-toggle waves-effect waves-dark" href="javascript:void(0)"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -83,7 +86,9 @@
                 </li>
                 <li>
                     <div class="message-center notifications" [perfectScrollbar]="config">
+                        -->
                         <!-- Message -->
+                        <!--
                         <a href="javascript:void(0)" class="message-item border-bottom d-block text-decoration-none" *ngFor="let notification of notifications">
                             <span class="btn btn-circle rounded-circle {{ notification.btn }}">
                                 <i class="{{ notification.icon }}"></i>
@@ -112,6 +117,7 @@
         </div>
     </li>
 </ul>
+-->
 <!-- ============================================================== -->
 <!-- Right side toggle and nav items -->
 <!-- ============================================================== -->

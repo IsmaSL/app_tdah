@@ -1,0 +1,178 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-body px-5">
+                <div class="row no-gutters pb-4 mt-3">
+                    <div class="col-sm-12 col-md-6">
+                        <h4>
+                            <span class="fw-bold">ID Prueba: </span><span
+                                class="text-decoration-underline">BAMZ-001-12-03-2023</span>
+                        </h4>
+                        <h4>
+                            <span class="fw-bold">Paciente: </span><span
+                                class="text-decoration-underline">Brandon Azael Muciño Santiesteban</span>
+                        </h4>
+                    </div>
+                    <div class="col-sm-12 col-md-6 text-md-end">
+                        <h4>
+                            <span class="fw-bold">Fecha: </span><span
+                                class="text-decoration-underline">12/03/2023</span>
+                        </h4>
+                        <h4>
+                            <span class="fw-bold">Tiempo: </span><span class="cronometro">
+                                <span class="minutos">{{ minutos }}</span> : <span class="segundos">{{ segundos }}</span> Min
+                            </span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row no-gutters pb-4 g-3">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 class="card-title">Ritmo Cardíaco</h4>
+                                <h6 class="card-subtitle">Latidos por minuto del paciente registrados durante la prueba</h6>
+                            </div>
+                            <div>
+                                <i class="fas fa-heart fs-8 me-2 text-danger"></i>
+                            </div>
+                        </div>
+                        <canvas baseChart height="100" 
+                            [datasets]="lineChartDataRC" 
+                            [labels]="lineChartLabels"
+                            [options]="lineChartOptionsRC" 
+                            [colors]="lineChartColorsRC" 
+                            [chartType]="lineChartType" 
+                            (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)">
+                        </canvas>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 class="card-title">Actividad Física</h4>
+                                <h6 class="card-subtitle">Datos del acelerómetro obtenidos por la actividad del paciente</h6>
+                            </div>
+                            <div>
+                                <i class="fas fa-child fs-8 me-2 text-info"></i>
+                            </div>
+                        </div>
+                        <canvas baseChart height="100" 
+                            [datasets]="lineChartDataAF" 
+                            [labels]="lineChartLabels"
+                            [options]="lineChartOptionsAF" 
+                            [colors]="lineChartColorsAF" 
+                            [chartType]="lineChartType" 
+                            (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)">
+                        </canvas>
+                    </div>
+                </div>
+                <div class="row no-gutters pb-4 g-3">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 class="card-title">Ondas Cerebrales (EEG)</h4>
+                                <h6 class="card-subtitle">Ondas cerebrales de diferentes frecuencias del paciente</h6>
+                            </div>
+                            <div>
+                                <i class="fas fa-procedures fs-8 me-2 text-success"></i>
+                            </div>
+                        </div>
+                        <canvas baseChart height="100" 
+                            [datasets]="lineChartDataEEG" 
+                            [labels]="lineChartLabels"
+                            [options]="lineChartOptionsAF" 
+                            [colors]="lineChartColorsEEG" 
+                            [chartType]="lineChartType" 
+                            (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)">
+                        </canvas>
+                    </div>
+                </div>
+                <div class="form-group mt-4">
+                    <!-- Mi modal Start -->
+                    <ng-template #content let-c="close" let-d="dismiss">
+                        <div class="modal-body fs-4 p-5 justify-content-center text-center">
+                            <span class="loader5"></span>
+                            <p>EN PAUSA</p>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-light-success text-success btn-lg px-4 fs-3 font-medium" 
+                                    (click)="c('Save click')">REANUDAR</button>
+                        </div>
+                    </ng-template>
+                    <!-- Mi modal End -->
+                    <!-- Mi modal Start -->
+                    <ng-template #content2 let-c="close" let-d="dismiss">
+                        <div class="modal-header bg-danger bg-opacity-100 text-white">
+                            <h4 class="modal-title" id="modal-basic-title">Detener Prueba</h4>
+                            <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+                        </div>
+                        <div class="modal-body fs-4 p-3 justify-content-center text-center">
+                            <p class="fs-4 fw-bold">¿Desea detener la prueba?</p>
+                            <span class="fs-3">Todos los datos recopilados se perderán</span>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-light-success text-success btn-lg px-4 fs-3 font-medium" 
+                                    (click)="c('Save click')">REANUDAR</button>
+                            <button type="button" class="btn btn-light-danger text-danger btn-lg px-4 fs-3 font-medium" 
+                                    (click)="cancelTest()">DETENER</button>
+                        </div>
+                    </ng-template>
+                    <!-- Mi modal End -->
+                    <!-- Mi modal Start -->
+                    <ng-template #content3 let-c="close" let-d="dismiss">
+                        <div class="modal-header bg-success bg-opacity-100 text-white">
+                            <h4 class="modal-title" id="modal-basic-title">Finalizar Prueba</h4>
+                            <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+                        </div>
+                        <div class="modal-body fs-4 p-3 justify-content-center text-center">
+                            <p class="fs-4 fw-bold">¿Desea finalizar la prueba?</p>
+                            <span class="fs-3">Antes de finalizar, asegúrese de cumplir con el tiempo mínimo para la precisión de los datos</span>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-light-info text-info btn-lg px-4 fs-3 font-medium" 
+                                    (click)="c('Save click')">REANUDAR</button>
+                            <button type="button" class="btn btn-light-success text-success btn-lg px-4 fs-3 font-medium" 
+                                    (click)="open4(content4)">Finalizar</button>
+                        </div>
+                    </ng-template>
+                    <!-- Mi modal End -->
+                    <!-- Mi modal Start -->
+                    <ng-template #content4 let-c="close" let-d="dismiss">
+                        <!-- <div class="modal-header bg-success text-white justify-content-center">
+                            <h4 class="modal-title" id="modal-basic-title">Finalizando Prueba</h4>
+                        </div> -->
+                        <div class="modal-body">
+                            <div class="row p-5 justify-content-center text-center">
+                                <span class="loader6"></span>
+                                <span class="mt-5 font-medium fs-6">Guardando datos</span>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <!-- Mi modal End -->
+                    <div class="row g-3 d-flex justify-content-center">
+                        <div class="col-lg-2 col-md-4 col-sm-12 mt-3">
+                            <button uiSref="#" type="button" class="btn btn-rounded btn-raised btn-lg btn-info w-100"
+                                    (click)="open(content)">
+                                <i class="fas fa-pause-circle me-1"></i> PAUSAR
+                            </button>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-12 mt-3">
+                            <button uiSref="#" type="button" class="btn btn-rounded btn-raised btn-lg btn-danger w-100"
+                                    (click)="open2(content2)">
+                                <i class="fas fa-stop-circle me-1"></i> DETENER
+                            </button>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-12 mt-3">
+                            <button uiSref="#" type="button" class="btn btn-rounded btn-raised btn-lg btn-success w-100"
+                                    (click)="open3(content3)">
+                                <i class="fas fa-check-circle me-1"></i> FINALIZAR
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

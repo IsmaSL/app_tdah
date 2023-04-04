@@ -29,6 +29,10 @@ export class StartTestComponent implements OnInit {
 
   open(content) {
     this.modalService.open(content);
+    setTimeout(() => {
+      this.router.navigateByUrl('/app/test', { skipLocationChange: false });
+      this.modalService.dismissAll(content);
+    }, 5000);
   }
   //Cancel button event Starts
   cancel() {

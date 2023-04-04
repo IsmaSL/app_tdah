@@ -54,6 +54,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     VerticalSidebarComponent,
     LoginComponent,
     NotFoundComponent,
+    
   ],
   imports: [
     CommonModule,

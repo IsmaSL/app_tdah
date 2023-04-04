@@ -23,14 +23,13 @@
             </div>
             <!-- Mi modal Start -->
             <ng-template #content let-c="close" let-d="dismiss">
-                <div class="modal-header bg-success text-white">
-                    <h4 class="modal-title" id="modal-basic-title">Iniciando prueba...</h4>
-                    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+                <div class="modal-header bg-success text-white justify-content-center">
+                    <h4 class="modal-title" id="modal-basic-title">Iniciando prueba</h4>
                 </div>
                 <div class="modal-body fs-4">
-                    <div class="row p-5 justify-content-md-center">
+                    <div class="row p-5 justify-content-center">
                         <span class="loader3"></span>
-                        <p class="text-center">Preparando todo...</p>
+                        <span class="loader4">Preparando</span>
                     </div>
                 </div>
             </ng-template>

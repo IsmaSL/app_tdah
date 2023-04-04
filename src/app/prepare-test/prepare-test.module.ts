@@ -5,10 +5,10 @@ import { FeatherModule } from "angular-feather";
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { TestsRoutingModule } from './tests-routing.module';
+import { PrepareTestRoutingModule } from './prepare-test-routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
 
-import { TestsComponent } from './tests.component';
+import { PrepareTestComponent } from './prepare-test.component';
 import { SelectTestComponent } from './select-test/select-test.component';
 import { SelectDeviceComponent } from './select-device/select-device.component';
 import { SyncDeviceComponent } from './sync-device/sync-device.component';
@@ -22,7 +22,7 @@ import { WorkflowService } from './workflow/workflow.service';
     imports: [
         CommonModule,
         FormsModule,
-        TestsRoutingModule,
+        PrepareTestRoutingModule,
         FeatherModule,
         NgbModule
     ],
@@ -33,14 +33,13 @@ import { WorkflowService } from './workflow/workflow.service';
         }
     ],
     declarations: [
-        TestsComponent, 
+        PrepareTestComponent, 
         NavbarComponent,
         SelectTestComponent, 
         SelectDeviceComponent, 
         SyncDeviceComponent, 
         StartTestComponent,
     ],
-    bootstrap: [TestsComponent]
+    bootstrap: [PrepareTestComponent]
 })
-
-export class TestsModule { }
+export class PrepareTestModule { }
