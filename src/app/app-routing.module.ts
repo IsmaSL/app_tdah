@@ -31,7 +31,16 @@ const Approutes: Routes = [
           },
           {
             path: 'patient-profile',
-            loadChildren: () => import('./patients/patient-profile/patient-profile.module').then(m => m.PatientProfileModule)
+            children: [
+              {
+                path: '',
+                loadChildren: () => import('./patients/patient-profile/patient-profile.module').then(m => m.PatientProfileModule),
+              },
+              {
+                path: 'reports',
+                loadChildren: () => import('./patients/reports/reports.module').then(m => m.ReportsModule)
+              }
+            ]
           },
         ]
       },

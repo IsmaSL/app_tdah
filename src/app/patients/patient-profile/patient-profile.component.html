@@ -1,33 +1,34 @@
 <div class="row">
     <!-- Column -->
     <div class="col-lg-4 col-xlg-3 col-md-5">
-        <div class="card shadow">
+        <div class="card shadow rounded-3">
             <div class="card-body pb-1">
                 <div class="mt-4 text-center">
                     <img src="assets/images/users/patient-user.jpg" class="rounded-circle" width="150" />
                     <h3 class="card-title font-medium mt-3">Brandon Azael Muciño Santiesteban</h3>
                     <h4 class="card-subtitle">Estudiante de primaria</h4>
                     <div class="row justify-content-md-center mt-4">
-                        <div class="col-6">
-                            <a href="javascript:void(0)" class="link">
-                                <h4 class="">
-                                    <i class="fas fa-child me-2"></i>
-                                    6 Años
-                                </h4>
-                            </a>
+                        <div class="col-3">
+                            <h4 class="">
+                                <i class="fas fa-child me-2"></i>
+                                <span class="rounded-pill bg-primary text-white py-0 px-2">07</span>
+                                Años
+                            </h4>
                         </div>
-                        <div class="col-6">
-                            <a href="javascript:void(0)" class="link">
-                                <h4 class="">
-                                    <i class="fas fa-stethoscope me-2"></i>
-                                    4 Pruebas
-                                </h4>
-                            </a>
+                        <div class="col">
+                            <h4 class="">
+                                <i class="fas fa-stethoscope me-2"></i>
+                                <span class="rounded-pill bg-info text-white py-0 px-2">04</span>
+                                Pruebas
+                            </h4>
                         </div>
-                    </div>
-                    <div class="row  justify-content-center mt-4">
-                        <span class="card-title">Probabilidad</span>
-                        <span class="h4 rounded-pill font-medium bg-success text-white py-1 col-3">85%</span>
+                        <div class="col">
+                            <h4 class="">
+                                <i class="fas fa-heartbeat me-2"></i>
+                                <span class="rounded-pill bg-success text-white py-0 px-2">85%</span>
+                                Prevalencia
+                            </h4>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -35,12 +36,25 @@
                 <hr>
             </div>
             <div class="card-body pt-2">
-                <a href="/app/prepare-test" type="button" class="btn btn-info text-white btn-rounded d-block w-100">
-                    <i class="fas fa-stethoscope"></i> Iniciar prueba
-                </a>
-                <button type="button" class="btn btn-success text-white btn-rounded d-block w-100 mt-3" (click)="open(content)">
-                    <i class="fa fas fa-download"></i> Exportar información
-                </button>
+                <div class="row g-3">
+                    <div class="col">
+                        <button class="btn btn-success text-white btn-rounded d-block w-100">
+                            <i class="fas fa-heartbeat me-2"></i>Recalcular
+                        </button>
+                    </div>
+                    <div class="col">
+                        <a href="/app/prepare-test" type="button" class="btn btn-info text-white btn-rounded d-block w-100">
+                            <i class="fas fa-stethoscope me-2"></i>Iniciar prueba
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-primary text-white btn-rounded d-block w-100 mt-3" (click)="open(content)">
+                            <i class="fa fas fa-download me-2"></i>Exportar información
+                        </button>
+                    </div>
+                </div>
                 <!-- Mi modal Start -->
                 <ng-template #content let-c="close" let-d="dismiss">
                     <div class="modal-header bg-success bg-opacity-100 text-white">
@@ -75,25 +89,22 @@
     <!-- Column -->
     <!-- Column -->
     <div class="col-lg-8 col-xlg-9 col-md-7">
-        <div class="card shadow">
+        <div class="card shadow rounded-3">
             <div class="card-body">
                 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills">
                     <li [ngbNavItem]="1">
                         <a ngbNavLink>Seguimiento</a>
                         <ng-template ngbNavContent>
-                            <div class="row pt-3">
+                            <div class="row">
                                 <app-history-tdah-tests></app-history-tdah-tests>
                             </div>
-                            <hr>
-                            <div class="row px-3">
-                                <app-table-results-test></app-table-results-test>
-                            </div>
+                            
                         </ng-template>
                     </li>
                     <li [ngbNavItem]="2">
                         <a ngbNavLink>Perfil</a>
                         <ng-template ngbNavContent>
-                            <div class="card-body">
+                            <div class="card-body overflow-auto" style="height: 25.2rem;">
                                 <!-- <div class="row">
                                     <quill-editor></quill-editor>
                                 </div> -->
@@ -169,13 +180,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <!--
                             <div class="d-flex justify-content-md-end justify-content-center">
-                                <a href="" class="btn btn-success btn-rounded">
+                                <a href="" class="btn btn-success btn-rounded mt-2">
                                     <i class="fas fa-edit"></i> Editar información
                                 </a>
                             </div>
+                            -->
                         </ng-template>
                     </li>
+                    <!--
                     <li [ngbNavItem]="3">
                         <a ngbNavLink>Settings</a>
                         <ng-template ngbNavContent>
@@ -237,11 +251,21 @@
                             </div>
                         </ng-template>
                     </li>
+                    -->
                 </ul>
                 <div [ngbNavOutlet]="nav" class="mt-2"></div>
             </div>
-
         </div>
     </div>
     <!-- Column -->
+    <div class="col mt-2">
+        <div class="card shadow rounded-3">
+            <div class="card-body">
+                <div class="row px-3">
+                    <app-table-results-test></app-table-results-test>
+                </div>
+            </div>
+        </div>
+        
+    </div>
 </div>

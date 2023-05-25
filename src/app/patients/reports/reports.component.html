@@ -1,0 +1,135 @@
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <!-- Column start -->
+    <div class="col-lg-4 col-xlg-3 col-md-6">
+        <div class="card shadow rounded-3" style="height: 17rem;">
+            <div class="card-header">
+                <span class="card-subtitle">Datos</span>
+                <h2 class="card-title">Generales</h2>
+            </div>
+            <div class="card-body overflow-auto fs-4">
+                <span class="fw-bold me-2">Folio:</span>123456<br>   
+                <span class="fw-bold me-2">Fecha:</span>12/03/2023<br>
+                <span class="fw-bold me-2">Prevalencia TDAH:</span>72 %<br>
+                <span class="fw-semibold small mx-2">Inatento:</span><span class="small">22 %</span><br>
+                <span class="fw-semibold small mx-2">Hiperactivo:</span><span class="small">45 %</span><br>
+                <span class="fw-semibold small mx-2">Mixto:</span><span class="small">66 %</span><br>
+                <span class="fw-bold me-2">Duración:</span>32 Min<br>
+            </div>
+        </div>
+    </div>
+    <!-- Column end -->
+
+    <!-- Column start -->
+    <div class="col-lg-4 col-xlg-3 col-md-6">
+        <div class="card shadow rounded-3" style="height: 17rem;">
+            <div class="card-header">
+                <span class="card-subtitle">Resultados de</span>
+                <h2 class="card-title">Ritmo Cardíaco</h2>
+            </div>
+            <div class="card-body overflow-auto fs-4">   
+                <span class="fw-bold me-2">Nivel de actividad:</span>Alto<br>
+                <span class="fw-bold me-2">Promedio:</span>83 LPM<br>
+                <span class="fw-bold me-2">Más alto:</span>102 LPM<br>
+                <span class="fw-bold me-2">Más bajo:</span>67 LPM<br>
+                <span class="fw-bold me-2">Oxigenación en sangre:</span>92 %<br>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-danger text-white btn-rounded" (click)="open(content)">
+                    <i class="fas fa-chart-bar me-2"></i>Ver gráfica
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Column end -->
+
+    <!-- Column start -->
+    <div class="col-lg-4 col-xlg-3 col-md-6">
+        <div class="card shadow rounded-3" style="height: 17rem;">
+            <div class="card-header">
+                <span class="card-subtitle">Resultados de</span>
+                <h2 class="card-title">Actvidad Física</h2>
+            </div>
+            <div class="card-body overflow-auto fs-4">   
+                <span class="fw-bold me-2">Acelerómetro:</span>83<br>
+                <span class="fw-bold me-2">Giroscopio:</span>102<br>
+                <span class="fw-bold me-2">Podómetro:</span>67<br>
+                <span class="fw-bold me-2">Ejes medidos:</span>X, Y, Z<br>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-warning text-white btn-rounded" (click)="open(content)">
+                    <i class="fas fa-chart-bar me-2"></i>Ver gráfica
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Column end -->
+
+    <!-- Column start -->
+    <div class="col-lg-4 col-xlg-3 col-md-6">
+        <div class="card shadow rounded-3" style="height: 17rem;">
+            <div class="card-header">
+                <span class="card-subtitle">Resultados de</span>
+                <h2 class="card-title">Concentración (EEG)</h2>
+            </div>
+            <div class="card-body overflow-auto fs-4">  
+                <span class="fw-bold me-2">Nivel Estrés:</span>Medio<br> 
+                <span class="fw-bold me-2">Gamma:</span>12 / 32<br>
+                <span class="fw-bold me-2">Beta:</span>11 / 23<br>
+                <span class="fw-bold me-2">Alpha:</span>10 / 18<br>
+                <span class="fw-bold me-2">Tetha:</span>09 / 16<br>
+                <span class="fw-bold me-2">Tetha:</span>06 / 12<br>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary text-white btn-rounded" (click)="open(content)">
+                    <i class="fas fa-chart-bar me-2"></i>Ver gráfica
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Column end -->
+
+    <!-- Column start -->
+    <div class="col-lg-4 col-xlg-3 col-md-6">
+        <div class="card shadow rounded-3" style="height: 17rem;">
+            <div class="card-header">
+                <span class="card-subtitle">Resultados de</span>
+                <h2 class="card-title">Cuestionario TDAH</h2>
+            </div>
+            <div class="card-body overflow-auto fs-4">  
+                <span class="fw-bold me-2">Resuelto:</span>Sí<br> 
+                <span class="fw-bold me-2">Observaciones:</span>Sí<br>
+                <span class="fw-bold me-2">Consumo medicamentos:</span>No<br>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-info text-white btn-rounded">
+                    <i class="fas fa-clipboard-list me-2"></i>Ver detalles
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Column end -->
+
+    <!-- Mi modal Start -->
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header bg-secondary  text-white">
+            <h4 class="modal-title" id="modal-basic-title">Gráfica de resultados</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+        </div>
+        <div class="modal-body fs-4">
+            <canvas baseChart height="100" 
+                            [datasets]="lineChartDataRC" 
+                            [labels]="lineChartLabels"
+                            [options]="lineChartOptionsRC" 
+                            [colors]="lineChartColorsRC" 
+                            [chartType]="lineChartType" 
+                            (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)">
+                        </canvas>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light-secondary text-secondary btn-lg px-4 fs-3 font-medium" 
+                    (click)="c('Save click')">Cerrar</button>
+        </div>
+    </ng-template>
+<!-- Mi modal End -->
+</div>

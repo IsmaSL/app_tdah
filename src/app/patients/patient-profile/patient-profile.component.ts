@@ -13,10 +13,9 @@ export class PatientProfileComponent {
   subtitle: string;
   constructor(config: NgbModalConfig, private modalService: NgbModal) {
     config.backdrop = 'static';
-		config.keyboard = false;
-    config.centered = false;
+    config.centered = true;
     config.animation = true;
-    config.size = "sm"
+    config.size = "lg"
   }
 
   open(content) {
