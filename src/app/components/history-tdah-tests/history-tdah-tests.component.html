@@ -1,34 +1,40 @@
-
-<div class="d-md-flex align-items-center px-3">
-    <h4 class="mb-0">Prevalencia del TDAH</h4>
+<div class="d-md-flex align-items-center ps-2 pe-3">
+    <h4 class="mb-0 fw-semi">Prevalencia del TDAH</h4>
     <div class="ms-auto mt-3 mt-md-0">
         <ul class="list-inline mb-0">
             <li class="list-inline-item text-info">
-                <i class="fa fa-circle"></i> Inatención
-            </li>
-            <li class="list-inline-item text-muted">
-                <i class="fa fa-circle"></i> Hiperactividad
-            </li>
-            <li class="list-inline-item text-danger">
-                <i class="fa fa-circle"></i> Mixto
-            </li>
-            <li class="list-inline-item text-info">
-                <select class="form-select" style="width: auto">
-                    <option>Todos</option>
-                    <option>2023</option>
-                    <option>2022</option>
-                </select>
+                <div class="input-group">
+                    <!-- <label for="year">Año:</label> -->
+                    <select class="form-select" style="width: auto" name="year" placeholder="Año">
+                        <option selected>2023</option>
+                        <option>2022</option>
+                        <option>2021</option>
+                    </select>
+                </div>
+                
             </li>
         </ul>
     </div>
 </div>
 
-<div class="mb-0 mt-2 d-flex flex-column w-100" style="height: 360px">
-    <apx-chart [series]="yearlyproductsalesChartOptions.series" [chart]="yearlyproductsalesChartOptions.chart"
+<div class="mb-0 mt-2 d-flex flex-column w-100" style="height: 22rem">
+
+    <!-- <apx-chart 
+        [series]="yearlyproductsalesChartOptions.series" [chart]="yearlyproductsalesChartOptions.chart"
         [xaxis]="yearlyproductsalesChartOptions.xaxis" [yaxis]="yearlyproductsalesChartOptions.yaxis"
         [grid]="yearlyproductsalesChartOptions.grid" [stroke]="yearlyproductsalesChartOptions.stroke"
         [tooltip]="yearlyproductsalesChartOptions.tooltip" [fill]="yearlyproductsalesChartOptions.fill"
         [dataLabels]="yearlyproductsalesChartOptions.dataLabels" [legend]="yearlyproductsalesChartOptions.legend"
         [colors]="yearlyproductsalesChartOptions.colors" [markers]="yearlyproductsalesChartOptions.markers">
-    </apx-chart>
+    </apx-chart> -->
+
+    <canvas baseChart class="pb-4"
+        [datasets]="lineChartDataAF" 
+        [labels]="lineChartLabels"
+        [options]="lineChartOptionsAF" 
+        [colors]="lineChartColorsAF" 
+        [chartType]="lineChartType" 
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)">
+    </canvas>
 </div>

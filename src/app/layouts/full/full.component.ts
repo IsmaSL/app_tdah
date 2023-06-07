@@ -34,7 +34,7 @@ export class FullComponent implements OnInit {
         headerpos: "fixed", // two possible values: fixed, absolute
         boxed: "full", // two possible values: full, boxed
         navbarbg: "skin1", // six possible values: skin(1/2/3/4/5/6)
-        sidebarbg: "skin1", // six possible values: skin(1/2/3/4/5/6)
+        sidebarbg: "skin5", // six possible values: skin(1/2/3/4/5/6)
         logobg: "skin5", // six possible values: skin(1/2/3/4/5/6)
     };
 
@@ -105,5 +105,14 @@ export class FullComponent implements OnInit {
     
   handleClick(event: boolean) {
     this.showMobileMenu = event;
+  }
+
+  actualizarVariable(mode: string) {
+    if(this.options.theme === 'light' && mode === 'dark') {
+        this.options.theme = mode;
+    } else if (this.options.theme === 'dark' && mode === 'dark') {
+        this.options.theme = 'light';
+    }
+    
   }
 }

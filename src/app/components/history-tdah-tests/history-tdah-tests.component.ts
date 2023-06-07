@@ -1,139 +1,101 @@
 import { Component, ViewChild } from '@angular/core';
 
-import {
-    ApexAxisChartSeries,
-    ApexChart,
-    ChartComponent,
-    ApexDataLabels,
-    ApexYAxis,
-    ApexLegend,
-    ApexXAxis,
-    ApexTooltip,
-    ApexTheme,
-    ApexGrid,
-    ApexFill
-} from 'ng-apexcharts';
-
-export type yearlyproductsalesChartOptions = {
-    series: ApexAxisChartSeries;
-    chart: ApexChart;
-    xaxis: ApexXAxis;
-    yaxis: ApexYAxis;
-    stroke: any;
-    theme: ApexTheme;
-    tooltip: ApexTooltip;
-    dataLabels: ApexDataLabels;
-    legend: ApexLegend;
-    colors: string[];
-    markers: any;
-    grid: ApexGrid;
-    fill: ApexFill;
-};
+import { Chart, ChartConfiguration, ChartDataSets } from 'chart.js';
+// import { BaseChartDirective } from 'ng2-charts';
+// import { default as Annotation } from 'chartjs-plugin-annotation';
 
 @Component({
-  selector: 'app-history-tdah-tests',
-  templateUrl: './history-tdah-tests.component.html',
-  styleUrls: ['./history-tdah-tests.component.scss']
+    selector: 'app-history-tdah-tests',
+    templateUrl: './history-tdah-tests.component.html',
+    styleUrls: ['./history-tdah-tests.component.scss']
 })
 export class HistoryTdahTestsComponent {
 
-    @ViewChild("chart") chart: ChartComponent = Object.create(null);
+    constructor() {}
     
-    public yearlyproductsalesChartOptions: Partial<yearlyproductsalesChartOptions>;
-
-    constructor() {
-        this.yearlyproductsalesChartOptions = {
-            series: [
+    public lineChartDataAF: ChartDataSets[] = [
+        { data: [5, 2, 7, 4, 5, 3, 5, 4], label: 'Déficit de Atención' },
+        { data: [4, 2, 5, 2, 1, 3, 2, 5], label: 'Hiperactividad' },
+        { data: [2, 5, 2, 6, 2, 5, 2, 4], label: 'Mixto' },
+        // { data: [18, 58, 20, 69, 16, 27, 90], label: 'Series B' }
+    ];
+    public lineChartLabels: Array<any> = [
+        'Ene',
+        'Feb',
+        'Mar',
+        'Arb',
+        'May',
+        'Jun',
+        // 'Jul',
+        // 'Ago',
+        // 'Sep',
+        // 'Oct',
+        // 'Nov',
+        // 'Dic'
+    ];
+    public lineChartOptionsAF: ChartConfiguration['options'] = {
+        plugins: {
+            legend: { display: true },
+            annotation: {
+              annotations: [
                 {
-                    type: 'area',
-                    name: 'Déficit de Atención',
-                    data: [5, 2, 7, 4, 5, 3, 5, 4]
+                  type: 'line',
+                  scaleID: 'x',
+                  value: 'March',
+                  borderColor: 'orange',
+                  borderWidth: 2,
+                  label: {
+                    display: true,
+                    position: 'left',
+                    color: 'orange',
+                    content: 'LineAnno',
+                    font: {
+                      weight: 'bold'
+                    }
+                  }
                 },
-                {
-                    type: 'area',
-                    name: 'Hiperactividad',
-                    data: [2, 5, 2, 6, 2, 5, 2, 4]
-                },
-                {
-                    type: 'area',
-                    name: 'Ambos',
-                    data: [4, 2, 5, 2, 1, 3, 2, 5]
-                }
-            ],
-            chart: {
-                fontFamily: 'Rubik,sans-serif',
-                height: 350,
-                type: 'line',
-                toolbar: {
-                    show: false
-                }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            markers: {
-                size: 4,
-                strokeColors: 'transparent',
-            },
-            stroke: {
-                curve: 'smooth',
-                width: '2',
-            },
-            colors: ['#8898aa', '#2cabe3', '#ff7514'],
-            legend: {
-                show: false,
-            },
-            fill: {
-                type: 'gradient',
-                opacity: 1,
-                gradient: {
-                    shade: 'light',
-                    type: "vertical",
-                    shadeIntensity: 0.5,
-                    gradientToColors: undefined,
-                    inverseColors: true,
-                    opacityFrom: 0.5,
-                    opacityTo: 0.3,
-                    stops: [0, 50, 100]
-                }
-            },
-            grid: {
-                show: true,
-                strokeDashArray: 3,
-                borderColor: 'rgba(0,0,0,0.1)',
-                xaxis: {
-                    lines: {
-                        show: true
-                    }
-                },
-                yaxis: {
-                    lines: {
-                        show: true
-                    }
-                }
-            },
-            xaxis: {
-                type: 'category',
-                categories: [
-                    '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015'
-                ],
-                labels: {
-                    style: {
-                        colors: '#a1aab2'
-                    }
-                }
-            },
-            yaxis: {
-                labels: {
-                    style: {
-                        colors: '#a1aab2'
-                    }
-                }
-            },
-            tooltip: {
-                theme: 'dark'
+              ],
             }
-        };
+        }
+    }
+    
+    public lineChartColorsAF: Array<any> = [
+        {
+            // Verde
+            backgroundColor: 'rgba(12, 255, 0,.1)',
+            borderColor: '#0CFF00',
+            pointBackgroundColor: '#0CFF00',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: '#0CFF00'
+        },
+        {
+            // Azul
+            backgroundColor: 'rgba(0, 139, 255,.1)',
+            borderColor: '#008BFF',
+            pointBackgroundColor: '#008BFF',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: '#008BFF'
+        },
+        {
+            // Naranja
+            backgroundColor: 'rgba(255, 112, 0,.1)',
+            borderColor: '#FF7000',
+            pointBackgroundColor: '#FF7000',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: '#FF7000'
+        },
+    ];
+    public lineChartLegend = true;
+    public lineChartType = 'line';
+    // events
+    public chartClicked(e: any): void {
+        // console.log(e);
+    }
+    public chartHovered(e: any): void {
+        // console.log(e);
     }
 }
 

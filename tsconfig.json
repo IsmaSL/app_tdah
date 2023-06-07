@@ -12,7 +12,8 @@
     "experimentalDecorators": true,
     "target": "es2020",
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
+      "chart.js"
     ],
     "lib": [
       "es2017",

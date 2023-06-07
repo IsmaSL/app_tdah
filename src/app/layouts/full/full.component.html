@@ -65,7 +65,7 @@
                 <!-- Vertical Header -->
                 <ng-template #vheader>
                     <div class="w-100">
-                        <app-vertical-navigation (toggleSidebar)="toggleSidebarType()">
+                        <app-vertical-navigation (darkMode)="actualizarVariable($event)" (toggleSidebar)="toggleSidebarType()">
                         </app-vertical-navigation>
                     </div>
                 </ng-template>

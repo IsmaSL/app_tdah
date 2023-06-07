@@ -3,7 +3,7 @@
 </div>
 <div class="table-responsive">
     <table class="table table-striped table-hover border mt-4">
-        <thead class="bg-dark text-white">
+        <thead class="table-dark text-white">
             <tr>
                 <th class="text-center">ID</th>
                 <th>Nombre</th>
@@ -14,7 +14,7 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody class="border border-dark align-middle">
+        <tbody class="border table-striped border-dark align-middle fw-normal">
             <tr *ngFor="let client of cfilterClient | slice: (cpage-1) * cpageSize : (cpage-1) * cpageSize + cpageSize">
                 <td class="text-center">{{ client.Id }}</td>
                 <td>
@@ -62,7 +62,7 @@
     </table>
 </div>
 <div class="d-flex justify-content-between flex-column flex-lg-row">
-    <div>
+    <div class="bg-white">
         <ngb-pagination [(page)]="cpage" [pageSize]="cpageSize" [collectionSize]="clientList.length"></ngb-pagination>
     </div>
     <div>

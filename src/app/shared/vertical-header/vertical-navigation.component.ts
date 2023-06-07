@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, EventEmitter, Output } from "@angular/core";
+import { Component, AfterViewInit, EventEmitter, Output, Input } from "@angular/core";
 import {
   NgbModal,
   ModalDismissReasons,
@@ -15,11 +15,18 @@ declare var $: any;
 })
 export class VerticalNavigationComponent implements AfterViewInit {
   @Output() toggleSidebar = new EventEmitter<void>();
+  @Output() darkMode = new EventEmitter();
+
+  public iconLight = false;
 
   public config: PerfectScrollbarConfigInterface = {};
 
   public showSearch = false;
 
+  emitEvent() {
+    this.darkMode.emit('dark');
+    this.iconLight = !this.iconLight;
+  }
 
   // This is for Notifications
   notifications: Object[] = [
@@ -117,7 +124,7 @@ export class VerticalNavigationComponent implements AfterViewInit {
 
 
   constructor(private modalService: NgbModal, private translate: TranslateService) {
-    translate.setDefaultLang('en');
+    translate.setDefaultLang('es');
   }
 
   changeLanguage(lang: any) {

@@ -15,7 +15,7 @@ export class PatientProfileComponent {
     config.backdrop = 'static';
     config.centered = true;
     config.animation = true;
-    config.size = "lg"
+    config.size = "sm"
   }
 
   open(content) {
