@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { Chart, ChartConfiguration, ChartDataSets } from 'chart.js';
+import { Chart, ChartConfiguration, ChartDataset } from 'chart.js';
 // import { BaseChartDirective } from 'ng2-charts';
 // import { default as Annotation } from 'chartjs-plugin-annotation';
 
@@ -13,10 +13,10 @@ export class HistoryTdahTestsComponent {
 
     constructor() {}
     
-    public lineChartDataAF: ChartDataSets[] = [
-        { data: [5, 2, 7, 4, 5, 3, 5, 4], label: 'Déficit de Atención' },
-        { data: [4, 2, 5, 2, 1, 3, 2, 5], label: 'Hiperactividad' },
-        { data: [2, 5, 2, 6, 2, 5, 2, 4], label: 'Mixto' },
+    public lineChartDataAF: ChartDataset[] = [
+        { data: [5, 2, 7, 4, 5, 3, 5, 4], label: 'Déficit de Atención', cubicInterpolationMode: 'monotone',},
+        { data: [4, 2, 5, 2, 1, 3, 2, 5], label: 'Hiperactividad', cubicInterpolationMode: 'monotone', },
+        { data: [2, 5, 2, 6, 2, 5, 2, 4], label: 'Mixto', cubicInterpolationMode: 'monotone', },
         // { data: [18, 58, 20, 69, 16, 27, 90], label: 'Series B' }
     ];
     public lineChartLabels: Array<any> = [
@@ -26,8 +26,8 @@ export class HistoryTdahTestsComponent {
         'Arb',
         'May',
         'Jun',
-        // 'Jul',
-        // 'Ago',
+        'Jul',
+        'Ago',
         // 'Sep',
         // 'Oct',
         // 'Nov',
@@ -46,7 +46,7 @@ export class HistoryTdahTestsComponent {
                   borderWidth: 2,
                   label: {
                     display: true,
-                    position: 'left',
+                    // position: 'left',
                     color: 'orange',
                     content: 'LineAnno',
                     font: {
@@ -67,7 +67,7 @@ export class HistoryTdahTestsComponent {
             pointBackgroundColor: '#0CFF00',
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: '#0CFF00'
+            pointHoverBorderColor: '#0CFF00',
         },
         {
             // Azul

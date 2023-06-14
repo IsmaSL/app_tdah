@@ -6,6 +6,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DevicesComponent } from './devices.component';
 import { DeviceService } from './devices.service';
 
+import { NgChartsModule } from 'ng2-charts';
+
 const routes: Routes = [
     {
         path: '',
@@ -24,7 +26,8 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         NgbModule,
-        CommonModule
+        CommonModule,
+        NgChartsModule
     ],
     declarations: [
         DevicesComponent

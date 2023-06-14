@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TestComponent } from './test.component';
 
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
@@ -24,7 +24,7 @@ const routes: Routes = [
     imports: [
       NgbModule,
       RouterModule.forChild(routes),
-      ChartsModule,
+      NgChartsModule,
     ],
     declarations: [
       TestComponent

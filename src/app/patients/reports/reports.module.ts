@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 
 import { ReportsComponent } from "./reports.component";
 
@@ -23,7 +23,7 @@ const routes: Routes = [
   imports: [
     NgbModule,
     RouterModule.forChild(routes),
-    ChartsModule,
+    NgChartsModule,
   ],
   declarations: [
     ReportsComponent

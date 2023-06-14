@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 // import { NgxChartsModule } from '@swimlane/ngx-charts';
 // import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 // import { NgApexchartsModule } from "ng-apexcharts";
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 
 import { HistoryTdahTestsComponent } from "./history-tdah-tests/history-tdah-tests.component";
 import { RecentPatientsComponent } from "./recent-patients/recent-patients.component";
@@ -20,7 +20,7 @@ import { TableResultsTestComponent } from './table-results-test/table-results-te
         // NgxChartsModule,
         // NgxDatatableModule,
         // NgApexchartsModule,
-        ChartsModule,
+        NgChartsModule,
         // NgChartsModule
     ],
     exports: [

@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-12">
-        <div class="card shadow">
+        <div class="card shadow bg-white rounded-4">
             <div class="card-body px-5">
                 <div class="row no-gutters pb-4 mt-3">
                     <div class="col-sm-12 col-md-6">
@@ -29,21 +29,17 @@
                     <div class="col-md-6 col-sm-12">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <h4 class="card-title">Ritmo Cardíaco</h4>
+                                <h4 class="card-title"><i class="fas fa-heart fs-8 me-2 text-danger"></i> Ritmo Cardíaco</h4>
                                 <h6 class="card-subtitle">Latidos por minuto del paciente registrados durante la prueba</h6>
                             </div>
                             <div>
-                                <i class="fas fa-heart fs-8 me-2 text-danger"></i>
+                                
                             </div>
                         </div>
-                        <canvas baseChart height="100" 
-                            [datasets]="lineChartDataRC" 
-                            [labels]="lineChartLabels"
-                            [options]="lineChartOptionsRC" 
-                            [colors]="lineChartColorsRC" 
-                            [chartType]="lineChartType" 
-                            (chartHover)="chartHovered($event)"
-                            (chartClick)="chartClicked($event)">
+                        <canvas baseChart height="125" 
+                            [datasets]="lineChartDataHR" 
+                            [options]="lineChartOptionsHR" 
+                            [legend]="false">
                         </canvas>
                     </div>
                     <div class="col-md-6 col-sm-12">
@@ -56,14 +52,10 @@
                                 <i class="fas fa-child fs-8 me-2 text-info"></i>
                             </div>
                         </div>
-                        <canvas baseChart height="100" 
-                            [datasets]="lineChartDataAF" 
-                            [labels]="lineChartLabels"
-                            [options]="lineChartOptionsAF" 
-                            [colors]="lineChartColorsAF" 
-                            [chartType]="lineChartType" 
-                            (chartHover)="chartHovered($event)"
-                            (chartClick)="chartClicked($event)">
+                        <canvas baseChart height="125" 
+                            [datasets]="lineChartDataAC" 
+                            [options]="lineChartOptionsAC" 
+                            [legend]="false">
                         </canvas>
                     </div>
                 </div>
@@ -78,14 +70,11 @@
                                 <i class="fas fa-procedures fs-8 me-2 text-success"></i>
                             </div>
                         </div>
-                        <canvas baseChart height="100" 
-                            [datasets]="lineChartDataEEG" 
-                            [labels]="lineChartLabels"
-                            [options]="lineChartOptionsAF" 
-                            [colors]="lineChartColorsEEG" 
-                            [chartType]="lineChartType" 
-                            (chartHover)="chartHovered($event)"
-                            (chartClick)="chartClicked($event)">
+                        <canvas baseChart height="150"
+                            [datasets]="lineChartDataEEG"
+                            [options]="lineChartOptions" 
+                            [legend]="lineChartLegend" 
+                            [type]="lineChartType">
                         </canvas>
                     </div>
                 </div>
