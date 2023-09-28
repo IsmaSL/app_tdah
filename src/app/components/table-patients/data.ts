@@ -17,7 +17,7 @@ export const tableList: Table[] = [
         Diagnosis: 'Hiperactivo',
         LastDate: '01/03/2023',
         Status: 'Activo',
-        imagePath: 'assets/images/users/user_2.jpg'
+        imagePath: 'assets/images/users/patient-user.jpg'
     },
     {
         Id: 345678,
@@ -35,7 +35,7 @@ export const tableList: Table[] = [
         Diagnosis: 'Normal',
         LastDate: '01/03/2023',
         Status: 'Activo',
-        imagePath: 'assets/images/users/patient-user.jpg'
+        imagePath: 'assets/images/users/user_2.jpg'
     },
     {
         Id: 567890,

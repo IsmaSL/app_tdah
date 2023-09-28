@@ -25,7 +25,7 @@ export class SelectTestComponent implements OnInit {
   //Save button event Starts
   save() {
     let firstState = this.workflowService.getFirstInvalidStep(STEPS.devices);
-    this.router.navigate(['sync'], { relativeTo: this.route.parent, skipLocationChange: true });
+    this.router.navigate(['start'], { relativeTo: this.route.parent, skipLocationChange: true });
   }
   //Save button event Ends
 

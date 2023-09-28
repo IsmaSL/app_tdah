@@ -19,7 +19,8 @@
     "axe/structure": [
       "default",
       {
-        "list": "off"
+        "list": "off",
+        "listitem": "off"
       }
     ],
     "axe/forms": [
@@ -32,6 +33,12 @@
     "button-type": "off",
     "typescript-config/consistent-casing": "off",
     "typescript-config/strict": "off",
-    "no-inline-styles": "off"
+    "no-inline-styles": "off",
+    "axe/parsing": [
+      "default",
+      {
+        "duplicate-id-active": "off"
+      }
+    ]
   }
 }

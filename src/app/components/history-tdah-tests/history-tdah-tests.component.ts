@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { Chart, ChartConfiguration, ChartDataset } from 'chart.js';
+import { Chart, ChartConfiguration, ChartDataset, ChartOptions } from 'chart.js';
 // import { BaseChartDirective } from 'ng2-charts';
 // import { default as Annotation } from 'chartjs-plugin-annotation';
 
@@ -11,14 +11,14 @@ import { Chart, ChartConfiguration, ChartDataset } from 'chart.js';
 })
 export class HistoryTdahTestsComponent {
 
-    constructor() {}
-    
+    constructor() { }
+
     public lineChartDataAF: ChartDataset[] = [
-        { data: [5, 2, 7, 4, 5, 3, 5, 4], label: 'Déficit de Atención', cubicInterpolationMode: 'monotone',},
+        { data: [5, 2, 7, 4, 5, 3, 5, 4], label: 'Déficit de Atención', cubicInterpolationMode: 'monotone', },
         { data: [4, 2, 5, 2, 1, 3, 2, 5], label: 'Hiperactividad', cubicInterpolationMode: 'monotone', },
         { data: [2, 5, 2, 6, 2, 5, 2, 4], label: 'Mixto', cubicInterpolationMode: 'monotone', },
-        // { data: [18, 58, 20, 69, 16, 27, 90], label: 'Series B' }
     ];
+
     public lineChartLabels: Array<any> = [
         'Ene',
         'Feb',
@@ -28,37 +28,33 @@ export class HistoryTdahTestsComponent {
         'Jun',
         'Jul',
         'Ago',
-        // 'Sep',
-        // 'Oct',
-        // 'Nov',
-        // 'Dic'
     ];
-    public lineChartOptionsAF: ChartConfiguration['options'] = {
+    public lineChartOptionsAF: any = {
         plugins: {
             legend: { display: true },
             annotation: {
-              annotations: [
-                {
-                  type: 'line',
-                  scaleID: 'x',
-                  value: 'March',
-                  borderColor: 'orange',
-                  borderWidth: 2,
-                  label: {
-                    display: true,
-                    // position: 'left',
-                    color: 'orange',
-                    content: 'LineAnno',
-                    font: {
-                      weight: 'bold'
-                    }
-                  }
-                },
-              ],
-            }
-        }
+                annotations: [
+                    {
+                        type: 'line',
+                        scaleID: 'x',
+                        value: 'March',
+                        borderColor: 'orange',
+                        borderWidth: 2,
+                        label: {
+                            display: true,
+                            // position: 'left',
+                            color: 'orange',
+                            content: 'LineAnno',
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                ],
+            },
+        },
     }
-    
+
     public lineChartColorsAF: Array<any> = [
         {
             // Verde

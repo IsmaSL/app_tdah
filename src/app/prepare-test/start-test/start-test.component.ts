@@ -30,9 +30,9 @@ export class StartTestComponent implements OnInit {
   open(content) {
     this.modalService.open(content);
     setTimeout(() => {
-      this.router.navigateByUrl('/app/test', { skipLocationChange: false });
+      this.router.navigateByUrl('/app/test/muse-js', { skipLocationChange: false });
       this.modalService.dismissAll(content);
-    }, 5000);
+    }, 1500);
   }
   //Cancel button event Starts
   cancel() {

@@ -6,67 +6,74 @@ import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './error/not-found/not-found.component';
 
 const Approutes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'app',
-    component: FullComponent,
-    children: [
-      {
-        path: 'home',
-        loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
-      },
-      {
-        path: 'patients',
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: 'app',
+        component: FullComponent,
         children: [
-          {
-            path: '',
-            loadChildren: () => import('./patients/start/patients.module').then(m => m.PatientsModule)
-          },
-          {
-            path: 'add-patient',
-            loadChildren: () => import('./patients/add-patient/add-patient.module').then(m => m.AddPatientModule)
-          },
-          {
-            path: 'patient-profile',
-            children: [
-              {
-                path: '',
-                loadChildren: () => import('./patients/patient-profile/patient-profile.module').then(m => m.PatientProfileModule),
-              },
-              {
-                path: 'reports',
-                loadChildren: () => import('./patients/reports/reports.module').then(m => m.ReportsModule)
-              }
-            ]
-          },
+            {
+                path: 'home',
+                loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+            },
+            {
+                path: 'patients',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () => import('./patients/start/patients.module').then(m => m.PatientsModule)
+                    },
+                    {
+                        path: 'add-patient',
+                        loadChildren: () => import('./patients/add-patient/add-patient.module').then(m => m.AddPatientModule)
+                    },
+                    {
+                        path: 'patient-profile',
+                        children: [
+                            {
+                                path: '',
+                                loadChildren: () => import('./patients/patient-profile/patient-profile.module').then(m => m.PatientProfileModule),
+                            },
+                            {
+                                path: 'reports/:id',
+                                loadChildren: () => import('./patients/reports/reports.module').then(m => m.ReportsModule)
+                            }
+                        ]
+                    },
+                ]
+            },
+            {
+                path: 'devices',
+                loadChildren: () => import('./devices/devices.module').then(m => m.DevicesModule)
+            },
+            {
+                path: 'prepare-test',
+                loadChildren: () => import('./prepare-test/prepare-test.module').then(m => m.PrepareTestModule)
+            },
+            {
+                path: 'test',
+                children: [
+                    {
+                        path: 'muse-js',
+                        // component: MuseJsComponent
+                        loadChildren: () => import('./test/muse-js/muse-js.module').then(m => m.MuseJsModule)
+                    }
+                ],
+                // loadChildren: () => import('./test/test.module').then(m => m.TestModule)
+            }
         ]
-      },
-      {
-        path: 'devices',
-        loadChildren: () => import('./devices/devices.module').then(m => m.DevicesModule)
-      },
-      {
-        path: 'prepare-test',
-        loadChildren: () => import('./prepare-test/prepare-test.module').then(m => m.PrepareTestModule)
-      },
-      {
-        path: 'test',
-        loadChildren: () => import('./test/test.module').then(m => m.TestModule)
-      }
-    ]
-  },
-  {
-    path: '**',
-    redirectTo: '/login',
-    // component: NotFoundComponent
-  },
+    },
+    {
+        path: '**',
+        redirectTo: '/login',
+        // component: NotFoundComponent
+    },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(Approutes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(Approutes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }

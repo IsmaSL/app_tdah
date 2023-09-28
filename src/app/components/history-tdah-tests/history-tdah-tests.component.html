@@ -1,42 +1,29 @@
-<div class="d-md-flex align-items-center ps-2 pe-3">
-    <h4 class="mb-0 fw-semi">Prevalencia del TDAH</h4>
-    <div class="ms-auto mt-3 mt-md-0">
-        <ul class="list-inline mb-0">
-            <li class="list-inline-item text-info">
-                <div class="input-group">
-                    <!-- <label for="year">Año:</label> -->
-                    <select class="form-select" style="width: auto" name="year" placeholder="Año">
-                        <option selected>2023</option>
-                        <option>2022</option>
-                        <option>2021</option>
-                    </select>
-                </div>
-                
-            </li>
-        </ul>
+<div class="">
+    <div class="d-md-flex align-items-center ps-2 pe-3">
+        <h4 class="mb-0 fw-semi">Prevalencia del TDAH</h4>
+        <div class="ms-auto mt-3 mt-md-0">
+            <ul class="list-inline mb-0">
+                <li class="list-inline-item text-info">
+                    <div class="input-group">
+                        <!-- <label for="year">Año:</label> -->
+                        <select class="form-select" style="width: auto" name="year" placeholder="Año">
+                            <option selected>2023</option>
+                            <option>2022</option>
+                            <option>2021</option>
+                        </select>
+                    </div>
+                    
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
 
-<div class="mb-0 mt-2 d-flex flex-column w-100" style="height: 22rem">
-
-    <!-- <apx-chart 
-        [series]="yearlyproductsalesChartOptions.series" [chart]="yearlyproductsalesChartOptions.chart"
-        [xaxis]="yearlyproductsalesChartOptions.xaxis" [yaxis]="yearlyproductsalesChartOptions.yaxis"
-        [grid]="yearlyproductsalesChartOptions.grid" [stroke]="yearlyproductsalesChartOptions.stroke"
-        [tooltip]="yearlyproductsalesChartOptions.tooltip" [fill]="yearlyproductsalesChartOptions.fill"
-        [dataLabels]="yearlyproductsalesChartOptions.dataLabels" [legend]="yearlyproductsalesChartOptions.legend"
-        [colors]="yearlyproductsalesChartOptions.colors" [markers]="yearlyproductsalesChartOptions.markers">
-    </apx-chart> -->
-
-    <canvas baseChart
-        [datasets]="lineChartDataAF" 
-        [labels]="lineChartLabels"
-        [options]="lineChartOptionsAF" 
-        [type]="lineChartType">
-    </canvas>
-
-    <!-- 
-        [colors]="lineChartColorsAF" 
-        [chartType]="lineChartType" 
-     -->
+    <div class="mt-2 d-flex flex-column w-100">
+        <canvas baseChart
+            [datasets]="lineChartDataAF" 
+            [labels]="lineChartLabels"
+            [options]="lineChartOptionsAF" 
+            [type]="lineChartType">
+        </canvas>
+    </div>
 </div>

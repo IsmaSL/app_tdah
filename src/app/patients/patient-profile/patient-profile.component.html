@@ -38,7 +38,7 @@
             <div class="card-body pt-2">
                 <div class="row g-3">
                     <div class="col">
-                        <button class="btn btn-success text-white btn-rounded d-block w-100">
+                        <button class="btn btn-success text-white btn-rounded d-block w-100" [disabled]="isEmptyList">
                             <i class="fas fa-heartbeat me-2"></i>Recalcular
                         </button>
                     </div>
@@ -92,13 +92,12 @@
         <div class="card bg-white shadow rounded-4">
             <div class="card-body">
                 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills">
-                    <li [ngbNavItem]="1">
+                    <li [ngbNavItem]="1" *ngIf="!isEmptyList">
                         <a ngbNavLink>Seguimiento</a>
                         <ng-template ngbNavContent>
                             <div class="row">
                                 <app-history-tdah-tests></app-history-tdah-tests>
                             </div>
-                            
                         </ng-template>
                     </li>
                     <li [ngbNavItem]="2">
@@ -258,7 +257,7 @@
         </div>
     </div>
     <!-- Column -->
-    <div class="col mt-2">
+    <div *ngIf="!isEmptyList" class="col mt-2">
         <div class="card bg-white shadow rounded-4">
             <div class="card-body">
                 <div class="row px-3">

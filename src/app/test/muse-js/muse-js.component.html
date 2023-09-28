@@ -1,0 +1,388 @@
+<div *ngIf="!startTesting">
+    <div class="card bg-white rounded-4 shadow" style="height: 30rem;">
+        <div class="card-body d-flex align-items-center justify-content-center">
+            <div class="row">
+                <div class="col">
+                    <div *ngIf="lookingDevice" class="row text-center myTransition my-5">
+                        <span class="looking"></span>
+                        <span class="text-info fs-8 mt-3">...Buscando...</span>
+                    </div>
+                    <div *ngIf="showTest"
+                        class="row text-center myTransition my-5 d-flex justify-content-center align-items-center">
+                        <div class="success-icon">
+                            <div class="success-icon__tip"></div>
+                            <div class="success-icon__long"></div>
+                        </div>
+                        <span class="text-success fs-8 mt-3">¡Conexión exitosa!</span>
+                        <span class="mt-3 fw-bolder fs-4">
+                            Comenzando prueba, espere...
+                        </span>
+                    </div>
+                    <div class="row text-center" *ngIf="!lookingDevice && !showTest">
+                        <div class="col">
+                            <div class="row">
+                                <span class="mb-3 fw-bolder fs-4">
+                                    Por favor, encienda el bluetooth (<i class="fab fa-bluetooth"></i>) en ambos
+                                    dispositivos (<i class="fas fa-laptop"></i> - <i class="fas fa-code-branch"></i>)
+                                    para iniciar la búsqueda.
+                                </span>
+                            </div>
+                            <button uiSref="#" type="button" class="btn btn-rounded btn-raised btn-info"
+                                (click)="connectToDevice()">
+                                <i class="fab fa-bluetooth me-1"></i> CONECTAR DISPOSITIVO
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div [hidden]="!startTesting">
+    <div class="card-body bg-white rounded-4 shadow px-2 py-3 mb-4">
+        <div class="row">
+            <div class="col">
+                <div class="d-flex justify-content-start align-items-center bg-dark rounded-3  p-2 ms-2 w-25">
+                    <div class="recording-circle me-2"></div>
+                    <div class="text-white">Grabando...</div>
+                </div>
+            </div>
+            <div class="col d-flex justify-content-end align-items-center">
+                <div class="button-group">
+                    <button uiSref="#" type="button" class="btn btn-rounded btn-raised btn-danger mb-0"
+                        (click)="open2(content2)">
+                        <i class="fas fa-stop-circle me-1"></i> CANCELAR
+                    </button>
+                    <button uiSref="#" type="button" class="btn btn-rounded btn-raised btn-info mb-0"
+                        (click)="open(content)">
+                        <i class="fas fa-pause-circle me-1"></i> PAUSAR
+                    </button>
+                    <button uiSref="#" type="button" class="btn btn-rounded btn-raised btn-success mb-0"
+                        (click)="open3(content3)">
+                        <i class="fas fa-check-circle me-1"></i> FINALIZAR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row d-flex align-items-center justify-content-center mt-2">
+        <div class="col-4">
+            <div class="card shadow bg-white text-dark rounded-4">
+                <div class="card-header text-center rounded-4 rounded-bottom">
+                    <h5 class="card-title mb-0">Información del paciente</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col fs-4">
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Nombre: </span>
+                                <span>Brandon Azael Muciño Santiesteban</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Edad: </span>
+                                <span>12 años</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Diagnóstico previo: </span>
+                                <span>Ninguno</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Consumo de medicamentos: </span>
+                                <span>Sí</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card shadow bg-white text-dark rounded-4">
+                <div class="card-header text-center rounded-4 rounded-bottom">
+                    <h5 class="card-title mb-0">Detalles de la prueba</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col fs-4">
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">ID Prueba: </span>
+                                <span>BAMZ-001-12-03-2023</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Fecha: </span>
+                                <span>{{ fechaHoy }}</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Hora Inicio: </span>
+                                <span>{{ tHora + ' Hrs' }}</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Tiempo Transcurrido: </span>
+                                <span>{{ tiempo }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card shadow bg-white text-dark rounded-4">
+                <div class="card-header text-center rounded-4 rounded-bottom">
+                    <h5 class="card-title mb-0">Información del dispositivo</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col fs-4">
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Nombre: </span>
+                                <span>{{ dName }}</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Firmware: </span>
+                                <span>{{ dFirw }}</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Batería: </span>
+                                <span>{{ dBatt ? dBatt + ' %' : '---'}}</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Estado: </span>
+                                <span class="rounded-4 text-white px-2"
+                                    [ngClass]="{'bg-danger': !dConn, 'bg-success': dConn}">
+                                    {{ dConn ? 'Conectado' : 'Desconectado' }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row d-flex align-items-center justify-content-center mt-2">
+        <div class="col-8">
+            <div class="card shadow bg-white text-dark rounded-4">
+                <div class="card-header text-center rounded-4 rounded-bottom">
+                    <h5 class="card-title mb-0">Información EEG</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <canvas #myChart id="myChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card shadow bg-white text-dark rounded-4">
+                <div class="card-header text-center rounded-4 rounded-bottom">
+                    <h5 class="card-title mb-0">Actividad Física</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Ritmo Cardíaco: </span>
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                                    </svg>
+                                    110
+                                </span>
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-heart-pulse-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M1.475 9C2.702 10.84 4.779 12.871 8 15c3.221-2.129 5.298-4.16 6.525-6H12a.5.5 0 0 1-.464-.314l-1.457-3.642-1.598 5.593a.5.5 0 0 1-.945.049L5.889 6.568l-1.473 2.21A.5.5 0 0 1 4 9H1.475Z" />
+                                        <path
+                                            d="M.88 8C-2.427 1.68 4.41-2 7.823 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C11.59-2 18.426 1.68 15.12 8h-2.783l-1.874-4.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.88Z" />
+                                    </svg>
+                                    80
+                                </span>
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                    </svg>
+                                    60
+                                </span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Nivel de actividad: </span><span>Alto</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Parpadeos: </span>
+                                I : 22 
+                                <span>
+                                    [
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                        <path
+                                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                    </svg>
+                                </span>
+                                L
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                        <path
+                                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                    </svg>
+                                    ]
+                                </span>
+                                20 : D 
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Nivel de Concentración: </span><span>Bajo</span>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <app-head-view [xyz]="accelerometer"></app-head-view>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card shadow rounded-4 bg-white">
+                <div class="card-header rounded-4 rounded-bottom">
+                    <h5 class="card-title mb-0">Observaciones</h5>
+                </div>
+                <div class="card-body">
+                    <app-editor [readOnly]="readOnly"></app-editor>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mi modal Start -->
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-body fs-4 p-5 justify-content-center text-center">
+        <span class="loader5"></span>
+        <p class="fw-bolder">EN PAUSA</p>
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-light-success text-success btn-lg px-4 fs-3 font-bold"
+            (click)="c('Save click'); resumeTest()">REANUDAR</button>
+    </div>
+</ng-template>
+<!-- Mi modal End -->
+
+<!-- Mi modal Start -->
+<ng-template #content2 let-c="close" let-d="dismiss">
+    <div class="modal-header bg-danger bg-opacity-100 text-white">
+        <h4 class="modal-title" id="modal-basic-title">Cancelar Prueba</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    </div>
+    <div class="modal-body fs-4 p-3 justify-content-center text-center">
+        <p class="fs-4 fw-bold">¿Desea cancelar la prueba?</p>
+        <span class="fs-3">Todos los datos recopilados se perderán</span>
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-light-success text-success btn-lg px-4 fs-3 font-medium"
+            (click)="c('Save click')">REANUDAR</button>
+        <button type="button" class="btn btn-light-danger text-danger btn-lg px-4 fs-3 font-medium"
+            (click)="cancelTest()">CANCELAR</button>
+    </div>
+</ng-template>
+<!-- Mi modal End -->
+
+<!-- Mi modal Start -->
+<ng-template #content3 let-c="close" let-d="dismiss">
+    <div class="modal-header bg-success bg-opacity-100 text-white">
+        <h4 class="modal-title" id="modal-basic-title">Finalizar Prueba</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    </div>
+    <div class="modal-body fs-4 p-3 justify-content-center text-center">
+        <p class="fs-4 fw-bold">¿Desea finalizar la prueba?</p>
+        <span class="fs-3">Antes de finalizar, asegúrese de cumplir con el tiempo mínimo para la precisión de los
+            datos</span>
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-light-info text-info btn-lg px-4 fs-3 font-medium"
+            (click)="c('Save click')">REANUDAR</button>
+        <button type="button" class="btn btn-light-success text-success btn-lg px-4 fs-3 font-medium"
+            (click)="open5(content5)">FINALIZAR</button>
+    </div>
+</ng-template>
+<!-- Mi modal End -->
+
+<!-- Mi modal Start -->
+<ng-template #content5 let-c="close" let-d="dismiss">
+    <div class="modal-header bg-success bg-opacity-100 text-white">
+        <h4 class="modal-title" id="modal-basic-title">Prediagnóstico</h4>
+        <!-- <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button> -->
+    </div>
+    <div class="modal-body fs-4 p-3 justify-content-center text-center">
+        <form>
+            <div class="form-group mb-4">
+                <label class="mr-sm-2" for="selectForm">
+                    ¿Considera que el paciente es diagnósticado con alguna de las siguietes condiciones relacionados con
+                    el TDAH?
+                </label>
+                <span class="fw-light"> Por favor, seleccione la opción más cercana a su criterio.</span>
+                <select class="form-select mt-3 bg-white" id="selectForm" (change)="onOptionChange($event.target.value)"
+                    name="selectForm">
+                    <option selected disabled>Elegir...</option>
+                    <option value="0">NO presenta TDAH</option>
+                    <option value="1">TDAH Predominantemente Inatento</option>
+                    <option value="2">TDAH Predominantemente Hiperactivo</option>
+                    <option value="3">TDAH Mixto</option>
+                </select>
+            </div>
+            <div class="form-group mb-4">
+                <label class="mr-sm-2" for="selectForm">
+                    Justifique su respuesta a continuación
+                </label>
+                <textarea class="form-control bg-white" cols="30" rows="5"></textarea>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-light-success text-success btn-lg px-4 fs-3 font-medium"
+            (click)="open4(content4)">GUARDAR</button>
+    </div>
+</ng-template>
+<!-- Mi modal End -->
+
+<!-- Mi modal Start -->
+<ng-template #content4 let-c="close" let-d="dismiss">
+    <!-- <div class="modal-header bg-success text-white justify-content-center">
+        <h4 class="modal-title" id="modal-basic-title">Finalizando Prueba</h4>
+    </div> -->
+    <div class="modal-body">
+        <div class="row p-5 justify-content-center text-center">
+            <span class="loader6"></span>
+            <span class="mt-5 font-medium fs-6">Guardando datos</span>
+        </div>
+    </div>
+</ng-template>
+<!-- Mi modal End -->

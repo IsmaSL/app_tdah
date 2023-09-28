@@ -11,11 +11,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PrepareTestComponent } from './prepare-test.component';
 import { SelectTestComponent } from './select-test/select-test.component';
 import { SelectDeviceComponent } from './select-device/select-device.component';
-import { SyncDeviceComponent } from './sync-device/sync-device.component';
 import { StartTestComponent } from './start-test/start-test.component';
 
-/* Shared Service */
-// import { FormDataService } from './data/formData.service';
 import { WorkflowService } from './workflow/workflow.service';
 
 @NgModule({
@@ -37,7 +34,6 @@ import { WorkflowService } from './workflow/workflow.service';
         NavbarComponent,
         SelectTestComponent, 
         SelectDeviceComponent, 
-        SyncDeviceComponent, 
         StartTestComponent,
     ],
     bootstrap: [PrepareTestComponent]

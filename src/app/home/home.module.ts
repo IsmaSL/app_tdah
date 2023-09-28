@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { StatsComponent } from '../components/stats/stats.component';
-import { ComponentsModule } from '../components/components.module';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 const routes: Routes = [
   {
@@ -22,18 +22,11 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forChild(routes),
-    // ChartsModule,
-    // ChartistModule,
-    // NgxChartsModule,
-    // NgxDatatableModule,
-    // NgApexchartsModule,
     ComponentsModule
   ],
   declarations: [
     HomeComponent,
     StatsComponent,
-    // HistoryTdahTestsComponent,
-    // RecentPatientsComponent,
   ]
 })
 export class HomeModule { }

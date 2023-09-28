@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
-// import { FormsModule } from '@angular/forms';
+import { CommonModule } from "@angular/common";
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { QuillModule } from 'ngx-quill';
-// import { EditorComponent } from './editor/editor.component';
-
 import { PatientProfileComponent } from './patient-profile.component';
-import { ComponentsModule } from 'src/app/components/components.module';
 
+import { ComponentsModule } from 'src/app/components/components.module';
 
 const routes: Routes = [
     {
@@ -27,16 +23,13 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        // FormsModule,
-        // CommonModule,
         RouterModule.forChild(routes),
         NgbModule,
+        CommonModule,
         ComponentsModule,
-        QuillModule.forRoot()
     ],
     declarations: [
         PatientProfileComponent,
-        // EditorComponent
     ],
 })
 export class PatientProfileModule { }
