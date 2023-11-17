@@ -18,7 +18,7 @@
                                         <h4 class="modal-title" id="modal-basic-title">Exportar Lista de Pacientes</h4>
                                         <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
                                     </div>
-                                    <div class="modal-body fs-4">
+                                    <div class="modal-body fs-4 bg-white">
                                         <form>
                                             <label class="mr-sm-2" for="">Exportar como:</label>
                                             <div class="input-group">
@@ -34,7 +34,7 @@
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="modal-footer">
+                                    <div class="modal-footer bg-white">
                                         <button type="button" class="btn btn-light-primary text-primary btn-lg px-4 fs-3 font-medium" 
                                                 (click)="c('Save click')">Cerrar</button>
                                     </div>
@@ -47,7 +47,14 @@
                         </div>
                     </div>
                 </div>
-                <app-table-patients></app-table-patients>
+                <div *ngIf="loading" class="text-center pt-5 mt-5">
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div>
+                    <app-table-patients *ngIf="patientList" [patients]="patientList"></app-table-patients>
+                </div>
             </div>
         </div>
     </div>

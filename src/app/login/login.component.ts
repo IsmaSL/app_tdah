@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -9,7 +11,9 @@ export class LoginComponent {
     loginform = true;
     recoverform = false;
 
-    constructor() {
+    credentials = { username: '', password: '' };
+
+    constructor(private router: Router, private authService: AuthService) {
         this.setUserInfo();
         // this.getUserInfo();
     }
@@ -49,5 +53,31 @@ export class LoginComponent {
             const datosUsuario = JSON.parse(datosGuardados);
             console.log(datosUsuario); // Esto imprimirá el objeto en la consola de forma legible
         }
+    }
+
+    login() {
+        this.authService.login(this.credentials.username, this.credentials.password).subscribe(response => {
+            // Almacena el token
+            this.authService.setToken(response.access_token);
+            
+            this.getCurrentUser();
+            // Procesa la respuesta, guarda el token, navega a otra página, etc.
+            this.router.navigate(['/app/home']);
+        }, error => {
+            console.log("status: " + error.status + " - " + error.statusText + "\n" + error.error.message);
+            alert("Ups... " + error.error.message)
+        });
+    }
+
+    getCurrentUser() {
+        this.authService.getUserProfile().subscribe(
+            response => {
+                console.log(response);
+                this.authService.setUser(response);
+            }, error => {
+                console.log(error);
+                alert("Ups... " + error)
+            }
+        )
     }
 }

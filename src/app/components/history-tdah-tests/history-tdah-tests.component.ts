@@ -14,20 +14,24 @@ export class HistoryTdahTestsComponent {
     constructor() { }
 
     public lineChartDataAF: ChartDataset[] = [
-        { data: [5, 2, 7, 4, 5, 3, 5, 4], label: 'Déficit de Atención', cubicInterpolationMode: 'monotone', },
-        { data: [4, 2, 5, 2, 1, 3, 2, 5], label: 'Hiperactividad', cubicInterpolationMode: 'monotone', },
-        { data: [2, 5, 2, 6, 2, 5, 2, 4], label: 'Mixto', cubicInterpolationMode: 'monotone', },
+        { data: [85], label: 'Déficit de Atención', cubicInterpolationMode: 'monotone', },
+        // { data: [4, 2, 5, 2, 1, 3, 2, 5], label: 'Hiperactividad', cubicInterpolationMode: 'monotone', },
+        // { data: [2, 5, 2, 6, 2, 5, 2, 4], label: 'Mixto', cubicInterpolationMode: 'monotone', },
     ];
 
     public lineChartLabels: Array<any> = [
-        'Ene',
-        'Feb',
-        'Mar',
-        'Arb',
-        'May',
-        'Jun',
-        'Jul',
-        'Ago',
+        // 'Ene',
+        // 'Feb',
+        // 'Mar',
+        // 'Arb',
+        // 'May',
+        // 'Jun',
+        // 'Jul',
+        // 'Ago',
+        // 'Sep',
+        'Oct',
+        'Nov',
+        'Dic'
     ];
     public lineChartOptionsAF: any = {
         plugins: {
@@ -85,7 +89,7 @@ export class HistoryTdahTestsComponent {
         },
     ];
     public lineChartLegend = true;
-    public lineChartType = 'line';
+    public lineChartType = 'bar';
     // events
     public chartClicked(e: any): void {
         // console.log(e);

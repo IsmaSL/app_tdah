@@ -11,7 +11,7 @@ import { PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
 })
 export class FullComponent implements OnInit {
     public config: PerfectScrollbarConfigInterface = {};
-    active=1;
+    active = 1;
 
     constructor(public router: Router) { }
 
@@ -102,17 +102,17 @@ export class FullComponent implements OnInit {
         }
     }
 
-    
-  handleClick(event: boolean) {
-    this.showMobileMenu = event;
-  }
 
-  actualizarVariable(mode: string) {
-    if(this.options.theme === 'light' && mode === 'dark') {
-        this.options.theme = mode;
-    } else if (this.options.theme === 'dark' && mode === 'dark') {
-        this.options.theme = 'light';
+    handleClick(event: boolean) {
+        this.showMobileMenu = event;
     }
-    
-  }
+
+    actualizarVariable(mode: string) {
+        if (this.options.theme === 'light' && mode === 'dark') {
+            this.options.theme = mode;
+        } else if (this.options.theme === 'dark' && mode === 'dark') {
+            this.options.theme = 'light';
+        }
+
+    }
 }

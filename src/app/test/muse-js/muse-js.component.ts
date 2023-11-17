@@ -4,7 +4,7 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 /* Muse JS */
 import { MuseClient } from 'muse-js';
-import { Subject } from 'rxjs';
+import { Subject, finalize } from 'rxjs';
 
 /* Chart JS */
 import { Chart, ChartDataset, ChartOptions } from 'chart.js';
@@ -16,6 +16,8 @@ import { XYZ } from './../components/head-view/head-view.component';
 
 import { MuseFormModel } from './muse-js.model';
 import { LocalStorageService } from 'src/app/services/localStorage/local-storage.service';
+
+import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
 
 Chart.register(AnnotationPlugin);
 Chart.register(StreamingPlugin);
@@ -53,7 +55,7 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
     cronometroActivo = false;
     intervalo: any;
     segundos = 0;
-    fechaHoy: string = new Date().toLocaleDateString('es-ES');
+    fechaHoy: string = new Date().toLocaleDateString('es-ES').replace(/\//g, '-');;
     tiempo: string = '00:00:00';
     tHora: string = '00:00:00';
 
@@ -78,11 +80,12 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
     readOnly: boolean = false;
 
     constructor(private cd: ChangeDetectorRef,
-                private router: Router,
-                private route: ActivatedRoute,
-                private modalConfig: NgbModalConfig,
-                private modalService: NgbModal,
-                private lss: LocalStorageService) {
+        private router: Router,
+        private route: ActivatedRoute,
+        private modalConfig: NgbModalConfig,
+        private modalService: NgbModal,
+        private lss: LocalStorageService,
+        private storage: Storage) {
         modalConfig.backdrop = 'static';
         modalConfig.keyboard = false;
         modalConfig.centered = true;
@@ -90,7 +93,7 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
         modalConfig.size = "md";
     }
 
-    ngAfterViewInit(): void {            
+    ngAfterViewInit(): void {
         const ctx = (this.chart.nativeElement as HTMLCanvasElement).getContext('2d')!;
         this.myChart = new Chart(ctx, {
             type: 'line',
@@ -384,13 +387,13 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
             // Tiempo
             this.obtenerHoraActual();
             this.iniciarCronometro();
-            
+
             // Obtiene la información EEG
             await this.getEEGData();
 
             // Obtiene la información ACC
             await this.getACCData();
-            
+
             // Obtiene la información PPG
             // await this.getPPGData();
         } catch (error) {
@@ -529,28 +532,28 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
         const a = document.createElement('a');
         const headers = ['time', ...channelNames].join(',');
         const csvData = headers + '\n' + samples.map(item => item.join(',')).join('\n');
+
+        let filename = 'idPaciente_' + this.fechaHoy + '_' + this.tHora;
+        let userId = 1;
+
         const file = new Blob([csvData], { type: 'text/csv' });
-        a.href = URL.createObjectURL(file);
-        document.body.appendChild(a);
-        a.download = 'nombrePaciente_' + this.fechaHoy + '_' + this.tHora + '.csv';
-        a.click();
-        document.body.removeChild(a);
+        this.uploadFile(userId, filename, file);
     }
 
     open(content) {
         this.modalService.open(content);
         this.muse.pause();
-        
+
         this.isPaused = !this.isPaused;
 
         this.myChart.options.scales['x'].realtime.pause = this.isPaused;
         // this.myChart.options.scales['x'].realtime.delay = this.isPaused ? 0 : 3000;
-        this.myChart.update({duration: 0 });
+        this.myChart.update({ duration: 0 });
 
         this.pausarCronometro();
 
         console.log("Pausing test...");
-        
+
     }
 
     open2(content) {
@@ -619,6 +622,30 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
         }
 
         this.saveToCsv(this.samples);
+        console.log("Save_all_Data();");
+
     }
 
+    uploadFile(userId: any, filename: string, file: Blob) {
+        const filePath = `storage/files/test/user_${userId}/${filename}.csv`;
+        const storageRef = ref(this.storage, filePath);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                console.log(snapshot);
+                
+            },
+            (error) => {
+                // manejar cualquier error que ocurra durante la subida
+                console.error(error);
+            },
+            () => {
+                // una vez que la subida ha sido completada con éxito
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    console.log('URL del archivo:', downloadURL);
+                });
+            }
+        );
+    }
 }

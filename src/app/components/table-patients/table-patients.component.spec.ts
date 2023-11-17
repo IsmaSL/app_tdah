@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { TableService } from './table-patients.service';
 
 import { TablePatientsComponent } from './table-patients.component';
 
@@ -13,7 +12,6 @@ describe('TablePatientsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ TablePatientsComponent ],
       imports: [ReactiveFormsModule, FormsModule, RouterTestingModule],
-      providers: [TableService]
     })
     .compileComponents();
   }));

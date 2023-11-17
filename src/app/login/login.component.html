@@ -1,6 +1,6 @@
 <div class="auth-wrapper d-flex no-block justify-content-center align-items-center"
     style="background:url(assets/images/background/bg-login-2.jpg) no-repeat center center; background-size: cover; background-attachment: fixed;">
-    <div class="auth-box m-3 m-md-0">
+    <div class="auth-box m-3 m-md-0 rounded-4 shadow">
         <div id="loginform" [ngClass]="{'d-none': recoverform}">
             <div class="text-center">
                 <span class="db"><img src="assets/images/logo-tdah-dark.png" alt="logo" /></span>
@@ -9,18 +9,18 @@
             <!-- Form -->
             <div class="row">
                 <div class="col-12">
-                    <form class="form-horizontal mt-3" id="loginform">
+                    <form (ngSubmit)="login()" class="form-horizontal mt-3" id="loginform">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"><i class="ti-user"></i></span>
 
                             <input type="text" class="form-control" placeholder="Usuario" aria-label="Usuario"
-                                aria-describedby="basic-addon1">
+                                aria-describedby="basic-addon1" [(ngModel)]="credentials.username" name="username">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon2"><i class="ti-pencil"></i></span>
 
                             <input type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña"
-                                aria-describedby="basic-addon1">
+                                aria-describedby="basic-addon1" [(ngModel)]="credentials.password" name="password">
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group text-center mt-3">
                             <div class="col-xs-12">
-                                <a class="btn d-block w-100 btn-lg btn-info" href="/app/home">Entrar</a>
+                                <button [disabled]="!credentials.username || !credentials.password" class="btn d-block w-100 btn-lg btn-info">Entrar</button>
                             </div>
                         </div>
                         <!-- <div class="row mt-4">

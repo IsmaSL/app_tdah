@@ -33,7 +33,7 @@ const Approutes: Routes = [
                         path: 'patient-profile',
                         children: [
                             {
-                                path: '',
+                                path: ':id',
                                 loadChildren: () => import('./patients/patient-profile/patient-profile.module').then(m => m.PatientProfileModule),
                             },
                             {

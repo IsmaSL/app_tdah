@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -31,58 +31,70 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getStorage, provideStorage } from '@angular/fire/storage';
+import { environment } from '../environments/environment';
+import { TokenInterceptor } from './services/token.interceptor';
+
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true,
-  wheelSpeed: 2,
-  wheelPropagation: true,
-  minScrollbarLength: 20
+    suppressScrollX: true,
+    wheelSpeed: 2,
+    wheelPropagation: true,
+    minScrollbarLength: 20
 };
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SpinnerComponent,
-    FullComponent,
-    BlankComponent,
-    VerticalNavigationComponent,
-    BreadcrumbComponent,
-    VerticalSidebarComponent,
-    LoginComponent,
-    NotFoundComponent,
-  ],
-  imports: [
-    CommonModule,
-    BrowserModule,
-    RouterModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    NgbModule,
-    AppRoutingModule,
-    PerfectScrollbarModule,
-    FeatherModule.pick(allIcons),
-    FeatherModule,
-    HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        SpinnerComponent,
+        FullComponent,
+        BlankComponent,
+        VerticalNavigationComponent,
+        BreadcrumbComponent,
+        VerticalSidebarComponent,
+        LoginComponent,
+        NotFoundComponent,
+    ],
+    imports: [
+        CommonModule,
+        BrowserModule,
+        RouterModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        NgbModule,
+        AppRoutingModule,
+        PerfectScrollbarModule,
+        FeatherModule.pick(allIcons),
+        FeatherModule,
+        HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+        provideStorage(() => getStorage()),
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    providers: [
+        {
+            provide: PERFECT_SCROLLBAR_CONFIG,
+            useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TokenInterceptor,
+            multi: true
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
