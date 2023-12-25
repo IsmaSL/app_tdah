@@ -1,15 +1,16 @@
 import { Component, ViewChild, OnInit, ChangeDetectorRef, OnDestroy, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 
 /* Services */
 import { PatientService } from 'src/app/services/patients.service';
 import { TestService } from 'src/app/services/tests.service';
 import { SwalService } from 'src/app/services/swal.service';
+import { NetworkService } from 'src/app/services/network.service';
 
 /* Muse JS */
 import { MuseClient } from 'muse-js';
-import { Subject } from 'rxjs';
 
 /* Chart JS */
 import { Chart, ChartDataset, ChartOptions } from 'chart.js';
@@ -38,6 +39,8 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild('myChart') chart!: ElementRef;
     @ViewChild('modalInit') modalInit!: ElementRef;
 
+    private subscription: Subscription;
+
     /* ChartJS */
     myChart: any;
     ctx: any;
@@ -55,7 +58,6 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
 
     /* Head */
     accelerometer!: XYZ;
-    destroy = new Subject<void>();
 
     /* Time and Crono */
     cronometroActivo = false;
@@ -66,21 +68,17 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit'
-      }).replace(/\//g, '-');
+    }).replace(/\//g, '-');
     tiempo: string = '00:00:00';
     tHora: string = '00:00:00';
 
     /* Filter */
-    LOW_CUTOFF = 1;
-    HIGH_CUTOFF = 100;
-    maxBufferSize = 15000 / 4;
+    maxBufferSize = 32000 / 4;
 
     /* Record and Save CSV file*/
-    private samplesMap: Map<number, number[]> = new Map();
+    samplesMap: Map<number, number[]> = new Map();
     recording = false;
     samples: number[][] = [];
-    tempTime: number = 0;
-    tempSamples: number[] = new Array(4);
 
     /* Config Test */
     lookingDevice: boolean = false;
@@ -113,15 +111,20 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
 
     /* Formulario - 3 (Final) */
     formFinal: MuseFormModel;
+    file: Blob;
+    isLoaded: boolean = true;
 
-    constructor(private cd: ChangeDetectorRef,
+    constructor(
+        private cd: ChangeDetectorRef,
         private router: Router,
         private modalConfig: NgbModalConfig,
         private modalService: NgbModal,
         private storage: Storage,
         private patientService: PatientService,
         private testService: TestService,
-        private swal: SwalService) {
+        private swal: SwalService,
+        private net: NetworkService
+    ) {
         modalConfig.backdrop = 'static';
         modalConfig.keyboard = false;
         modalConfig.centered = true;
@@ -148,8 +151,13 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngOnDestroy() {
+        // Destruye elementos para evitar la perdide de memoria
         if(this.myChart) {
             this.myChart.destroy();
+        }
+
+        if (this.subscription) {
+            this.subscription.unsubscribe();
         }
     }
 
@@ -314,7 +322,7 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
                 },
                 realtime: {
                     duration: 10000,
-                    frameRate: 30,
+                    frameRate: 24,
                     delay: 0,
                 },
             },
@@ -401,7 +409,7 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
         },
         plugins: {
             title: {
-                display: true,
+                display: false,
             },
             legend: {
                 labels: {
@@ -409,7 +417,7 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
                 },
             },
             streaming: {
-                frameRate: 10,   // chart is drawn 5 times every second
+                frameRate: 5,   // chart is drawn 5 times every second
             },
             tooltip: {
                 enabled: false
@@ -446,7 +454,7 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
                 setTimeout(() => {
                     this.startTesting = true;
                     this.startTest();
-                }, 4000);
+                }, 3500);
             }
         } catch (err: any) {
             this.lookingDevice = false;
@@ -480,7 +488,7 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
             this.dConn = this.muse.connectionStatus.value;
             this.dName = this.muse.deviceName;
             this.dFirw = (await this.muse.deviceInfo()).fw;
-            this.muse.telemetryData.subscribe(
+            await this.muse.telemetryData.subscribe(
                 (data) => {
                     this.dBatt = data.batteryLevel;
                     this.dTemp = data.temperature;
@@ -491,24 +499,7 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
         }
     }
 
-    async getEEGData() {
-        // try {
-        //     console.log('EEG Stream: ON');
-        //     this.muse.eegReadings.subscribe(
-        //         (eeg) => {
-        //             this.myChart.data?.datasets[eeg.electrode].data.push({
-        //                 x: eeg.timestamp,
-        //                 y: eeg.samples[0]
-        //             });
-
-        //             this.myChart.update('quiet');
-
-        //             this.recordSamples(eeg.electrode, eeg.timestamp, eeg.samples[0]);
-        //         }
-        //     );
-        // } catch (error) {
-        //     console.log("Error on: 'getEEGData()' -> " + error);
-        // }
+    getEEGData() {
         try {
             console.log('EEG Stream: ON');
     
@@ -549,7 +540,7 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
         }
     }
 
-    async getACCData() {
+    getACCData() {
         try {
             console.log('ACC Stream: ON');
             this.muse.accelerometerData.subscribe(
@@ -581,24 +572,6 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
         console.log("Conexión terminada.");
 
         this.stopRecording();
-    }
-
-    async recordSamples(electrode: number, time: number, sample: number) {
-        if (this.tempTime === 0) {
-            this.tempTime = time
-            this.tempSamples[electrode] = sample;
-        } else if (this.tempTime !== 0 && this.tempTime === time) {
-            this.tempSamples[electrode] = sample;
-
-            if (this.isFullyFilledArray(this.tempSamples)) {
-                this.samples.push([this.tempTime, ...this.tempSamples]);
-                this.tempTime = 0;
-                this.tempSamples = new Array(4);
-            }
-        } else {
-            this.tempTime = time;
-            this.tempSamples[electrode] = sample;
-        }
     }
 
     isFullyFilledArray(arr: (number | null | undefined)[]): boolean {
@@ -660,8 +633,7 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
         if(this.formPrev.nivelActFisicaObservada === '' || this.formPrev.nivelAteObservada === '') {
             this.swal.swalEmptyData();
         } else {
-            console.log(this.formPrev);
-            
+            // console.log(this.formPrev);
             this.modalService.open(content);
         }
     }
@@ -676,25 +648,36 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
         if(this.formPred.prediagnostico === '' || this.formPred.justificacion === '') {
             this.swal.swalEmptyData();
         } else {
+            // Prepara los samples a subir
+            this.saveToCsv(this.samples);
+            // Prepara los datos a guardar
             this.saveAllData();
-
-            this.testService.add_test(this.formFinal).subscribe(
-                (response) => {
-                    this.modalService.open(content);
-                    console.log(response);
-                    setTimeout(() => {
-                        this.modalService.dismissAll(content);
-                        this.router.navigate(['/app/patients/patient-profile/', this.current_patient.id]);
-                        // this.router.navigateByUrl('/app/patients/patient-profile')
-                        //     .then(() => {
-                        //         window.location.reload();
-                        //     });
-                    }, 3000);
-                    
-                }, (error) => {
-                    this.swal.swalTestNotSaved(error.error.detail);
+            // valida que exista una conexión de internet para subir los archivos
+            this.subscription = this.net.estaOnline.subscribe(online => {
+                if (!online) {
+                    this.swal.swalNotNetwork();
+                } else {
+                    // Sube el archivo al paciente correspondiente
+                    this.uploadFile(this.current_patient.id, this.test_id, this.file);
+                    // si la subida es correcta, procede a guardar los datos en la BD
+                    if(this.isLoaded) {
+                        this.testService.add_test(this.formFinal).subscribe(
+                            (response) => {
+                                this.modalService.open(content);
+                                console.log(response);
+                                setTimeout(() => {
+                                    this.modalService.dismissAll(content);
+                                    this.router.navigate(['/app/patients/patient-profile/', this.current_patient.id]);
+                                }, 3000);
+                            }, (error) => {
+                                this.swal.swalTestNotSaved(error);
+                            }
+                        );
+                    } else {
+                        this.swal.swalTestNotSaved("No fue posible almacenar el archivo generado :(");      
+                    }
                 }
-            );
+            });
         }
     }
 
@@ -702,10 +685,8 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
 
     // Guarda los datos en la BD
     saveAllData() {
-        this.saveToCsv(this.samples);
-        console.log("Save_all_Data();");
+        console.log("SaveAllData();");
         this.formFinal = {
-            // idPrueba: null,
             idPaciente: this.current_patient.id,
             idTipoDispositivo: 1,
             detalle_prueba: {
@@ -722,38 +703,37 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
             probabilidad: 0.0,
             diagnosticoFinal: '',
         }
-        console.log(this.formFinal);
     }
 
     // Guarda los samples en un CSV
     saveToCsv(samples: number[][]) {
+        console.log("SaveToCsv();");
+
         const channelNames = ['TP9', 'AF7', 'AF8', 'TP10']
-        // const a = document.createElement('a');
         const headers = ['time', ...channelNames].join(',');
         const csvData = headers + '\n' + samples.map(item => item.join(',')).join('\n');
-
-        const file = new Blob([csvData], { type: 'text/csv' });
-
-        // Sube el archivo al id del paciente
-        this.uploadFile(this.current_patient.id, this.test_id, file);
+        this.file = new Blob([csvData], { type: 'text/csv' });
     }
 
     // Sube el archivo
     uploadFile(userId: any, filename: string, file: Blob) {
+        console.log("UploadFile();");
+
         const filePath = `storage/files/test/user_${userId}/${filename}.csv`;
         const storageRef = ref(this.storage, filePath);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
         uploadTask.on('state_changed',
             (snapshot) => {
-                console.log(snapshot);
+                // console.log('snapshot: \n' + snapshot);                
             }, (error) => {
                 // manejar cualquier error que ocurra durante la subida
+                this.isLoaded = false;
                 console.error(error);
             }, () => {
                 // una vez que la subida ha sido completada con éxito
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    console.log('URL del archivo:', downloadURL);
+                    // console.log('URL del archivo: ', downloadURL);
                 });
             }
         );

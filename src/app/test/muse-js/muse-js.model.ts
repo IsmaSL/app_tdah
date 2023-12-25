@@ -1,9 +1,7 @@
 export class MuseFormModel {
-    // idPrueba: number;
     idPaciente: number;
     idTipoDispositivo: number;
     detalle_prueba: {
-        // idEvaluacion: number;
         nivelAtencion: string;
         nivelActividad: string;
         observaciones: string;

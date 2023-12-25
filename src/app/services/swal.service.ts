@@ -125,4 +125,16 @@ export class SwalService {
             },
         });
     }
+
+    swalNotNetwork() {
+        Swal.fire({
+            icon: "error",
+            title: "Ups...",
+            text: "Se ha perdido la conexión a internet :(",
+            customClass: {
+                title: 'my-0',
+                htmlContainer: 'my-0',
+            },
+        });
+    }
 }
