@@ -18,21 +18,21 @@ const routes: Routes = [
                 path: 'devices',
                 component: SelectDeviceComponent,
                 data: {
-                    title: 'Dispositivos'
+                    title: 'Dispositivos Disponibles'
                 }
             },
-            {
-                path: 'tests',
-                component: SelectTestComponent,
-                data: {
-                    title: 'Detalles del dispositivo'
-                }
-            },
+            // {
+            //     path: 'tests',
+            //     component: SelectTestComponent,
+            //     data: {
+            //         title: 'Detalles del Dispositivo'
+            //     }
+            // },
             {
                 path: 'start',
                 component: StartTestComponent,
                 data: {
-                    title: 'Iniciar Prueba'
+                    title: 'Recomendaciones'
                 }
             },
         ]

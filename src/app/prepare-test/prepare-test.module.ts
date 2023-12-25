@@ -6,14 +6,11 @@ import { FeatherModule } from "angular-feather";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { PrepareTestRoutingModule } from './prepare-test-routing.module';
-import { NavbarComponent } from './navbar/navbar.component';
 
 import { PrepareTestComponent } from './prepare-test.component';
 import { SelectTestComponent } from './select-test/select-test.component';
 import { SelectDeviceComponent } from './select-device/select-device.component';
 import { StartTestComponent } from './start-test/start-test.component';
-
-import { WorkflowService } from './workflow/workflow.service';
 
 @NgModule({
     imports: [
@@ -23,15 +20,9 @@ import { WorkflowService } from './workflow/workflow.service';
         FeatherModule,
         NgbModule
     ],
-    providers: [
-        { 
-            provide: WorkflowService, 
-            useClass: WorkflowService 
-        }
-    ],
+    providers: [ ],
     declarations: [
         PrepareTestComponent, 
-        NavbarComponent,
         SelectTestComponent, 
         SelectDeviceComponent, 
         StartTestComponent,

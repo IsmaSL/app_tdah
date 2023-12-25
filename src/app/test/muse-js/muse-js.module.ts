@@ -2,11 +2,15 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from "@angular/common";
 import { NgChartsModule } from "ng2-charts";
+import { FormsModule } from '@angular/forms';
 
 import { MuseJsComponent } from "./muse-js.component";
 import { HeadViewComponent } from "../components/head-view/head-view.component";
 
 import { ComponentsModule } from 'src/app/components/components.module';
+
+const test_nam: string = JSON.parse(localStorage.getItem('current_patient')).nombre;
+const test_num: number = JSON.parse(localStorage.getItem('current_patient')).num_pruebas_prev + 1;
 
 const routes: Routes = [
     {
@@ -14,8 +18,8 @@ const routes: Routes = [
         data: {
             title: 'Muse',
             urls: [
-                { title: 'Test', url: '' },
-                { title: 'BAMZ-001-12-03-2023' },
+                { title: test_nam },
+                { title: 'Prueba ' + test_num },
             ]
         },
         component: MuseJsComponent
@@ -31,7 +35,8 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         CommonModule,
         NgChartsModule,
-        ComponentsModule
+        ComponentsModule,
+        FormsModule
     ],
     providers: [],
 })

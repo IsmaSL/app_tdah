@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PatientService } from 'src/app/services/patients.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
     // selector: 'app-patients',
@@ -15,7 +16,8 @@ export class PatientsComponent implements OnInit {
 
     constructor(config: NgbModalConfig, 
                 private modalService: NgbModal,
-                private patientService: PatientService) {
+                private patientService: PatientService,
+                private fireService: FirebaseService) {
         config.backdrop = 'static';
         config.keyboard = false;
         config.centered = false;
@@ -36,10 +38,34 @@ export class PatientsComponent implements OnInit {
         this.patientService.get_all_patients().subscribe(
             (response) => {
                 this.loading = false;
-                this.patientList = response;             
+                this.patientList = response;   
+                console.log(this.patientList);
+                
+                this.get_pic_profile();
             }, (error) => {
                 this.loading = false;
                 alert("Error: " + error.error.message);
+            }
+        );
+    }
+
+    get_pic_profile() {
+        this.patientList.forEach(
+            patient => {
+                if(patient.urlImg !== 'NULL' || patient.urlImg !== '' || patient.urlImg !== null) {
+                    this.fireService.getProfileUrl(patient.idUsuario).then(
+                        url => {
+                            patient.urlImg = url;
+                        }
+                    ).catch(
+                        error => {
+                            console.error('Error al obtener la URL del perfil:', error);
+                            patient.urlImg = 'assets/images/users/user4.jpg';
+                        }
+                    );
+                } else {
+                    patient.urlImg = 'assets/images/users/user4.jpg';
+                }
             }
         );
     }

@@ -1,142 +1,189 @@
-<div class="row row-cols-1 row-cols-md-3 gx-4 gy-2">
-    <div class="col-lg-4 col-xlg-3 col-md-6">
-        <div class="card shadow bg-white text-dark rounded-4">
-            <div class="card-header text-center rounded-4 rounded-bottom">
-                <h5 class="card-title mb-0">Información del paciente</h5>
+<div *ngIf="isLoading" class="text-center pt-5 mt-5">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<div *ngIf="data">
+    <div class="row">
+        <div class="col-12 col-md-4 pb-2">
+            <div class="card shadow bg-white text-dark rounded-4">
+                <div class="card-header text-center rounded-4 rounded-bottom">
+                    <h5 class="card-title mb-0">Información general</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col fs-4">
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Nombre: </span>
+                                <span class="fw-underlined">{{ data.usuario.nombre }} {{ data.usuario.apellidoP }} {{ data.usuario.apellidoM }}</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Edad: </span>
+                                <span>25 años</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Actividad Física Observada: </span><span>{{ data.detalle_prueba.nivelActividad }}</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Nivel de Atención Observado: </span><span>{{ data.detalle_prueba.nivelAtencion }}</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Diagnóstico Médico: </span>
+                                <div>
+                                    <span>
+                                        <li class="fas fa-info-circle me-1" data-toggle="tooltip" data-placement="right" title="Diagnóstico realizado durante la prueba por el especialista de la salud."></li>
+                                    </span>
+                                    <ng-container *ngIf="data.detalle_prueba.diagnosticoMedico === '0'">
+                                        <span class="rounded-4 text-white px-2 bg-info py-1 fw-bolder">Sin TDAH</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="data.detalle_prueba.diagnosticoMedico === '1'">
+                                        <span class="rounded-4 text-white px-2 bg-warning py-1 fw-bolder">TDAH Inatento</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="data.detalle_prueba.diagnosticoMedico === '2'">
+                                        <span class="rounded-4 text-white px-2 bg-primary py-1 fw-bolder">TDAH Hiperactivo</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="data.detalle_prueba.diagnosticoMedico === '3'">
+                                        <span class="rounded-4 text-white px-2 bg-success py-1 fw-bolder">TDAH Mixto</span>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <hr>
+                            <!-- <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Diagnóstico Final:</span>
+                                <div>
+                                    <ng-container *ngIf="diaf === '' || diaf === null">
+                                        <span class="rounded-4 text-white px-2 bg-danger py-1 fw-bolder">No Evaluado</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="diaf === '0'">
+                                        <span class="rounded-4 text-white px-2 bg-info py-1 fw-bolder">Sin TDAH</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="diaf === '1'">
+                                        <span class="rounded-4 text-white px-2 bg-warning py-1 fw-bolder">TDAH Inatento</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="diaf === '2'">
+                                        <span class="rounded-4 text-white px-2 bg-primary py-1 fw-bolder">TDAH Hiperactivo</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="diaf === '3'">
+                                        <span class="rounded-4 text-white px-2 bg-success py-1 fw-bolder">TDAH Mixto</span>
+                                    </ng-container>
+                                </div>
+                            </div> -->
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Diagnóstico Final:</span>
+                                <div>
+                                    <ng-container *ngIf="data.diagnosticoFinal === '' || data.diagnosticoFinal === null">
+                                        <span class="rounded-4 text-white px-2 bg-danger py-1 fw-bolder">No Evaluado</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="data.diagnosticoFinal === '0'">
+                                        <span class="rounded-4 text-white px-2 bg-info py-1 fw-bolder">Sin TDAH</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="data.diagnosticoFinal === '1'">
+                                        <span class="rounded-4 text-white px-2 bg-warning py-1 fw-bolder">TDAH Inatento</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="data.diagnosticoFinal === '2'">
+                                        <span class="rounded-4 text-white px-2 bg-primary py-1 fw-bolder">TDAH Hiperactivo</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="data.diagnosticoFinal === '3'">
+                                        <span class="rounded-4 text-white px-2 bg-success py-1 fw-bolder">TDAH Mixto</span>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bolder">Probabilidad de Prevalencia:</span>
+                                <!-- <span *ngIf="prob === ''" class="rounded-4 text-white px-2 bg-primary fw-bolder">-- %</span>
+                                <span *ngIf="prob !== ''" class="rounded-4 text-white px-2 bg-primary fw-bolder">{{ prob }} %</span> -->
+                                
+                                <span *ngIf="data.diagnosticoFinal === '' || data.diagnosticoFinal === null" class="rounded-4 text-white px-2 bg-primary fw-bolder">
+                                    -- %
+                                </span>
+                                <span *ngIf="data.diagnosticoFinal !== '' || data.diagnosticoFinal !== null" class="rounded-4 text-white px-2 bg-primary fw-bolder">
+                                    {{ data.probabilidad }} %
+                                </span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-start">
+                                <button class="btn btn-info text-white btn-rounded"
+                                        (click)="showChart()"
+                                        [disabled]="isHiddenChart"
+                                        >
+                                    <i class="fas fa-chart-bar me-2"></i>Obtener Resultodos del EEG
+                                </button>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col fs-4">
-                        <div class="d-flex justify-content-between">
-                            <span class="fw-bolder">Nombre: </span>
-                            <span>Brandon Azael Muciño Santiesteban</span>
+        </div>
+        <div class="col-12 col-md-8">
+            <div class="row h-100">
+                <div class="col-12 col-md-6 h-60 pb-2">
+                    <div class="card shadow bg-white text-dark rounded-4">
+                        <div class="card-header text-center rounded-4 rounded-bottom">
+                            <h5 class="card-title mb-0">Detalles de la Prueba</h5>
                         </div>
-                        <hr>
-                        <div class="d-flex justify-content-between">
-                            <span class="fw-bolder">Edad: </span>
-                            <span>12 años</span>
-                        </div>
-                        <hr>
-                        <div class="d-flex justify-content-between">
-                            <span class="fw-bolder">Diagnóstico: </span>
-                            <div>
-                                <ng-container *ngIf="arregloSeleccionado.prediagnostico === '0'">
-                                    <span class="rounded-4 text-white px-2 bg-info py-1">Sin TDAH</span>
-                                </ng-container>
-                                <ng-container *ngIf="arregloSeleccionado.prediagnostico === '1'">
-                                    <span class="rounded-4 text-white px-2 bg-warning py-1">TDAH Inatento</span>
-                                </ng-container>
-                                <ng-container *ngIf="arregloSeleccionado.prediagnostico === '2'">
-                                    <span class="rounded-4 text-white px-2 bg-primary py-1">TDAH Hiperactivo</span>
-                                </ng-container>
-                                <ng-container *ngIf="arregloSeleccionado.prediagnostico === '3'">
-                                    <span class="rounded-4 text-white px-2 bg-success py-1">TDAH Mixto</span>
-                                </ng-container>
-                                <li class="fas fa-info-circle ms-1" data-toggle="tooltip" data-placement="right" title="El paciente presenta un alto nivel de actividad física..."></li>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col fs-4">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-bolder">ID Prueba: </span>
+                                        <span>{{ data.detalle_prueba.urlCsv.slice(0, -4) }}</span>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-bolder">Fecha: </span>
+                                        <span>{{ data.fecha_prueba }}</span>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-bolder">Hora Inicio: </span>
+                                        <span>{{ data.hora_prueba }} Hrs</span>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-bolder">Duración: </span>
+                                        <span>{{ data.tiempo_prueba }}</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <hr>
-                        <div class="d-flex justify-content-between">
-                            <span class="fw-bolder">Consumo de medicamentos: </span>
-                            <span>Sí</span>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 h-60 pb-2">
+                    <div class="card shadow bg-white text-dark rounded-4">
+                        <div class="card-header text-center rounded-4 rounded-bottom">
+                            <h5 class="card-title mb-0">Dispositivo Utilizado</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col fs-4">
+                                    <div class="text-center">
+                                        <img src="assets/images/devices/device_2.jpg" class="img-fluid img-thumbnail" style="height: 10.7rem;">
+                                        <br>
+                                        <span><strong>{{ data.tipo_dispositivo.nombre }}</strong></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-xlg-3 col-md-6">
-        <div class="card shadow bg-white text-dark rounded-4">
-            <div class="card-header text-center rounded-4 rounded-bottom">
-                <h5 class="card-title mb-0">Detalles de la prueba</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col fs-4">
-                        <div class="d-flex justify-content-between">
-                            <span class="fw-bolder">ID Prueba: </span>
-                            <span>BAMZ-001-12-03-2023</span>
+                <div class="col-12 h-50">
+                    <div class="card shadow bg-white text-dark rounded-4">
+                        <div class="card-header text-center rounded-4 rounded-bottom">
+                            <h5 class="card-title mb-0">Observaciones</h5>
                         </div>
-                        <hr>
-                        <div class="d-flex justify-content-between">
-                            <span class="fw-bolder">Fecha: </span>
-                            <span>{{ arregloSeleccionado.fecha }}</span>
+                        <div class="card-body py-4">
+                            <div class="row">
+                                <div class="col fs-4">
+                                    <app-editor [readOnly]="readOnly"></app-editor>
+                                </div>
+                            </div>
                         </div>
-                        <hr>
-                        <div class="d-flex justify-content-between">
-                            <span class="fw-bolder">Hora Inicio: </span>
-                            <span>{{ arregloSeleccionado.horaInicio }} Hrs</span>
-                        </div>
-                        <hr>
-                        <div class="d-flex justify-content-between">
-                            <span class="fw-bolder">Tiempo Transcurrido: </span>
-                            <span>{{ arregloSeleccionado.duracionPrueba }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-xlg-3 col-md-6">
-        <div class="card shadow bg-white text-dark rounded-4">
-            <div class="card-header text-center rounded-4 rounded-bottom">
-                <h5 class="card-title mb-0">Dispositivo Utilizado</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col fs-4">
-                        <div class="text-center">
-                            <img src="assets/images/devices/device_2.jpg" class="img-fluid img-thumbnail w-50">
-                            <br>
-                            <span>Muse Band S (Gen 2)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-xlg-3 col-md-6">
-        <div class="card shadow bg-white text-dark rounded-4">
-            <div class="card-header text-center rounded-4 rounded-bottom">
-                <h5 class="card-title mb-0">Generales</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col fs-4">
-                        <div class="d-flex justify-content-between">
-                            <span class="fw-bolder">Nivel de Actividad: </span><span>Alto</span>
-                        </div>
-                        <hr>
-                        <div class="d-flex justify-content-between">
-                            <span class="fw-bolder">Nivel de Concentración: </span><span>Inatento</span>
-                        </div>
-                        <hr>
-                        <div class="d-flex justify-content-end">
-                            <button class="btn btn-info text-white btn-rounded"
-                                    (click)="showDivAndScroll()"
-                                    [disabled]="isShow">
-                                <i class="fas fa-chart-bar me-2"></i> Resultados EEG
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-8 col-xlg-3 col-md-12">
-        <div class="card shadow bg-white text-dark rounded-4">
-            <div class="card-header text-center rounded-4 rounded-bottom">
-                <h5 class="card-title mb-0">Observaciones</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <span class="h5">Diagnóstico Médico: TDAH - Mixto</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col fs-4">
-                        <app-editor [readOnly]="readOnly"></app-editor>
                     </div>
                 </div>
             </div>
@@ -144,24 +191,75 @@
     </div>
 </div>
 
-<div #hiddenDiv class="row mt-2" [hidden]="!isShow">
+<div [hidden]="!isHiddenChart" class="row mt-2">
     <div class="col">
         <div class="card shadow bg-white text-dark rounded-4">
             <div class="card-header d-flex justify-content-between rounded-4 rounded-bottom">
                 <div>
-                    <h5 class="card-title mb-0">Resultado EEG</h5>
-                </div>
-                <div>
-                    <button class="btn btn-danger text-white btn-rounded px-2"
-                        (click)="isShow = !isShow"
-                        [disabled]="!isShow">
-                        <i class="fas fa-times-circle"></i>
-                    </button>
+                    <h5 class="card-title mb-0">Resultados del EEG</h5>
                 </div>
             </div>
             <div class="card-body">
-                <canvas #chartCanvas></canvas>
+                <div [hidden]="!isLoadingChart" class="text-center py-5 my-5">
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div class="text-center">
+                        <span>Obteniendo resultados...</span>
+                    </div>
+                </div>  
+                <div [hidden]="isLoadingChart">
+                    <div class="row d-flex align-items-center pb-3">
+                        <div class="col text-center">
+                            <button class="btn btn-rounded btn-success" (click)="open4(content4)" [disabled]="prob !== ''"><li class="fas fa-check me-2"></li>Confirmar diagnóstico</button>
+                        </div>
+                        <div class="col text-center">
+                            <span class="h4">
+                                <strong>Resultado:</strong> {{ statusAttention }}
+                            </span>
+                        </div>
+                        <div class="col text-center">
+                            <button class="btn btn-rounded btn-primary"><li class="fas fa-edit me-2"></li>Modificar diagnóstico</button>
+                        </div>
+                    </div>
+                    <canvas height="100" #chartBT></canvas>
+                </div>
+                <div [hidden]="isLoadingChart" class="row px-2">
+                    <div class="col">
+                        <h5 class="card-title my-3">Cociente Beta/Theta</h5>
+                        <p> El cociente Beta/Theta es esencialmente una métrica numérica que representa la relación entre las potencias de las 
+                            ondas beta y theta para un canal específico. Su interpretación y uso dependen del contexto y del objetivo del análisis.</p>
+                    </div>
+                </div>
+                <div [hidden]="isLoadingChart" class="row px-2">
+                    <div class="col">
+                        <ul>
+                            <li>
+                                Si cociente es <span class="fw-bold">mayor que 1</span>, indica que la potencia de las ondas beta es dominante en comparación 
+                                con las ondas theta. Esto podría asociarse con un estado de alerta o concentración.
+                            </li>
+                            <li>
+                                Si es <span class="fw-bold">menor que 1</span>, sugiere que las ondas theta son más dominantes, lo que podría indicar un estado de relajación o distracción.
+                            </li>
+                            <li>
+                                Si es <span class="fw-bold">aproximadamente 1</span>, indica que las potencias de las ondas beta y theta son similares.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<ng-template #content4 let-c="close" let-d="dismiss">
+    <!-- <div class="modal-header bg-success text-white justify-content-center">
+        <h4 class="modal-title" id="modal-basic-title">Finalizando Prueba</h4>
+    </div> -->
+    <div class="modal-body">
+        <div class="row p-5 justify-content-center text-center">
+            <span class="loader6"></span>
+            <span class="mt-5 font-medium fs-6">Guardando datos</span>
+        </div>
+    </div>
+</ng-template>

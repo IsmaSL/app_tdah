@@ -1,12 +1,11 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute } from '@angular/router';
-import { MuseFormModel } from './muse-js.model';
+import { Router, ActivatedRoute } from '@angular/router';
+import { TestService } from 'src/app/services/tests.service';
 
 import { Chart } from 'chart.js';
-import * as moment from 'moment'
-import * as d3 from "d3";
 import zoomPlugin from 'chartjs-plugin-zoom';
+import 'chartjs-plugin-annotation';
 Chart.register(zoomPlugin);
 
 @Component({
@@ -16,54 +15,72 @@ Chart.register(zoomPlugin);
     providers: [NgbModalConfig, NgbModal],
 })
 export class ReportsComponent implements OnInit, AfterViewInit {
-    @ViewChild('hiddenDiv') hiddenDiv!: ElementRef;
-
     /* Chart */
-    @ViewChild('chartCanvas') chartCanvas!: ElementRef;
+    @ViewChild('chartBT') chartBT!: ElementRef;
 
     chart: any;
-    csvData: any[] = [];
     timeData: string[] = [];
-    valueData1: number[] = [];
-    valueData2: number[] = [];
-    valueData3: number[] = [];
-    valueData4: number[] = [];
-
-    /* Show chart */
-    isShow: boolean = false;
+    statusAttention: string;
 
     /* Data */
-    reportId: number = 0;
+    patientId: string;
+    reportId: string;
     readOnly: boolean = true;
-    arregloSeleccionado: MuseFormModel;
 
-    constructor(private route: ActivatedRoute) { }
+    data: any;
+    resultEEG = {
+        id_user: '',
+        url_file: ''
+    };
+    isLoading: boolean = false;
+    isLoadingChart: boolean = false;
+    isHiddenChart: boolean = false;
+
+    ban: boolean = false;
+
+    prob: string;
+    diaf: string;
+
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                private modalConfig: NgbModalConfig,
+                private modalService: NgbModal,
+                private testService: TestService) {
+                    modalConfig.backdrop = 'static';
+                    modalConfig.keyboard = false;
+                    modalConfig.centered = true;
+                    modalConfig.animation = true;
+                    modalConfig.size = "md";
+                }
 
     ngOnInit() {
-        const storedArreglos = localStorage.getItem('listTest');
-        const arreglos = JSON.parse(storedArreglos);
+        // if(localStorage.getItem('report')) {
+        //     const reportJSON = localStorage.getItem('report');
+        //     const report = reportJSON ? JSON.parse(reportJSON) : null;
 
+        //     this.prob = report ? report.probabilidad : undefined;
+        //     this.diaf = report ? report.diagnosticoFinal : undefined;
+        // } else {
+        //     const report = { probabilidad: '', diagnosticoFinal: '' };
+        //     localStorage.setItem('report', JSON.stringify(report));
+        // }
+        
         this.route.paramMap.subscribe((params) => {
-            this.reportId = parseInt(params.get('id'), 10);
+            this.reportId = params.get('id');
         });
-
-        this.arregloSeleccionado = arreglos[this.reportId - 1]
-    }
+        this.get_report_info(this.reportId);
+    }   
 
     ngAfterViewInit(): void {
-        this.loadCSVData();
+        
     }
 
-    showDivAndScroll() {
-        this.isShow = true;
+    showChart() {
+        this.isHiddenChart = true;
+        // Obtiene los datos
+        this.get_results_eeg(this.data.usuario.idUsuario.toString(), this.data.detalle_prueba.urlCsv);
+        // Pinta la gráfica
 
-        setTimeout(() => {
-            this.scrollIntoView();
-        }, 0);
-    }
-
-    private scrollIntoView() {
-        this.hiddenDiv.nativeElement.scrollIntoView({ behavior: 'smooth' });
     }
 
     private chartColors: any = {
@@ -79,96 +96,111 @@ export class ReportsComponent implements OnInit, AfterViewInit {
     private color(def: string, alpha: string): string {
         return def.replace(')', ', ' + alpha + ')');
     };
-
-    loadCSVData() {
-        d3.csv('/assets/files/data.csv').then((data) => {
-            this.csvData = data;
-            this.processCSVData();
-        });
+    
+    get_report_info(id: string) {
+        this.isLoading = true;
+        this.testService.get_test_report(id).subscribe(
+            (response) => {
+                this.isLoading = false;
+                this.data = response;
+                this.patientId = response.usuario.idUsuario;
+                console.log(this.data);
+                
+            }, (error) => {
+                this.isLoading = false;
+                console.log(error.error);
+            }
+        );
     }
 
-    processCSVData() {
-        for (const entry of this.csvData) {
-            const formattedTime = moment.unix(entry.time / 1000).format('HH:mm:ss');
-            this.timeData.push(formattedTime);
-            this.valueData1.push(parseFloat(entry.TP9));
-            this.valueData2.push(parseFloat(entry.AF7));
-            this.valueData3.push(parseFloat(entry.AF8));
-            this.valueData4.push(parseFloat(entry.TP10));
-        }
-
-        this.createChart();
+    get_results_eeg(id: string, urlFile: string) {
+        this.isLoadingChart = true;
+        this.testService.get_results_eeg(id, urlFile).subscribe(
+            (response) => {
+                this.isLoadingChart = false;
+                console.log(response);
+                this.timeData = Array.from({ length: response.beta_theta_ratio_af7.length }, (_, i) => `${i + 1} min`);
+                    this.statusAttention = response.final_state
+                    this.createChart();
+                    this.putDataOnChart(
+                        response.beta_theta_ratio_af7,
+                        response.beta_theta_ratio_af8);      
+            }, (error) => {
+                this.isLoadingChart = false;
+                console.log(error.error);
+            }
+        );
     }
 
     createChart() {
-        const ctx = this.chartCanvas.nativeElement.getContext('2d');
+        const ctx = this.chartBT.nativeElement.getContext('2d');
+
         this.chart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: this.timeData,
                 datasets: [
                     {
-                        label: 'TP9',
-                        data: this.valueData1,
-                        borderColor: this.chartColors.red,
-                        pointBackgroundColor: this.chartColors.red,
-                        backgroundColor: this.color(this.chartColors.red, '0.5'),
-                        fill: false,
-                        pointRadius: 0.5,
-                        pointHitRadius: 1,
-                        cubicInterpolationMode: 'monotone',
-                        borderWidth: 1.5,
-                    },
-                    {
-                        label: 'AF7',
-                        data: this.valueData2,
+                        type: 'line',
+                        label: 'AF7 - Beta/Theta',
+                        yAxisID: 'y1',
+                        xAxisID: 'x',
+                        backgroundColor: this.color(this.chartColors.blue, '0.5'),
                         borderColor: this.chartColors.blue,
                         pointBackgroundColor: this.chartColors.blue,
-                        backgroundColor: this.color(this.chartColors.blue, '0.5'),
-                        fill: false,
-                        pointRadius: 0.5,
-                        pointHitRadius: 1,
+                        borderWidth: 1,
+                        pointRadius: 4,
                         cubicInterpolationMode: 'monotone',
-                        borderWidth: 1.5,
+                        data: [],
                     },
                     {
-                        label: 'AF8',
-                        data: this.valueData3,
+                        type: 'line',
+                        label: 'AF8 - Beta/Theta',
+                        yAxisID: 'y1',
+                        xAxisID: 'x',
+                        backgroundColor: this.color(this.chartColors.green, '0.5'),
                         borderColor: this.chartColors.green,
                         pointBackgroundColor: this.chartColors.green,
-                        backgroundColor: this.color(this.chartColors.green, '0.5'),
-                        fill: false,
-                        pointRadius: 0.5,
-                        pointHitRadius: 1,
+                        borderWidth: 1,
+                        pointRadius: 4,
                         cubicInterpolationMode: 'monotone',
-                        borderWidth: 1.5,
+                        data: [],
                     },
-                    {
-                        label: 'TP10',
-                        data: this.valueData4,
-                        borderColor: this.chartColors.yellow,
-                        pointBackgroundColor: this.chartColors.yellow,
-                        backgroundColor: this.color(this.chartColors.yellow, '0.5'),
-                        fill: false,
-                        pointRadius: 0.5,
-                        pointHitRadius: 1,
-                        cubicInterpolationMode: 'monotone',
-                        borderWidth: 1.5,
-                    }
                 ]
             },
             options: {
                 transitions: {
                     zoom: {
-                      animation: {
-                        duration: 0
-                      }
+                        animation: {
+                            duration: 30
+                        }
                     }
                 },
                 scales: {
-                    y: {
-                        min: -200,
-                        max: 200
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Time (minutes)'
+                        },
+                    },
+                    y1: {
+                        position: 'left',
+                        offset: true,
+                        title: {
+                            display: true,
+                            text: 'Ratio',
+                            color: this.chartColors.gray,
+                        },
+                        grid: {
+                            color: this.chartColors.gray,
+                            borderColor: this.chartColors.gray,
+                        },
+                        ticks: {
+                            color: this.chartColors.gray,
+                        },
+                        min: 0,
+                        max: 3.0
                     },
                 },
                 plugins: {
@@ -188,13 +220,78 @@ export class ReportsComponent implements OnInit, AfterViewInit {
                         }
                     },
                     legend: {
-                        align: 'start',
+                        align: 'center',
                         labels: {
                             usePointStyle: true,
                         },
                     },
+                    annotation: {
+                        annotations: [
+                            {
+                                type: 'line',
+                                scaleID: 'y1',
+                                value: 1.2,
+                                borderColor: 'green',
+                                borderWidth: 1,
+                                label: {
+                                    display: true,
+                                    content: 'Atento \u2191'
+                                }
+                            },
+                            {
+                                type: 'line',
+                                scaleID: 'y1',
+                                value: 0.8,
+                                borderColor: 'red',
+                                borderWidth: 1,
+                                label: {
+                                    display: true,
+                                    content: 'Distraído \u2193'
+                                }
+                            }
+                        ]
+                    }
                 }
             }
         });
     }
+
+    putDataOnChart(ratio_bt_af7: any, ratio_bt_af8: any) {
+        this.chart.data.labels = this.timeData;
+        this.chart.data.datasets[0].data = ratio_bt_af7;
+        this.chart.data.datasets[1].data = ratio_bt_af8;
+        this.chart.update();
+    }
+
+    updated_results_report(id: string) {
+
+        const report = { probabilidad: '23.30', diagnosticoFinal: '0' };
+        localStorage.setItem('report', JSON.stringify(report));
+
+        // this.testService.updated_results_report(id).subscribe(
+        //     (response) => {
+        //         console.log(response);   
+        //         this.ban = true;
+        //     }, (error) => {
+        //         console.log(error.error);
+                
+        //     }
+        // );
+    }
+
+    open4(content) {
+        this.modalService.open(content);
+        this.updated_results_report(this.reportId);
+        // if(this.ban) {
+            setTimeout(() => {
+                this.modalService.dismissAll(content);
+                this.router.navigateByUrl('/app/patients/patient-profile/'+ this.patientId, { skipLocationChange: false })
+                    .then(() => {
+                        window.location.reload();
+                    });
+            }, 2000);
+        // }
+    }
+
+
 }

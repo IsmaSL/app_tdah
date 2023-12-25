@@ -8,6 +8,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PatientsComponent } from './patients.component';
 import { TablePatientsComponent } from '../../components/table-patients/table-patients.component';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+import { FilterPipe } from './filter.pipe';
+
 const routes: Routes = [
     {
         path: '',
@@ -28,10 +31,12 @@ const routes: Routes = [
         CommonModule,
         RouterModule.forChild(routes),
         NgbModule,
+        NgxPaginationModule
     ],
     declarations: [
         PatientsComponent,
         TablePatientsComponent,
+        FilterPipe
     ]
 })
 export class PatientsModule { }

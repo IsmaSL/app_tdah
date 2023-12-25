@@ -14,9 +14,11 @@ export class HistoryTdahTestsComponent {
     constructor() { }
 
     public lineChartDataAF: ChartDataset[] = [
-        { data: [85], label: 'Déficit de Atención', cubicInterpolationMode: 'monotone', },
+        // { data: [85], label: 'Déficit de Atención', cubicInterpolationMode: 'monotone', },
+        { data: [23.3], label: 'Sin TDAH', cubicInterpolationMode: 'monotone', },
         // { data: [4, 2, 5, 2, 1, 3, 2, 5], label: 'Hiperactividad', cubicInterpolationMode: 'monotone', },
         // { data: [2, 5, 2, 6, 2, 5, 2, 4], label: 'Mixto', cubicInterpolationMode: 'monotone', },
+        // { data: [85], label: 'Mixto', cubicInterpolationMode: 'monotone', },
     ];
 
     public lineChartLabels: Array<any> = [
@@ -29,7 +31,7 @@ export class HistoryTdahTestsComponent {
         // 'Jul',
         // 'Ago',
         // 'Sep',
-        'Oct',
+        'oct',   
         'Nov',
         'Dic'
     ];

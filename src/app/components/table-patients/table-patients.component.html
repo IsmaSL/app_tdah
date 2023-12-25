@@ -1,5 +1,5 @@
 <div class="text-end mt-3">
-    <input type="text" placeholder="Buscar..." class="form-control" [(ngModel)]="csearchTerm" />
+    <input [(ngModel)]="searchText" class="form-control bg-white border-dark" placeholder="Buscar...">
 </div>
 <div class="table-responsive">
     <table class="table table-striped table-hover border mt-4">
@@ -15,13 +15,10 @@
             </tr>
         </thead>
         <tbody class="border table-striped border-dark align-middle fw-normal">
-            <tr *ngFor="let patient of patients | slice: (cpage-1) * cpageSize : (cpage-1) * cpageSize + cpageSize ; index as i">
+            <tr *ngFor="let patient of patients | filter: searchText | paginate: { itemsPerPage: 10, currentPage: p }; index as i">
                 <td class="text-center">{{ i + 1 }}</td>
                 <td>
-                    <img *ngIf="patient.urlImg; else defaultImage" [src]="patient.urlImg" class="me-2 rounded-circle" style="width: 36px">
-                    <ng-template #defaultImage>
-                        <img src="assets/images/users/user4.jpg" class="me-2 rounded-circle" style="width: 36px">
-                    </ng-template>
+                    <img [src]="patient.urlImg" class="me-2 rounded-circle" style="width: 36px">
                     <ngb-highlight [result]="patient.nombre" [term]="csearchTerm"></ngb-highlight>
                     <span>&nbsp;</span>
                     <ngb-highlight [result]="patient.apellidoP" [term]="csearchTerm"></ngb-highlight>
@@ -35,10 +32,10 @@
                     <ngb-highlight [result]="patient.fechaRegistro" [term]="csearchTerm"></ngb-highlight>
                 </td>
                 <td>
-                    <span>--/--/----</span>
+                    <span>14/11/2023</span>
                 </td>
                 <td>
-                    <span>Sin diagnóstico</span>
+                    <span>TDAH - Mixto</span>
                     <!-- <span class="badge rounded-pill font-medium" 
                           [ngClass]="{
                                         'bg-secondary':patient.Diagnosis==='Normal',
@@ -69,15 +66,9 @@
         </tbody>
     </table>
 </div>
-<div class="d-flex justify-content-between flex-column flex-lg-row">
-    <div class="bg-white">
-        <ngb-pagination [(page)]="cpage" [pageSize]="cpageSize" [collectionSize]="patients.length"></ngb-pagination>
-    </div>
-    <div>
-        <select class="form-select" style="width: auto" [(ngModel)]="cpageSize">
-            <option [ngValue]="2">2 items por página</option>
-            <option [ngValue]="4">4 items por página</option>
-            <option [ngValue]="6">6 items por página</option>
-        </select>
-    </div>
+<div class="text-end mt-2">
+    <pagination-controls    previousLabel="Anterior"
+                            nextLabel="Siguiente" 
+                            (pageChange)="p = $event">
+    </pagination-controls>
 </div>

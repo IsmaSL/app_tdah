@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SyncDeviceComponent } from './sync-device.component';
+import { AddPatientComponent } from './add-patient.component';
 
-describe('SyncDeviceComponent', () => {
-  let component: SyncDeviceComponent;
-  let fixture: ComponentFixture<SyncDeviceComponent>;
+describe('AddPatientComponent', () => {
+  let component: AddPatientComponent;
+  let fixture: ComponentFixture<AddPatientComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SyncDeviceComponent ]
+      declarations: [ AddPatientComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SyncDeviceComponent);
+    fixture = TestBed.createComponent(AddPatientComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

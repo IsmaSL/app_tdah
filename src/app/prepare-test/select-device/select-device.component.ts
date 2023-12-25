@@ -1,65 +1,31 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
-import { WorkflowService } from '../workflow/workflow.service';
-import { STEPS } from "../workflow/workflow.model";
 import { Router, ActivatedRoute } from "@angular/router";
-
-import { NgbCarouselConfig, NgbCarousel} from '@ng-bootstrap/ng-bootstrap';
+import { PatientService } from 'src/app/services/patients.service';
 
 @Component({
-  selector: 'app-select-device',
-  templateUrl: './select-device.component.html',
-  styleUrls: ['./select-device.component.scss'],
-  providers: [NgbCarouselConfig]
+    selector: 'app-select-device',
+    templateUrl: './select-device.component.html',
+    styleUrls: ['./select-device.component.scss'],
 })
 export class SelectDeviceComponent implements OnInit {
 
-  title = 'Por favor seleccione el dispositivo a usar';
-  devices = [
-    {
-      id: 1,
-      name: '',
-      description: '',
-      image: 'assets/images/devices/device_1.jpg'
-    },
-    {
-      id: 2,
-      name: '',
-      description: '',
-      image: 'assets/images/devices/device_2.jpg'
-    },
-    {
-      id: 3,
-      name: '',
-      description: '',
-      image: 'assets/images/devices/device_3.png'
-    },
-  ];
+    title = 'Por favor seleccione el dispositivo a usar';
+    current_patient: any[];
 
-  images = [
-    'assets/images/devices/device_1.jpg',
-    'assets/images/devices/device_2.jpg',
-    'assets/images/devices/device_3.png',
-  ];
+    constructor(private router: Router,
+        private route: ActivatedRoute,
+        private patientService: PatientService) { }
 
-  constructor(private router: Router,
-              private route: ActivatedRoute,
-              private workflowService: WorkflowService,
-              config: NgbCarouselConfig) {
-    config.keyboard = true;
-    config.showNavigationArrows = true;
-    config.showNavigationIndicators = true;
-    
-  }
+    ngOnInit(): void { }
 
-  @ViewChild('carousel', { static: true }) carousel: NgbCarousel = Object.create(null);
+    save() {
+        // this.router.navigateByUrl('/app/prepare-test/tests', { skipLocationChange: true });
+        this.router.navigate(['start'], { relativeTo: this.route.parent, skipLocationChange: true });
+    }
 
-  ngOnInit(): void { }
-
-  save() {
-    let firstState = this.workflowService.getFirstInvalidStep(STEPS.tests);
-    if (firstState.length > 0) {
-    };
-    this.router.navigateByUrl('/app/prepare-test/tests', { skipLocationChange: true });
-  }
+    cancel() {
+        let current_data = this.patientService.get_patient_info();
+        let id_current_patient = current_data.id;
+        this.router.navigate(['/app/patients/patient-profile/', id_current_patient]);   
+    }
 }

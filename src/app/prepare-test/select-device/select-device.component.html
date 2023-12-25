@@ -1,69 +1,42 @@
-<form class="editForm">
-    <div class="tab-pane active">
-        <h4 class="font-medium-2 text-center">{{title}}</h4>
-        <br />
-        <div class="row">
-            <!-- <div class="col-6">
-                <div class="">
-                    <input type="radio" class="btn-check" name="devices" [id]="devices[0].id" autocomplete="off">
-                    <label [for]="devices[0].id" class="btn">
-                        <img [src]="devices[0].image" class="img-fluid mb-5" />
-                    </label>
-                    <input type="radio" class="btn-check" name="devices" [id]="devices[1].id" autocomplete="off">
-                    <label [for]="devices[1].id" class="btn">
-                        <img [src]="devices[1].image" class="img-fluid mb-5" />
-                    </label>
-                    <input type="radio" class="btn-check" name="devices" [id]="devices[2].id" autocomplete="off">
-                    <label [for]="devices[2].id" class="btn">
-                        <img [src]="devices[2].image" class="img-fluid mb-5" />
-                    </label>
-                </div>
-            </div>
-            <div class="col-6"></div> -->
-            <div class="col-12">
-                <div class="d-flex justify-content-center">
-                    <div class="card-body pt-0">
-                        <ngb-carousel *ngIf="images" class="text-center carousel carousel-dark slide">
-                            <!-- <ng-template ngbSlide>
-                                <div class="picsum-img-wrapper">
-                                    <img [src]="images[0]" class="img-fluid mb-5" alt="Random first slide" />
-                                </div>
-                                <div class="carousel-caption bg-light bg-opacity-25">
-                                    <h3 class="">Muse Band 2</h3>
-                                    <p class="">Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                                </div>
-                            </ng-template> -->
-                            <ng-template ngbSlide>
-                                <div class="picsum-img-wrapper">
-                                    <img [src]="images[1]" class="img-fluid mb-5" alt="Random second slide" />
-                                </div>
-                                <div class="carousel-caption bg-light bg-opacity-25">
-                                    <h3 class="">Muse Band S (Gen 2)</h3>
-                                    <p class="">
-                                        Muse es una diadema inteligente que utiliza sensores cerebrales EEG avanzados <br>
-                                        para detectar la actividad cerebral y brindar información en tiempo real.
-                                    </p>
-                                </div>
-                            </ng-template>
-                                <!-- <ng-template ngbSlide>
-                                    <div class="picsum-img-wrapper">
-                                        <img [src]="images[2]" class="img-fluid mb-5" alt="Random third slide" />
-                                    </div>
-                                    <div class="carousel-caption bg-light bg-opacity-50">
-                                        <h3 class="">Emotiv Epoc X-14</h3>
-                                        <p class="">
-                                            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                                        </p>
-                                    </div>
-                                </ng-template> -->
-                        </ngb-carousel>
-                    </div>
-                </div>
-
-                <div class="mb-3 text-center">
-                    <button type="button" uiSref="tests" class="btn btn-success btn-rounded btn-lg btn-raised" (click)="save()"> Siguiente </button>
-                </div>
-            </div>
+<div class="container my-2 py-1">
+    <!-- Step 1 - title -->
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-10">
+            <span class="h2">
+                <i class="fas fa-heartbeat me-3 bg-info p-3 rounded-5 text-white"></i><strong class="me-2">Paso 1:</strong>Seleccionar dispositivo
+            </span>
+        </div>
+        <div class="col d-flex justify-content-md-end align-items-center mt-2 mt-md-0">
+            <button type="button" class="btn btn-outline-primary btn-rounded btn-raised fs-5 border-2 me-2 px-4" (click)="cancel()">
+                <i class="fas fa-angle-left me-2"></i>Regresar
+            </button>
         </div>
     </div>
-</form>
+    <hr>
+    <div class="row pt-2">
+        <!-- Imagen -->
+        <div class="col-sm-12 col-md-3 col-lg-3">
+            <img src="assets/images/devices/device_2.jpg" class="img-fluid border rounded-4" alt="">
+        </div>
+        <!-- Información -->
+        <div class="col-sm-12 col-md-7 col-lg-7">
+            <h2 class="h2"><i class="fas fa-angle-right me-2"></i>Muse Band S - Gen 2</h2>
+            <h3 class="h3 mb-4"><i class="fas fa-angle-double-right me-2"></i>Model: MU-03-GY-ML</h3>
+            <h4>Descripción:</h4>
+            <p class="fs-5">
+                Muse es una diadema inteligente que utiliza sensores cerebrales EEG avanzados 
+                para detectar la actividad cerebral y brindar información en tiempo real.
+            </p>
+            <h4>Características:</h4>
+            <p class="fs-5">
+                Lectura de EEG en tiempo real - Medición de ritmo cardíaco - Acelerómetro para la actividad física - Medición de respiración y presión sanguínea
+            </p>
+        </div>
+        <!-- Botón -->
+        <div class="col-sm-12 col-md-2 col-lg-2 d-flex justify-content-center align-items-center">
+            <button type="button" class="btn btn-outline-success btn-rounded btn-raised fs-5 border-2" (click)="save()">
+                Seleccionar <i class="fas fa-angle-right ms-2"></i>
+            </button>
+        </div>
+    </div>
+</div>

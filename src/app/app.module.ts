@@ -10,7 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FullComponent } from './layouts/full/full.component';
 import { BlankComponent } from './layouts/blank/blank.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './auth/login.component';
 import { NotFoundComponent } from './error/not-found/not-found.component';
 
 import { VerticalNavigationComponent } from './shared/vertical-header/vertical-navigation.component';
@@ -39,7 +39,6 @@ import { TokenInterceptor } from './services/token.interceptor';
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
-
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true,

@@ -31,5 +31,4 @@ import { EditorComponent } from "./editor/editor.component";
         EditorComponent
     ],
 })
- 
 export class ComponentsModule { }

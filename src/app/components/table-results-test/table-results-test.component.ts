@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-table-results-test',
@@ -7,16 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableResultsTestComponent implements OnInit {
 
-    data: any[] = [];
+    @Input() tests: any[];
+
+    // --
+    prob: string;
+    diaf: string;
 
     constructor() { }
 
     ngOnInit(): void {
-        const localStorageData = localStorage.getItem('listTest');
-        this.data = localStorageData ? JSON.parse(localStorageData) : [];
+        if(localStorage.getItem('report')) {
+            const reportJSON = localStorage.getItem('report');
+            const report = reportJSON ? JSON.parse(reportJSON) : null;
 
-        // console.log(this.data);
-        
+            this.prob = report ? report.probabilidad : undefined;
+            this.diaf = report ? report.diagnosticoFinal : undefined;
+        } else {
+            this.prob = '';
+            this.diaf = '';
+        }
     }
-
 }

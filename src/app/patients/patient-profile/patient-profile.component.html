@@ -1,32 +1,55 @@
-<div class="row">
+<div *ngIf="loading" class="text-center pt-5 mt-5">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<div *ngIf="data" class="row">
     <!-- Column -->
     <div class="col-lg-4 col-xlg-3 col-md-5">
         <div class="card bg-white shadow rounded-4">
-            <div class="card-body pb-1">
-                <div class="my-2 text-center">
-                    <img src="assets/images/users/patient-user.jpg" class="rounded-circle" width="150" />
-                    <h3 class="card-title font-medium mt-3">Brandon Azael Muciño Santiesteban</h3>
-                    <h4 class="card-subtitle">Estudiante de primaria</h4>
+            <div class="card-body pb-0">
+                <div class=" mt-1 mb-2 text-center">
+                    <img [src]="profileUrl" alt="Imagen de perfil" class="rounded-circle" width="150"/>
+
+                    <h3 class="card-title font-medium mt-3">
+                        {{ data.nombre }} {{ data.apellidoP }} {{ data.apellidoM }}
+                    </h3>
+                    <h4 class="card-subtitle">{{ data.datos_generales.ocupacion }} - {{ calculateAge(data.datos_generales.fechaNacimiento) }} años</h4>
                     <div class="row justify-content-md-center mt-4">
-                        <div class="col-3">
+                        <div class="col">
                             <h4 class="">
-                                <i class="fas fa-child me-2"></i>
-                                <span class="rounded-pill bg-primary text-white py-0 px-2">07</span>
-                                Años
+                                <i class="fas fa-stethoscope me-1"></i>Pruebas
+                                <span class="rounded-pill bg-info text-white py-0 px-2">{{ lengthTest }}</span>
+                            </h4>
+                        </div>
+                        <div class="col">   
+                            <h4 class="">
+                                <i class="fas fa-chart-line me-1"></i>Preva.
+                                <span *ngIf="prob===''" class="rounded-pill bg-success text-white py-0 px-2">--%</span>
+                                <span *ngIf="prob!==''" class="rounded-pill bg-success text-white py-0 px-2">{{ this.prob }}%</span>
                             </h4>
                         </div>
                         <div class="col">
                             <h4 class="">
-                                <i class="fas fa-stethoscope me-2"></i>
-                                <span class="rounded-pill bg-info text-white py-0 px-2">04</span>
-                                Pruebas
-                            </h4>
-                        </div>
-                        <div class="col">
-                            <h4 class="">
-                                <i class="fas fa-heartbeat me-2"></i>
-                                <span class="rounded-pill bg-success text-white py-0 px-2">85%</span>
-                                Prevalencia
+                                <i class="fas fa-heartbeat me-1"></i>TDAH <br>
+                                <span class="rounded-pill bg-info text-white py-0 px-2">
+                                    <ng-container *ngIf="diaf === '' || diaf === null">
+                                        --
+                                    </ng-container>
+                                    <ng-container *ngIf="diaf === '0'">
+                                        Sin TDAH
+                                    </ng-container>
+                                    <ng-container *ngIf="diaf === '1'">
+                                        Inatento
+                                    </ng-container>
+                                    <ng-container *ngIf="diaf === '2'">
+                                        Hiperactivo
+                                    </ng-container>
+                                    <ng-container *ngIf="diaf === '3'">
+                                        Mixto
+                                    </ng-container>
+                                </span>
                             </h4>
                         </div>
                     </div>
@@ -38,21 +61,21 @@
             <div class="card-body pt-2">
                 <div class="row g-3">
                     <div class="col">
+                        <button type="button" class="btn btn-primary text-white btn-rounded d-block w-100" (click)="open(content)">
+                            <i class="fa fas fa-download me-2"></i>Exportar 
+                        </button>
+                    </div>
+                    <div class="col">
                         <button class="btn btn-success text-white btn-rounded d-block w-100" [disabled]="isEmptyList">
                             <i class="fas fa-heartbeat me-2"></i>Recalcular
                         </button>
                     </div>
+                </div>
+                <div class="row mt-3">
                     <div class="col">
-                        <a href="/app/prepare-test" type="button" class="btn btn-info text-white btn-rounded d-block w-100">
+                        <a href="/app/prepare-test" type="button" class="btn btn-info text-white btn-rounded d-block w-100" (click)="saveDataPatient()">
                             <i class="fas fa-stethoscope me-2"></i>Iniciar prueba
                         </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <button type="button" class="btn btn-primary text-white btn-rounded d-block w-100 mt-3" (click)="open(content)">
-                            <i class="fa fas fa-download me-2"></i>Exportar información
-                        </button>
                     </div>
                 </div>
                 <!-- Mi modal Start -->
@@ -92,41 +115,38 @@
         <div class="card bg-white shadow rounded-4">
             <div class="card-body">
                 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills">
-                    <li [ngbNavItem]="1" *ngIf="!isEmptyList">
-                        <a ngbNavLink>Seguimiento</a>
+                    <li *ngIf="lengthTest !== 0" [ngbNavItem]="1">
+                        <a ngbNavLink class="card-subtitle mb-0"><strong>Seguimiento</strong></a>
                         <ng-template ngbNavContent>
-                            <div class="row">
+                            <div class="row" style="height: 24.3rem;">
                                 <app-history-tdah-tests></app-history-tdah-tests>
                             </div>
                         </ng-template>
                     </li>
                     <li [ngbNavItem]="2">
-                        <a ngbNavLink>Perfil</a>
+                        <a ngbNavLink class="card-subtitle mb-0"><strong>Perfil</strong></a>
                         <ng-template ngbNavContent>
-                            <div class="card-body overflow-auto fw-normal" style="height: 25rem;">
-                                <!-- <div class="row">
-                                    <quill-editor></quill-editor>
-                                </div> -->
+                            <div class="card-body overflow-auto fw-normal ps-1 pt-2 pb-0" style="height: 24.3rem;">
                                 <div class="row mt-auto">
                                     <div class="col-md-3 col-xs-6 b-r">
                                         <strong>Fecha de registro</strong>
                                         <br>
-                                        <p class="text-muted">21/12/2022</p>
+                                        <span class="text-muted">{{ data.fechaRegistro }}</span>
                                     </div>
                                     <div class="col-md-3 col-xs-6 b-r">
                                         <strong>Celular</strong>
                                         <br>
-                                        <p class="text-muted">(123) 456 7890</p>
+                                        <span class="text-muted">{{ data.datos_generales.numTelefono }}</span>
                                     </div>
                                     <div class="col-md-3 col-xs-6 b-r">
                                         <strong>Correo</strong>
                                         <br>
-                                        <p class="text-muted">johnathan@admin.com</p>
+                                        <span class="text-muted">{{ data.correo }}</span>
                                     </div>
                                     <div class="col-md-3 col-xs-6">
                                         <strong>Ciudad</strong>
                                         <br>
-                                        <p class="text-muted">Orizaba, Ver.</p>
+                                        <span class="text-muted">{{ data.datos_generales.ciudadResidencia }}</span>
                                     </div>
                                 </div>
                                 <hr>
@@ -145,11 +165,11 @@
                                     of type and scrambled it to make a type specimen book. It has survived not only five
                                     centuries
                                 </p>
-                                <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem
+                                <!-- <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem
                                     Ipsum passages,
                                     and more recently with desktop publishing software like Aldus PageMaker including
                                     versions
-                                    of Lorem Ipsum.</p>
+                                    of Lorem Ipsum.</p> -->
                                 <hr>
                                 <div class="row">
                                     <div class="col">
@@ -178,93 +198,115 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="d-flex justify-content-md-end justify-content-center">
-                                        <a href="" class="btn btn-success btn-rounded">
-                                            <i class="fas fa-comments"></i> Enviar Cuestionario DSM-5
-                                        </a>
+                            </div>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="3">
+                        <a ngbNavLink class="card-subtitle mb-0"><strong>Formularios</strong></a>
+                        <ng-template ngbNavContent>
+                            <div class="card-body overflow-auto fw-normal ps-1 pt-2 pb-0" style="height: 24.3rem;">
+                                <h3>Formularios para TDAH</h3>
+                                <p>Los siguientes formularios tienen como propósito identificar de mejor manera la prevalencia del TDAH. Se recomienda resolver al menos un formulario previo a la realización de cualquier prueba.</p>
+                                <hr>
+                                <div class="row d-flex justify-content-between">
+                                    <div class="col align-items-center">
+                                        <h3>ASRS</h3>
+                                    </div>
+                                    <div class="col text-end align-items-center">
+                                        <button href="" class="btn btn-primary btn-rounded py-1 px-2">
+                                            <i class="fas fa-external-link-alt"></i> Ir al formulario
+                                        </button>
                                     </div>
                                 </div>
+                                <p>
+                                    La Escala de Autoinforme de TDAH en Adultos (ASRS) es una herramienta de cribado para evaluar los síntomas actuales del TDAH. Esta escala de 18 ítems evalúa los síntomas de impulsividad, hiperactividad y falta de atención. Los resultados son puntuaciones sumadas entre 0 y 72, y una puntuación más alta significa síntomas más graves. 
+                                </p>
+                                <hr>
+                                <div class="row d-flex justify-content-between">
+                                    <div class="col align-items-center">
+                                        <h3>WURS</h3>
+                                    </div>
+                                    <div class="col text-end align-items-center">
+                                        <button href="" class="btn btn-success btn-rounded py-1 px-2">
+                                            <i class="fas fa-external-link-alt"></i> Ir al formulario
+                                        </button>
+                                    </div>
+                                </div>
+                                <p>
+                                    La Wender Utah Rating Scale for Attention Deficit Hyperactivity Disorder (WURS) es un cuestionario de 25 ítems que evalúa retrospectivamente la presencia y gravedad de los síntomas del TDAH infantil. La escala arroja una puntuación total entre 0 y 100, y las puntuaciones más altas indican una mayor manifestación y gravedad de los síntomas.   
+                                </p>
+                                <hr>
+                                <div class="row d-flex justify-content-between">
+                                    <div class="col align-items-center">
+                                        <h3>MDQ</h3>
+                                    </div>
+                                    <div class="col text-end align-items-center">
+                                        <button href="" class="btn btn-secondary btn-rounded text-white py-1 px-2">
+                                            <i class="fas fa-external-link-alt"></i> Ir al formulario
+                                        </button>
+                                    </div>
+                                </div>
+                                <p>
+                                    El Cuestionario de Trastornos del Estado de Ánimo (MDQ) es un instrumento de cribado autoinformado para el trastorno del espectro bipolar, que contiene 13 preguntas sí/no relativas a síntomas hipomaníacos/maníacos comúnmente observados en el trastorno bipolar, así como dos preguntas adicionales. Los criterios diagnósticos son que al menos 7 de las 13 preguntas se respondan afirmativamente, que varios de los síntomas se hayan presentado a la vez y que hayan causado problemas personales.
+                                </p>
+                                <hr>
+                                <div class="row d-flex justify-content-between">
+                                    <div class="col align-items-center">
+                                        <h3>CT</h3>
+                                    </div>
+                                    <div class="col text-end align-items-center">
+                                        <button href="" class="btn btn-info btn-rounded py-1 px-2">
+                                            <i class="fas fa-external-link-alt"></i> Ir al formulario
+                                        </button>
+                                    </div>
+                                </div>
+                                <p>
+                                    La escala de temperamento ciclotímico (TC) es una escala de autoevaluación de 21 ítems, que evalúa la inestabilidad emocional y la hipersensibilidad a los estímulos externos típicamente asociadas a este trastorno del espectro bipolar. La TC forma parte originalmente del cuestionario TEMP-A exhaustivo. 
+                                </p>
+                                <hr>
+                                <div class="row d-flex justify-content-between">
+                                    <div class="col align-items-center">
+                                        <h3>MADRS</h3>
+                                    </div>
+                                    <div class="col text-end align-items-center">
+                                        <button href="" class="btn btn-warning btn-rounded py-1 px-2">
+                                            <i class="fas fa-external-link-alt"></i> Ir al formulario
+                                        </button>
+                                    </div>
+                                </div>
+                                <p>
+                                    La Escala de Calificación de la Depresión de Montgomery y Asberg (MADRS) es un instrumento de 10 ítems calificado por el clínico, que evalúa la gravedad de la depresión en curso. La puntuación total (0-60) indica la gravedad de la depresión, y las puntuaciones inferiores a 10 se clasifican como ausencia de síntomas depresivos.
+                                </p>
+                                <hr>
+                                <div class="row d-flex justify-content-between">
+                                    <div class="col align-items-center">
+                                        <h3>HADS</h3>
+                                    </div>
+                                    <div class="col text-end align-items-center">
+                                        <button href="" class="btn btn-dark btn-rounded py-1 px-2">
+                                            <i class="fas fa-external-link-alt"></i> Ir al formulario
+                                        </button>
+                                    </div>
+                                </div>
+                                <p>
+                                    La Escala Hospitalaria de Ansiedad y Depresión (HADS) es un instrumento de evaluación valorado por el paciente para evaluar la gravedad del estado actual de ansiedad y depresión. La escala consta de 14 ítems, siete de los cuales evalúan el nivel de ansiedad (HADS-A) y siete el estado depresivo (HADS-D). Cada dimensión da una puntuación total entre 0 y 21, y las puntuaciones por debajo de 8 indican la ausencia de síntomas en relación con la afección en cuestión.
+                                </p>
                             </div>
                         </ng-template>
                     </li>
-                    <!--
-                    <li [ngbNavItem]="3">
-                        <a ngbNavLink>Settings</a>
-                        <ng-template ngbNavContent>
-                            <div class="card-body">
-                                <form class="form-horizontal form-material">
-                                    <div class="mb-3">
-                                        <label class="col-md-12">Full Name</label>
-                                        <div class="col-md-12">
-                                            <input type="text" placeholder="Johnathan Doe"
-                                                class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="example-email" class="col-md-12">Email</label>
-                                        <div class="col-md-12">
-                                            <input type="email" placeholder="johnathan@admin.com"
-                                                class="form-control form-control-line" name="example-email"
-                                                id="example-email">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="col-md-12">Password</label>
-                                        <div class="col-md-12">
-                                            <input type="password" value="password"
-                                                class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="col-md-12">Phone No</label>
-                                        <div class="col-md-12">
-                                            <input type="text" placeholder="123 456 7890"
-                                                class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="col-md-12">Message</label>
-                                        <div class="col-md-12">
-                                            <textarea rows="5" class="form-control form-control-line"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="col-sm-12">Select Country</label>
-                                        <div class="col-sm-12">
-                                            <select class="form-select form-control-line">
-                                                <option>London</option>
-                                                <option>India</option>
-                                                <option>Usa</option>
-                                                <option>Canada</option>
-                                                <option>Thailand</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="col-sm-12">
-                                            <button class="btn btn-success">Update Profile</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </ng-template>
-                    </li>
-                    -->
                 </ul>
                 <div [ngbNavOutlet]="nav" class="mt-2"></div>
             </div>
         </div>
     </div>
     <!-- Column -->
-    <div *ngIf="!isEmptyList" class="col mt-2">
+    <div class="col mt-2">
         <div class="card bg-white shadow rounded-4">
             <div class="card-body">
                 <div class="row px-3">
-                    <app-table-results-test></app-table-results-test>
+                    <app-table-results-test [tests]="tests"></app-table-results-test>
                 </div>
             </div>
         </div>
-        
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import Quill from 'quill';
 
 @Component({
@@ -7,7 +7,10 @@ import Quill from 'quill';
 })
 export class EditorComponent implements AfterViewInit {
     @Input() readOnly: any;
+    @Input() contenidoGuardado: string;
+    @Output() contenidoCambiado = new EventEmitter<string>();
     @ViewChild('quillEditor') editorRef: ElementRef;
+    private quill: Quill;
 
     quillConfig: any = [
         
@@ -31,14 +34,24 @@ export class EditorComponent implements AfterViewInit {
     constructor() { }
 
     ngAfterViewInit(): void {
-        const quill = new Quill(this.editorRef.nativeElement, {
+        this.quill = new Quill(this.editorRef.nativeElement, {
             modules: {
                 toolbar: this.quillConfig
             },
             placeholder: 'Escriba aquí sus observaciones...',
-            readOnly: this.readOnly,
+            // readOnly: this.readOnly,
             theme: 'snow'
         });
+
+        this.quill.on('text-change', () => {
+            const contenido = this.quill.root.innerHTML;
+            this.contenidoCambiado.emit(contenido);
+        });
+
+        // Establecer el contenido guardado
+        if (this.contenidoGuardado) {
+            this.quill.root.innerHTML = this.contenidoGuardado;
+        }
     }
 
 }

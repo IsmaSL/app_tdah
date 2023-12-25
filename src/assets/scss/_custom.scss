@@ -10,6 +10,10 @@
     width: 6px;
 }
 
+*::-webkit-scrollbar:horizontal {
+    height: 6px;
+}
+
 *::-webkit-scrollbar-track {
     background: #e3e3e3;
 }
@@ -19,3 +23,4 @@
     border-radius: 20px;
     border: 1px solid #e3e3e3;
 }
+
