@@ -81,25 +81,6 @@ export class SwalService {
         });
     }
 
-    swalTestSaved() {
-        Swal.fire({
-            icon: "success",
-            title: "¡Hecho!",
-            text: "Resultados guardados sitisfactoriamente.",
-            customClass: {
-                title: 'my-0',
-                htmlContainer: 'my-0',
-            },
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-            }
-        });
-    }
-
     swalPatientNotSaved(message_error: string) {
         Swal.fire({
             icon: "error",
@@ -113,16 +94,74 @@ export class SwalService {
         });
     }
 
+    swalTestSaved() {
+        Swal.fire({
+            icon: "success",
+            title: "¡Hecho!",
+            text: "Resultados guardados sitisfactoriamente.",
+            customClass: {
+                title: 'my-0',
+                htmlContainer: 'my-0',
+            },
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            allowOutsideClick: false,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+    }
+
     swalTestNotSaved(message_error: string) {
         Swal.fire({
             icon: "error",
             title: "Ups...",
             text: "Paciente no registrado.",
             html: message_error,
+            allowOutsideClick: false,
             customClass: {
                 title: 'my-0',
                 htmlContainer: 'my-0',
             },
+        });
+    }
+
+    swalGettingPrev() {
+        Swal.fire({
+            icon: "warning",
+            title: "Obteniendo diagnóstico final",
+            text: "Espere por favor",
+            customClass: {
+                title: 'my-0',
+                htmlContainer: 'my-0',
+            },
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+    }
+
+    swalTestUpdated() {
+        Swal.fire({
+            icon: "success",
+            title: "¡Hecho!",
+            text: "Diagnóstico final generado con éxito",
+            customClass: {
+                title: 'my-0',
+                htmlContainer: 'my-0',
+            },
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            allowOutsideClick: false,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
         });
     }
 

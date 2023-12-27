@@ -29,7 +29,19 @@ export class TestService {
         return this.http.put<any>(this.url_base + "/update-test-report", data);
     }
 
+    update_atention_report(data: any): Observable<any> {
+        return this.http.put<any>(this.url_base + "/updated-test-detail-report", data);
+    }
+
+    update_prev_diag_final(data: any): Observable<any> {
+        return this.http.put<any>(this.url_base + '/update-test-report', data);
+    }
+
     add_test(data: MuseFormModel): Observable<MuseFormModel> {
         return this.http.post<MuseFormModel>(this.url_base + "/save-test", data);
+    }
+
+    get_prev_diag(data: any): Observable<any> {
+        return this.http.post<any>(this.url_base + '/calcular-diagnostico', data)
     }
 }

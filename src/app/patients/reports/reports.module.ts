@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { Routes, RouterModule } from "@angular/router";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgChartsModule } from 'ng2-charts';
+import { FormsModule } from '@angular/forms';
 
 import { ReportsComponent } from "./reports.component";
 
@@ -31,7 +32,8 @@ const routes: Routes = [
         CommonModule,
         RouterModule.forChild(routes),
         NgChartsModule,
-        ComponentsModule
+        ComponentsModule,
+        FormsModule
     ],
 })
 

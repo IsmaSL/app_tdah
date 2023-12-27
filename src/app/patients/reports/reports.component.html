@@ -6,6 +6,7 @@
 
 <div *ngIf="data">
     <div class="row">
+        <!-- Información general -->
         <div class="col-12 col-md-4 pb-2">
             <div class="card shadow bg-white text-dark rounded-4">
                 <div class="card-header text-center rounded-4 rounded-bottom">
@@ -21,22 +22,44 @@
                             <hr>
                             <div class="d-flex justify-content-between">
                                 <span class="fw-bolder">Edad: </span>
-                                <span>25 años</span>
+                                <span>{{ calculateAge(data.usuario.datos_generales.fechaNacimiento) }} años</span>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between">
-                                <span class="fw-bolder">Actividad Física Observada: </span><span>{{ data.detalle_prueba.nivelActividad }}</span>
+                                <span class="fw-bolder">Actividad Física: </span>
+                                <div>
+                                    <ng-container *ngIf="data.detalle_prueba.nivelActividad === '1'">
+                                        <span class="rounded-4 text-white px-2 bg-danger py-1 fw-bolder">Alta</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="data.detalle_prueba.nivelActividad === '2'">
+                                        <span class="rounded-4 text-white px-2 bg-warning py-1 fw-bolder">Moderada</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="data.detalle_prueba.nivelActividad === '3'">
+                                        <span class="rounded-4 text-white px-2 bg-success py-1 fw-bolder">Baja</span>
+                                    </ng-container>
+                                </div>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between">
-                                <span class="fw-bolder">Nivel de Atención Observado: </span><span>{{ data.detalle_prueba.nivelAtencion }}</span>
+                                <span class="fw-bolder">Nivel de Atención: </span>
+                                <div>
+                                    <ng-container *ngIf="data.detalle_prueba.nivelAtencion === '1'">
+                                        <span class="rounded-4 text-white px-2 bg-success py-1 fw-bolder">Atento</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="data.detalle_prueba.nivelAtencion === '2'">
+                                        <span class="rounded-4 text-white px-2 bg-warning py-1 fw-bolder">Medianamente Atento</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="data.detalle_prueba.nivelAtencion === '3'">
+                                        <span class="rounded-4 text-white px-2 bg-danger py-1 fw-bolder">Inatento</span>
+                                    </ng-container>
+                                </div>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between">
                                 <span class="fw-bolder">Diagnóstico Médico: </span>
                                 <div>
                                     <span>
-                                        <li class="fas fa-info-circle me-1" data-toggle="tooltip" data-placement="right" title="Diagnóstico realizado durante la prueba por el especialista de la salud."></li>
+                                        <li class="fas fa-info-circle me-1" data-toggle="tooltip" data-placement="right" title="{{ data.detalle_prueba.justificacionMedico }}"></li>
                                     </span>
                                     <ng-container *ngIf="data.detalle_prueba.diagnosticoMedico === '0'">
                                         <span class="rounded-4 text-white px-2 bg-info py-1 fw-bolder">Sin TDAH</span>
@@ -53,30 +76,10 @@
                                 </div>
                             </div>
                             <hr>
-                            <!-- <div class="d-flex justify-content-between">
-                                <span class="fw-bolder">Diagnóstico Final:</span>
-                                <div>
-                                    <ng-container *ngIf="diaf === '' || diaf === null">
-                                        <span class="rounded-4 text-white px-2 bg-danger py-1 fw-bolder">No Evaluado</span>
-                                    </ng-container>
-                                    <ng-container *ngIf="diaf === '0'">
-                                        <span class="rounded-4 text-white px-2 bg-info py-1 fw-bolder">Sin TDAH</span>
-                                    </ng-container>
-                                    <ng-container *ngIf="diaf === '1'">
-                                        <span class="rounded-4 text-white px-2 bg-warning py-1 fw-bolder">TDAH Inatento</span>
-                                    </ng-container>
-                                    <ng-container *ngIf="diaf === '2'">
-                                        <span class="rounded-4 text-white px-2 bg-primary py-1 fw-bolder">TDAH Hiperactivo</span>
-                                    </ng-container>
-                                    <ng-container *ngIf="diaf === '3'">
-                                        <span class="rounded-4 text-white px-2 bg-success py-1 fw-bolder">TDAH Mixto</span>
-                                    </ng-container>
-                                </div>
-                            </div> -->
                             <div class="d-flex justify-content-between">
                                 <span class="fw-bolder">Diagnóstico Final:</span>
                                 <div>
-                                    <ng-container *ngIf="data.diagnosticoFinal === '' || data.diagnosticoFinal === null">
+                                    <ng-container *ngIf="data.diagnosticoFinal === ''">
                                         <span class="rounded-4 text-white px-2 bg-danger py-1 fw-bolder">No Evaluado</span>
                                     </ng-container>
                                     <ng-container *ngIf="data.diagnosticoFinal === '0'">
@@ -96,20 +99,19 @@
                             <hr>
                             <div class="d-flex justify-content-between">
                                 <span class="fw-bolder">Probabilidad de Prevalencia:</span>
-                                <!-- <span *ngIf="prob === ''" class="rounded-4 text-white px-2 bg-primary fw-bolder">-- %</span>
-                                <span *ngIf="prob !== ''" class="rounded-4 text-white px-2 bg-primary fw-bolder">{{ prob }} %</span> -->
-                                
-                                <span *ngIf="data.diagnosticoFinal === '' || data.diagnosticoFinal === null" class="rounded-4 text-white px-2 bg-primary fw-bolder">
-                                    -- %
-                                </span>
-                                <span *ngIf="data.diagnosticoFinal !== '' || data.diagnosticoFinal !== null" class="rounded-4 text-white px-2 bg-primary fw-bolder">
-                                    {{ data.probabilidad }} %
-                                </span>
+                                <div>
+                                    <ng-container *ngIf="data.probabilidad === 0">
+                                        <span class="rounded-4 text-white px-2 py-1 bg-primary fw-bolder">No Evaluado</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="data.probabilidad > 0">
+                                        <span class="rounded-4 text-white px-2 py-1 bg-primary fw-bolder">{{ data.probabilidad * 100 }}%</span>
+                                    </ng-container>
+                                </div>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-start">
-                                <button class="btn btn-info text-white btn-rounded"
-                                        (click)="showChart()"
+                                <button class="btn btn-info btn-rounded fs-4 text-white"
+                                        (click)="showResultsEEG()"
                                         [disabled]="isHiddenChart"
                                         >
                                     <i class="fas fa-chart-bar me-2"></i>Obtener Resultodos del EEG
@@ -121,7 +123,9 @@
             </div>
         </div>
         <div class="col-12 col-md-8">
+            <!-- Resto de detalles -->
             <div class="row h-100">
+                <!-- Detalles de la prueba -->
                 <div class="col-12 col-md-6 h-60 pb-2">
                     <div class="card shadow bg-white text-dark rounded-4">
                         <div class="card-header text-center rounded-4 rounded-bottom">
@@ -154,6 +158,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Detalles dispositivo usado -->
                 <div class="col-12 col-md-6 h-60 pb-2">
                     <div class="card shadow bg-white text-dark rounded-4">
                         <div class="card-header text-center rounded-4 rounded-bottom">
@@ -172,6 +177,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Observaciones -->
                 <div class="col-12 h-50">
                     <div class="card shadow bg-white text-dark rounded-4">
                         <div class="card-header text-center rounded-4 rounded-bottom">
@@ -180,7 +186,7 @@
                         <div class="card-body py-4">
                             <div class="row">
                                 <div class="col fs-4">
-                                    <app-editor [readOnly]="readOnly"></app-editor>
+                                    <app-editor [contenidoGuardado]="contenidoDelEditor" [readOnly]="readOnly"></app-editor>
                                 </div>
                             </div>
                         </div>
@@ -204,34 +210,39 @@
                     <div class="spinner-border" role="status">
                       <span class="visually-hidden">Loading...</span>
                     </div>
-                    <div class="text-center">
-                        <span>Obteniendo resultados...</span>
+                    <div class="text-center mt-2">
+                        <span class="fs-5">Obteniendo resultados...</span>
+                        <br>
+                        <span class="fs-3">Esto podría demorar unos segundos</span>
                     </div>
                 </div>  
                 <div [hidden]="isLoadingChart">
-                    <div class="row d-flex align-items-center pb-3">
-                        <div class="col text-center">
-                            <button class="btn btn-rounded btn-success" (click)="open4(content4)" [disabled]="prob !== ''"><li class="fas fa-check me-2"></li>Confirmar diagnóstico</button>
+                    <div class="row d-flex align-items-center justify-content-between">
+                        <div class="col">
+                            <span class="h4 me-2 fw-boldee">Diagnóstico del EEG:</span>
+                            <span class="h3 rounded-4 text-white px-3 bg-success py-1 fw-bolder">{{ statusAttention }}</span>
                         </div>
-                        <div class="col text-center">
-                            <span class="h4">
-                                <strong>Resultado:</strong> {{ statusAttention }}
-                            </span>
-                        </div>
-                        <div class="col text-center">
-                            <button class="btn btn-rounded btn-primary"><li class="fas fa-edit me-2"></li>Modificar diagnóstico</button>
+                        <div class="col text-end">
+                            <button class="btn btn-rounded btn-success me-2 fs-4" 
+                                    (click)="updateNewAtention()">
+                                    <li class="fas fa-check me-2"></li>Confirmar
+                            </button>
+                            <button class="btn btn-rounded btn-primary fs-4"
+                                    (click)="openFormUpdate(content1)">
+                                <li class="fas fa-edit me-2"></li>Modificar
+                            </button>
                         </div>
                     </div>
                     <canvas height="100" #chartBT></canvas>
                 </div>
-                <div [hidden]="isLoadingChart" class="row px-2">
+                <div [hidden]="isLoadingChart" class="row px-2 fs-4">
                     <div class="col">
                         <h5 class="card-title my-3">Cociente Beta/Theta</h5>
                         <p> El cociente Beta/Theta es esencialmente una métrica numérica que representa la relación entre las potencias de las 
                             ondas beta y theta para un canal específico. Su interpretación y uso dependen del contexto y del objetivo del análisis.</p>
                     </div>
                 </div>
-                <div [hidden]="isLoadingChart" class="row px-2">
+                <div [hidden]="isLoadingChart" class="row px-2 fs-4">
                     <div class="col">
                         <ul>
                             <li>
@@ -261,5 +272,36 @@
             <span class="loader6"></span>
             <span class="mt-5 font-medium fs-6">Guardando datos</span>
         </div>
+    </div>
+</ng-template>
+
+<ng-template #content1 let-c="close" let-d="dismiss">
+    <div class="modal-header bg-primary text-white justify-content-center">
+        <h4 class="modal-title" id="modal-basic-title">Modificar Resultado EEG</h4>
+    </div>
+    <div class="modal-body bg-white">
+        <form>
+            <div class="form-group mb-4 text-center">
+                <span class="fs-4">
+                    Al modificar el resultado del análisis de atención del paciente, estará reemplazando el 
+                    diagnóstico del sistema basado en el EEG realizado. Se aconseja priorizar el resultado del 
+                    sistema para mantener la precisión y objetividad del diagnóstico.
+                </span>
+                <br>
+                <h4 class="mr-sm-2 mt-4">Seleccione la opción más cercana a su criterio</h4>
+                <select class="form-select mt-1 bg-white fs-5" name="selectForm" [(ngModel)]="updateAtentionForm.nivelAtencion" required>
+                    <option value="" selected disabled>Elegir...</option>
+                    <option value="1">Atento</option>
+                    <option value="2">Medianamente Atento</option>
+                    <option value="3">Inatento</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer justify-content-center bg-white">
+        <button type="button" class="btn btn-rounded btn-raised btn-light-info border border-info border-1 text-info font-medium fs-4"
+            (click)="c('Save click')">Regresar</button>
+        <button type="button" class="btn btn-rounded btn-raised btn-light-success border border-success border-1 text-success font-medium fs-4"
+            (click)="updateNewAtention()">Guardar</button>
     </div>
 </ng-template>

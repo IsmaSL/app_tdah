@@ -11,7 +11,7 @@
 </div>
 <div *ngIf="tests">
     <div class="table-responsive">
-        <table class="table table-striped table-hover border mt-3">
+        <table class="table table-striped table-hover border mt-3 fs-4">
             <thead class="table-dark text-white">
                 <tr>
                     <th class="text-center">ID</th>
@@ -51,31 +51,14 @@
                         <ng-container *ngIf="test.diagnosticoFinal === '3'">
                             <span class="rounded-4 text-white px-2 bg-success py-1">TDAH Mixto</span>
                         </ng-container>
-                        <!-- <ng-container *ngIf="diaf === '' || diaf === null">
-                            <span class="rounded-4 text-white px-2 bg-danger py-1 fw-bolder">No Evaluado</span>
-                        </ng-container>
-                        <ng-container *ngIf="diaf === '0'">
-                            <span class="rounded-4 text-white px-2 bg-info py-1 fw-bolder">Sin TDAH</span>
-                        </ng-container>
-                        <ng-container *ngIf="diaf === '1'">
-                            <span class="rounded-4 text-white px-2 bg-warning py-1 fw-bolder">TDAH Inatento</span>
-                        </ng-container>
-                        <ng-container *ngIf="diaf === '2'">
-                            <span class="rounded-4 text-white px-2 bg-primary py-1 fw-bolder">TDAH Hiperactivo</span>
-                        </ng-container>
-                        <ng-container *ngIf="diaf === '3'">
-                            <span class="rounded-4 text-white px-2 bg-success py-1 fw-bolder">TDAH Mixto</span>
-                        </ng-container> -->
                     </td>
                     <td class="text-center">
-                        <!-- <span *ngIf="prob===''" class="rounded-pill bg-success text-white py-1 px-2 fw-semi">--%</span>
-                        <span *ngIf="prob!==''" class="rounded-pill bg-success text-white py-1 px-2 fw-semi">{{ this.prob }}%</span> -->
-                        <span *ngIf="test.diagnosticoFinal===''" class="rounded-pill bg-success text-white py-1 px-2 fw-semi">--%</span>
-                        <span *ngIf="test.diagnosticoFinal!==''" class="rounded-pill bg-success text-white py-1 px-2 fw-semi">{{ test.probabilidad }}%</span>
+                        <span *ngIf="test.diagnosticoFinal===''" class="rounded-pill bg-success text-white py-1 px-2 fw-semi">No Evaluado</span>
+                        <span *ngIf="test.diagnosticoFinal!==''" class="rounded-pill bg-success text-white py-1 px-2 fw-semi">{{ test.probabilidad * 100 }}%</span>
                     </td>
                     <td class="text-center">
                         <button [routerLink]="['/app/patients/patient-profile/reports', test.idDetallePrueba]" 
-                            type="button" class="btn btn-rounded btn-outline-info">
+                            type="button" class="btn btn-rounded btn-outline-info fs-4">
                             Ver reporte <i class="fas fa-angle-right"></i> 
                         </button>
                     </td>

@@ -1,8 +1,10 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
+// Services
 import { TestService } from 'src/app/services/tests.service';
-
+import { SwalService } from 'src/app/services/swal.service';
+// Chart.js
 import { Chart } from 'chart.js';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import 'chartjs-plugin-annotation';
@@ -26,6 +28,7 @@ export class ReportsComponent implements OnInit, AfterViewInit {
     patientId: string;
     reportId: string;
     readOnly: boolean = true;
+    contenidoDelEditor: string = ''; // Asume que aquí se carga el contenido desde la base de datos
 
     data: any;
     resultEEG = {
@@ -41,11 +44,33 @@ export class ReportsComponent implements OnInit, AfterViewInit {
     prob: string;
     diaf: string;
 
+    // -------------
+
+    updateAtentionForm: any = {
+        idDetallePrueba: null,
+        nivelAtencion: ''
+    }
+
+    getPrevDiagForm: any = {
+        nivelActividadFisica: '',
+        nivelAtencion: '',
+        diagnosticoMedico: ''
+    }
+
+    setPrevDiagForm: any = {
+        diagnostico: '',
+        probabilidad: null
+    }
+
+    isGettingPrevDiag: boolean = false;
+
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private modalConfig: NgbModalConfig,
                 private modalService: NgbModal,
-                private testService: TestService) {
+                private testService: TestService,
+                private swal: SwalService
+                ) {
                     modalConfig.backdrop = 'static';
                     modalConfig.keyboard = false;
                     modalConfig.centered = true;
@@ -54,34 +79,13 @@ export class ReportsComponent implements OnInit, AfterViewInit {
                 }
 
     ngOnInit() {
-        // if(localStorage.getItem('report')) {
-        //     const reportJSON = localStorage.getItem('report');
-        //     const report = reportJSON ? JSON.parse(reportJSON) : null;
-
-        //     this.prob = report ? report.probabilidad : undefined;
-        //     this.diaf = report ? report.diagnosticoFinal : undefined;
-        // } else {
-        //     const report = { probabilidad: '', diagnosticoFinal: '' };
-        //     localStorage.setItem('report', JSON.stringify(report));
-        // }
-        
         this.route.paramMap.subscribe((params) => {
             this.reportId = params.get('id');
         });
         this.get_report_info(this.reportId);
     }   
 
-    ngAfterViewInit(): void {
-        
-    }
-
-    showChart() {
-        this.isHiddenChart = true;
-        // Obtiene los datos
-        this.get_results_eeg(this.data.usuario.idUsuario.toString(), this.data.detalle_prueba.urlCsv);
-        // Pinta la gráfica
-
-    }
+    ngAfterViewInit(): void { }
 
     private chartColors: any = {
         red: 'rgb(255, 99, 132)',
@@ -96,6 +100,23 @@ export class ReportsComponent implements OnInit, AfterViewInit {
     private color(def: string, alpha: string): string {
         return def.replace(')', ', ' + alpha + ')');
     };
+
+    showResultsEEG() {
+        this.isHiddenChart = true;
+        // Obtiene los datos
+        this.get_results_eeg(this.data.usuario.idUsuario.toString(), this.data.detalle_prueba.urlCsv);
+        // Pinta la gráfica
+    }
+
+    calculateAge(birthdate: string): number {
+        const birthDate = new Date(birthdate);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
+        return age;
+    }
     
     get_report_info(id: string) {
         this.isLoading = true;
@@ -104,8 +125,9 @@ export class ReportsComponent implements OnInit, AfterViewInit {
                 this.isLoading = false;
                 this.data = response;
                 this.patientId = response.usuario.idUsuario;
-                console.log(this.data);
-                
+                this.contenidoDelEditor = this.data.detalle_prueba.observaciones;
+                this.updateAtentionForm.idDetallePrueba = this.data.detalle_prueba.idDetallePrueba;
+                // console.log(this.data);
             }, (error) => {
                 this.isLoading = false;
                 console.log(error.error);
@@ -120,11 +142,20 @@ export class ReportsComponent implements OnInit, AfterViewInit {
                 this.isLoadingChart = false;
                 console.log(response);
                 this.timeData = Array.from({ length: response.beta_theta_ratio_af7.length }, (_, i) => `${i + 1} min`);
-                    this.statusAttention = response.final_state
-                    this.createChart();
-                    this.putDataOnChart(
-                        response.beta_theta_ratio_af7,
-                        response.beta_theta_ratio_af8);      
+                this.statusAttention = response.final_state;
+                if(response.final_state === 'Atento') {
+                    this.updateAtentionForm.nivelAtencion = '1';
+                } else if(response.final_state === 'Inatento') {
+                    this.updateAtentionForm.nivelAtencion = '3';
+                } else {
+                    this.updateAtentionForm.nivelAtencion = '2';
+                }
+                this.createChart();
+                this.putDataOnChart(
+                    response.beta_theta_ratio_af7,
+                    response.beta_theta_ratio_af8
+                );      
+                console.log(this.updateAtentionForm);
             }, (error) => {
                 this.isLoadingChart = false;
                 console.log(error.error);
@@ -263,35 +294,56 @@ export class ReportsComponent implements OnInit, AfterViewInit {
         this.chart.update();
     }
 
-    updated_results_report(id: string) {
-
-        const report = { probabilidad: '23.30', diagnosticoFinal: '0' };
-        localStorage.setItem('report', JSON.stringify(report));
-
-        // this.testService.updated_results_report(id).subscribe(
-        //     (response) => {
-        //         console.log(response);   
-        //         this.ban = true;
-        //     }, (error) => {
-        //         console.log(error.error);
-                
-        //     }
-        // );
-    }
-
-    open4(content) {
+    openFormUpdate(content) {
         this.modalService.open(content);
-        this.updated_results_report(this.reportId);
-        // if(this.ban) {
-            setTimeout(() => {
-                this.modalService.dismissAll(content);
-                this.router.navigateByUrl('/app/patients/patient-profile/'+ this.patientId, { skipLocationChange: false })
-                    .then(() => {
-                        window.location.reload();
-                    });
-            }, 2000);
-        // }
     }
 
+    updateNewAtention() {
+        if(this.updateAtentionForm.idDetallePrueba === null || this.updateAtentionForm.nivelAtencion === '') {
+            this.swal.swalEmptyData();
+        } else {    
+            this.testService.update_atention_report(this.updateAtentionForm).subscribe(
+                (response) => {
+                    this.swal.swalTestUpdated();
+                    this.modalService.dismissAll();
+                    this.get_report_info(this.reportId);
+                    setTimeout( () => {
+                        this.swal.swalGettingPrev();
+                        this.getPrevDiagForm = {
+                            nivelActividadFisica: this.data.detalle_prueba.nivelActividad,
+                            nivelAtencion: this.data.detalle_prueba.nivelAtencion,
+                            diagnosticoMedico: this.data.detalle_prueba.diagnosticoMedico
+                        }
+                        this.testService.get_prev_diag(this.getPrevDiagForm).subscribe(
+                            (response) => {
+                                setTimeout( () => {
+                                    this.testService.update_prev_diag_final(
+                                            {
+                                                idPrueba: this.reportId,
+                                                probabilidad: response.probabilidadPrevalencia,
+                                                diagnosticoFinal: response.diagnosticoFinal.toString()
+                                            }
+                                        ).subscribe(
+                                            (response) => {
+                                                this.get_report_info(this.reportId);
+                                                this.swal.swalTestUpdated();
+                                            }, (error) => {
+                                                this.swal.swalTestNotSaved(error);
+                                                console.log(error);
+                                            }
+                                        );
+                                    }, 3000);
+                            }, (error) => {
+                                this.swal.swalTestNotSaved("Problemas al obtener la prevalencia y el diagnóstico final.");
+                                console.log(error);
+                            }
+                        );
+                    }, 3000);
+                }, (error) => {
+                    this.swal.swalTestNotSaved(error.error)
+                }
+            );
+        }
+    }
 
 }
