@@ -12,6 +12,7 @@ import { PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
 export class FullComponent implements OnInit {
     public config: PerfectScrollbarConfigInterface = {};
     active = 1;
+    isLoading: boolean = true;
 
     constructor(public router: Router) { }
 

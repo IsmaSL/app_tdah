@@ -1,21 +1,22 @@
-<div class="text-end mt-3">
-    <input [(ngModel)]="searchText" class="form-control bg-white border-dark" placeholder="Buscar...">
+<div class="text-end mt-2">
+    <input [(ngModel)]="searchText" class="form-control bg-white border-dark fs-4" placeholder="Buscar...">
 </div>
 <div class="table-responsive">
-    <table class="table table-striped table-hover border mt-4">
+    <table class="table table-striped table-hover border mt-4 fs-4">
         <thead class="table-dark text-white">
             <tr>
                 <th class="text-center">#</th>
                 <th>Nombre del Paciente</th>
-                <th>Contacto</th>
-                <th>Fecha Ingreso</th>
-                <th>Última Visita</th>
-                <th>Diagnóstico</th>
+                <th class="text-center">Contacto</th>
+                <th class="text-center">Fecha Ingreso</th>
+                <th class="text-center">Último Diagnóstico</th>
+                <th class="text-center">Diagnóstico</th>
                 <th></th>
             </tr>
         </thead>
         <tbody class="border table-striped border-dark align-middle fw-normal">
-            <tr *ngFor="let patient of patients | filter: searchText | paginate: { itemsPerPage: 10, currentPage: p }; index as i">
+            <tr *ngFor="let patient of patients | filter: searchText | paginate: { itemsPerPage: 10, currentPage: p }; index as i"
+                class="align-items-center ">
                 <td class="text-center">{{ i + 1 }}</td>
                 <td>
                     <img [src]="patient.urlImg" class="me-2 rounded-circle" style="width: 36px">
@@ -25,22 +26,41 @@
                     <span>&nbsp;</span>
                     <ngb-highlight [result]="patient.apellidoM" [term]="csearchTerm"></ngb-highlight>
                 </td>
-                <td>
+                <td class="text-center">
                     <ngb-highlight [result]="patient.correo" [term]="csearchTerm"></ngb-highlight>
                 </td>
-                <td>
+                <td class="text-center">
                     <ngb-highlight [result]="patient.fechaRegistro" [term]="csearchTerm"></ngb-highlight>
                 </td>
-                <td>
-                    <span>14/11/2023</span>
+                <td class="text-center">
+                    <span>{{ patient.datos_clinicos ? patient.datos_clinicos.fecha_diagnostico : "No realizado" }}</span>
                 </td>
-                <td>
-                    <span>TDAH - Mixto</span>
+                <td class="text-center">
+                    <div *ngIf="patient.datos_clinicos">
+                        <ng-container *ngIf="patient.datos_clinicos.adhd === null">
+                            <span class="rounded-4 text-white px-2 bg-danger py-1">No Evaluado</span>
+                        </ng-container>
+                        <ng-container *ngIf="patient.datos_clinicos.adhd === 0">
+                            <span class="rounded-4 text-white px-2 bg-info py-1">Sin TDAH</span>
+                        </ng-container>
+                        <ng-container *ngIf="patient.datos_clinicos.adhd === 1">
+                            <span class="rounded-4 text-white px-2 bg-warning py-1">TDAH Inatento</span>
+                        </ng-container>
+                        <ng-container *ngIf="patient.datos_clinicos.adhd === 2">
+                            <span class="rounded-4 text-white px-2 bg-primary py-1">TDAH Hiperactivo</span>
+                        </ng-container>
+                        <ng-container *ngIf="patient.datos_clinicos.adhd === 3">
+                            <span class="rounded-4 text-white px-2 bg-success py-1">TDAH Mixto</span>
+                        </ng-container>
+                    </div>
+                    <div *ngIf="!patient.datos_clinicos">
+                        <span class="rounded-4 text-white px-2 bg-danger py-1">No Evaluado</span>
+                    </div>
                 </td>
                 <td class="text-center">
                     <a [routerLink]="['/app/patients/patient-profile', patient.idUsuario]" 
-                        type="button" class="btn btn-rounded btn-outline-info">
-                        Ver perfil <i class="fas fa-angle-right ms-2"></i> 
+                        type="button" class="btn btn-rounded btn-outline-info fs-4">
+                        Ver perfil<i class="fas fa-angle-right ms-2"></i> 
                     </a>
                 </td>
             </tr>

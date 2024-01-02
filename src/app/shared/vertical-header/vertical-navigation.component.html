@@ -133,7 +133,7 @@
             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="flag-icon flag-icon-{{selectedLanguage.icon}}"></i>
         </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" ngbDropdownMenu>
+        <div class="dropdown-menu dropdown-menu-right fs-4 bg-white" aria-labelledby="navbarDropdown" ngbDropdownMenu>
             <span class="dropdown-item" href="#" *ngFor="let lang of languages" (click)="changeLanguage(lang)">
                 <i class="flag-icon flag-icon-{{lang.icon}} me-2"></i>
                 <span>{{lang.language}}
@@ -145,7 +145,7 @@
     <!-- ============================================================== -->
     <!-- Search -->
     <!-- ============================================================== -->
-    <li class="nav-item search-box d-none d-md-block">
+    <li class="nav-item search-box d-none d-md-block fs-4">
         <form class="app-search d-none d-lg-block">
             <input type="text" class="form-control" placeholder="Search..." />
             <a href="" class="active"><i class="fa fa-search"></i></a>
@@ -155,31 +155,34 @@
     <!-- User profile and search -->
     <!-- ============================================================== -->
     <li class="nav-item" ngbDropdown placement="bottom-end">
-        <a ngbDropdownToggle class="nav-link text-muted waves-effect waves-dark pro-pic" href="javascript:void(0)"
+        <a ngbDropdownToggle class="nav-link text-muted waves-effect waves-dark pro-pic fs-4" href="javascript:void(0)"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img src="assets/images/users/users6.jpg" alt="user" class="rounded-circle" width="31" />
-            <span class="ms-2 text-white font-medium">Dr. Francisco</span><span
+            <span class="ms-2 text-white font-medium">Dr. {{ current_user.nombre }}</span><span
                 class="fas fa-angle-down ms-2 text-white"></span>
         </a>
-        <div class="dropdown-menu-right user-dd" ngbDropdownMenu>
+        <div class="dropdown-menu-right user-dd bg-white fs-4" ngbDropdownMenu>
             <div class="d-flex no-block align-items-center p-3 bg-primary text-white mb-2">
                 <div class="">
                     <img src="assets/images/users/users6.jpg" alt="user" class="img-circle" width="60" />
                 </div>
                 <div class="ms-2">
-                    <h4 class="mb-0">Dr. Francisco Javier Ramírez Tinoco</h4>
-                    <p class="mb-0">dr_fraciscoJRT@gmail.com</p>
+                    <h4 class="mb-0">Dr. {{ current_user.nombre }} {{ current_user.apellidoP }} {{ current_user.apellidoM }}</h4>
+                    <p class="mb-0">{{ current_user.correo }}</p>
                 </div>
             </div>
             <a class="dropdown-item" href="">
-                <i class="ti-user me-1 ms-1"></i> Mi Perfil</a>
+                <i class="ti-user me-1 ms-1"></i> Mi Perfil
+            </a>
+            <!-- <a class="dropdown-item" href="">
+                <i class="ti-email me-1 ms-1"></i> Bandeja</a> -->
             <a class="dropdown-item" href="">
-                <i class="ti-email me-1 ms-1"></i> Bandeja</a>
-            <a class="dropdown-item" href="">
-                <i class="ti-settings me-1 ms-1"></i> Configuración de la Cuenta</a>
-            <a class="dropdown-item" href="">
-                <i class="fa fa-power-off me-1 ms-1"></i> Cerrar Sesión</a>
-            <div class="dropdown-divider"></div>
+                <i class="ti-settings me-1 ms-1"></i> Configuración de la Cuenta
+            </a>
+            <button class="dropdown-item bg-danger text-white" (click)="closeSesion()">
+                <i class="fa fa-power-off me-1 ms-1"></i> Cerrar Sesión
+            </button>
+            <!-- <div class="dropdown-divider"></div> -->
         </div>
     </li>
     <!-- ============================================================== -->

@@ -1,14 +1,22 @@
-<nav class="sidebar-nav bg-primary">
+<nav class="sidebar-nav fs-5 d-flex flex-column justify-content-between" style="height: 100%;">
     <ul id="sidebarnav">
         <!-- First level menu -->
         <li class="sidebar-item" 
             [class.selected]="showMenu === sidebarnavItem.title" 
             *ngFor="let sidebarnavItem of sidebarnavItems">
-            <a class="sidebar-link waves-effect waves-dark"
-                [ngClass]="{ 'bg-danger opacity-100': isLinkActive(sidebarnavItem.path) }"
+            <a class="sidebar-link waves-effect waves-dark text-white"
+                [ngClass]="{ 'bg-danger opacity-100 fw-bolder': isLinkActive(sidebarnavItem.path) }"
                 [routerLink]="sidebarnavItem.path">
                 <i [ngClass]="[sidebarnavItem.icon]"></i>
                 <span class="hide-menu">{{sidebarnavItem.title | translate}}</span>
+            </a>
+        </li>
+    </ul>
+    <ul id="sidebarnav" class="">
+        <li class="sidebar-item">
+            <a class="sidebar-link fw-bolder text-white waves-effect waves-dark" (click)="closeSesion()">
+                <i class="fas fa-power-off"></i>
+                <span class="hide-menu">Cerrar Sesión</span>
             </a>
         </li>
     </ul>

@@ -5,6 +5,8 @@ import { FullComponent } from './layouts/full/full.component';
 import { LoginComponent } from './auth/login.component';
 import { NotFoundComponent } from './error/not-found/not-found.component';
 
+import { AuthGuard } from './guards/auth.guard';
+
 const Approutes: Routes = [
     {
         path: 'login',
@@ -13,6 +15,7 @@ const Approutes: Routes = [
     {
         path: 'app',
         component: FullComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'home',
@@ -20,6 +23,7 @@ const Approutes: Routes = [
             },
             {
                 path: 'patients',
+                canActivate: [AuthGuard],
                 children: [
                     {
                         path: '',
@@ -50,22 +54,33 @@ const Approutes: Routes = [
             },
             {
                 path: 'devices',
+                canActivate: [AuthGuard],
                 loadChildren: () => import('./devices/devices.module').then(m => m.DevicesModule)
             },
             {
                 path: 'prepare-test',
+                canActivate: [AuthGuard],
                 loadChildren: () => import('./prepare-test/prepare-test.module').then(m => m.PrepareTestModule)
             },
             {
                 path: 'test',
+                canActivate: [AuthGuard],
                 children: [
                     {
                         path: 'muse-js',
-                        // component: MuseJsComponent
                         loadChildren: () => import('./test/muse-js/muse-js.module').then(m => m.MuseJsModule)
                     }
                 ],
-                // loadChildren: () => import('./test/test.module').then(m => m.TestModule)
+            },
+            {
+                path: '**',
+                component: NotFoundComponent,
+                data: {
+                    title: 'ERROR 404',
+                    urls: [
+                        { title: 'Ir al Inicio' },
+                    ]
+                }
             }
         ]
     },

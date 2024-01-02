@@ -10,6 +10,10 @@ export class UsersService {
 
     constructor(private http: HttpClient) { }
 
+    getCurrentUser() {
+        return localStorage.getItem('current_user');
+    }
+
     get_count_patient(): Observable<any> {
         return this.http.get<any>(this.url_base + '/count-patients/');
     }
@@ -20,5 +24,10 @@ export class UsersService {
 
     get_history_data(year: number, month: number): Observable<any> {
         return this.http.get<any>(`${this.url_base}/history/${year}/${month}`);
+    }
+
+    close_sesion() {
+        localStorage.removeItem('current_user');
+        localStorage.removeItem('token');
     }
 }

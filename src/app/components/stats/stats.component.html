@@ -6,8 +6,8 @@
                     <img src="assets/images/users/users6.jpg" alt="user" class="rounded-circle" width="60" height="60" />
                 </div>
                 <div class="ms-3">
-                    <h4 class="fw-semi">Dr. Francisco J. Ramírez Tinoco</h4>
-                    <h5 class="fw-semi">Psiquiatra</h5>
+                    <h4 class="fw-semi">Dr. {{ current_user.nombre }} {{ current_user.apellidoP }} {{ current_user.apellidoM }}</h4>
+                    <h5 class="fw-semi">{{ current_user.rol }}</h5>
                     <div class="progress">
                         <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75"
                             aria-valuemin="0" aria-valuemax="75"></div>

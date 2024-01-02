@@ -85,7 +85,7 @@ export class PatientProfileComponent implements OnInit, AfterViewInit {
                 
             }, (error) => {
                 this.loading = false;
-                alert("Error: " + error.error.message);
+                // alert("Error: " + error.error.message);
             }
         );
     }

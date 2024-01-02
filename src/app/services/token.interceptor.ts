@@ -3,12 +3,16 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+
 import { AuthService } from './auth.service';
+import { SwalService } from './swal.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-    constructor(private authService: AuthService, private router: Router) { }
+    constructor(private authService: AuthService, 
+                private router: Router,
+                private swalServ: SwalService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let authReq = req;
@@ -25,9 +29,10 @@ export class TokenInterceptor implements HttpInterceptor {
         return next.handle(authReq).pipe(
             catchError((error: HttpErrorResponse) => {
                 if (error.status === 401 || error.status === 403) {
+                    this.swalServ.swalSessionExpired();
                     // Si el token ha expirado o no es válido
                     this.authService.logout(); // Limpia la sesión
-                    this.router.navigate(['/login']); // Redirige al login
+                    this.router.navigate(['/login'], { replaceUrl: true }); // Redirige al login
                 }
                 return throwError(error);
             })

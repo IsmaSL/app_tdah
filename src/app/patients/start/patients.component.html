@@ -4,17 +4,17 @@
             <div class="card-body px-5">
                 <div class="row pb-4 no-gutters mt-3">
                     <div class="col-sm-12 col-md-6 d-flex">
-                        <h3 class="fw-medium">Lista de Pacientes</h3>
+                        <h2 class="fw-medium mb-0">Lista de Pacientes</h2>
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <div class="float-start float-md-end w-100">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="button" class="btn btn-rounded btn-outline-primary" (click)="open(content)">
+                                <button type="button" class="btn btn-rounded btn-outline-primary fs-4" (click)="open(content)">
                                     <i class="fa fas fa-download me-1"></i> Exportar
                                 </button>
                                 <!-- Mi modal Start -->
                                 <ng-template #content let-c="close" let-d="dismiss">
-                                    <div class="modal-header bg-primary bg-opacity-100 text-white">
+                                    <div class="modal-header bg-primary bg-opacity-100 text-white fs-4">
                                         <h4 class="modal-title" id="modal-basic-title">Exportar Lista de Pacientes</h4>
                                         <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
                                     </div>
@@ -35,12 +35,12 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer bg-white">
-                                        <button type="button" class="btn btn-light-primary text-primary btn-lg px-4 fs-3 font-medium" 
+                                        <button type="button" class="btn btn-light-primary text-primary btn-lg px-4 fs-4 font-medium" 
                                                 (click)="c('Save click')">Cerrar</button>
                                     </div>
                                 </ng-template>
                                 <!-- Mi modal End -->
-                                <a href="/app/patients/add-patient" type="button" class="btn btn-rounded btn-outline-success">
+                                <a href="/app/patients/add-patient" type="button" class="btn btn-rounded btn-outline-success fs-4">
                                     <i class="fa fas fa-user-plus me-1"></i> Registrar Paciente
                                 </a>
                             </div>

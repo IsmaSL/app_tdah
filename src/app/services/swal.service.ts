@@ -257,4 +257,20 @@ export class SwalService {
             }
         });
     }
+
+    swalSessionExpired() {
+        Swal.fire({
+            icon: "error",
+            title: "La sesión ha expirado",
+            text: "Vuelve a iniciar sesión para continuar",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            allowOutsideClick: false,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+    }
 }

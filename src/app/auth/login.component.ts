@@ -4,75 +4,53 @@ import { AuthService } from '../services/auth.service';
 
 @Component({
     selector: 'app-login',
-    templateUrl: './login.component.html'
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
 
     loginform = true;
     recoverform = false;
+    isChecking: boolean = false;
 
     credentials = { username: '', password: '' };
 
-    constructor(private router: Router, private authService: AuthService) {
-        this.setUserInfo();
-        // this.getUserInfo();
-    }
+    constructor(private router: Router, 
+                private authService: AuthService) {
+                    if(this.authService.isLoggedIn()) {
+                        this.router.navigate(['/app/home']);
+                    }
+                }
 
     showRecoverForm() {
         this.loginform = !this.loginform;
         this.recoverform = !this.recoverform;
     }
 
-    setUserInfo() {
-        let nombre: string = "Ismael";
-        let usuario: any = {
-            nombre: "Ismael",
-            edad: 25,
-            credenciales: {
-                user: "IsmaelSL",
-                pass: "holamundo"
-            }
-        }
-
-        let listTest: any[] = [];
-
-        localStorage.setItem("userName", nombre);
-        localStorage.setItem("userData", JSON.stringify(usuario));
-        localStorage.setItem("listTest", JSON.stringify(listTest));
-    }
-
-    getUserInfo() {
-        const nombre = localStorage.getItem("userName");
-        const usuario = JSON.parse(localStorage.getItem("userData"));
-
-        console.log(nombre + "\n" + usuario);
-        console.log(typeof usuario)
-
-        const datosGuardados = localStorage.getItem('userData');
-        if (datosGuardados) {
-            const datosUsuario = JSON.parse(datosGuardados);
-            console.log(datosUsuario); // Esto imprimirá el objeto en la consola de forma legible
-        }
-    }
-
     login() {
         this.authService.login(this.credentials.username, this.credentials.password).subscribe(response => {
+            this.isChecking = true;
             // Almacena el token
             this.authService.setToken(response.access_token);
-            
+            // Obtiene el usuario por el token
             this.getCurrentUser();
-            // Procesa la respuesta, guarda el token, navega a otra página, etc.
-            this.router.navigate(['/app/home']);
+            // Prepara el cambio de página
+            setTimeout(
+                () => {
+                    // Procesa la respuesta, guarda el token, navega a otra página, etc.
+                    this.router.navigate(['/app/home']);
+                }, 2000
+            );
         }, error => {
             console.log("status: " + error.status + " - " + error.statusText + "\n" + error.error.message);
             alert("Ups... " + error.error.message)
         });
     }
 
-    getCurrentUser() {
-        this.authService.getUserProfile().subscribe(
+    async getCurrentUser() {
+        await this.authService.getUserProfile().subscribe(
             response => {
-                console.log(response);
+                // Almacena el usuario
                 this.authService.setUser(response);
             }, error => {
                 console.log(error);

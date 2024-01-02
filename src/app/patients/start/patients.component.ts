@@ -39,12 +39,11 @@ export class PatientsComponent implements OnInit {
             (response) => {
                 this.loading = false;
                 this.patientList = response;   
-                console.log(this.patientList);
-                
+                // console.log(this.patientList);
                 this.get_pic_profile();
             }, (error) => {
                 this.loading = false;
-                alert("Error: " + error.error.message);
+                // alert("Error: " + error.error.message);
             }
         );
     }

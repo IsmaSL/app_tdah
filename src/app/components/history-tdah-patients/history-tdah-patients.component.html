@@ -1,15 +1,15 @@
 <div class="row d-md-flex align-items-center mb-3">
-    <div class="col">
+    <div class="col-12 col-md-6">
         <h4 class="mb-0 fw-semi">Historial de Diagnósticos Realizados</h4>
     </div>
-    <div class="col">
-        <div class="row d-flex g-1 justify-content-end">
-            <div class="col-auto">
+    <div class="col-12 col-md-6">
+        <div class="row d-flex g-1 justify-content-md-end">
+            <div class="col-6 col-md-4">
                 <select name="years" class="form-select">
                     <option value="Enero">Enero</option>
                 </select>
             </div>
-            <div class="col-auto">
+            <div class="col-6 col-md-4">
                 <select name="months" class="form-select">
                     <option *ngFor="let year of [2024]" [value]="year">{{ year }}</option>
                 </select>
