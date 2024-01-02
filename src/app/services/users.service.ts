@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -14,5 +14,11 @@ export class UsersService {
         return this.http.get<any>(this.url_base + '/count-patients/');
     }
 
-    
+    get_count_patients_adhd(): Observable<any> {
+        return this.http.get<any>(this.url_base + '/count-patients-adhd');
+    }
+
+    get_history_data(year: number, month: number): Observable<any> {
+        return this.http.get<any>(`${this.url_base}/history/${year}/${month}`);
+    }
 }

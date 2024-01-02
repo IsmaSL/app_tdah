@@ -1,29 +1,14 @@
-<div class="">
-    <div class="d-md-flex align-items-center ps-2 pe-3">
-        <h4 class="mb-0 fw-semi">Prevalencia del TDAH</h4>
-        <div class="ms-auto mt-3 mt-md-0">
-            <ul class="list-inline mb-0">
-                <li class="list-inline-item text-info">
-                    <div class="input-group">
-                        <!-- <label for="year">Año:</label> -->
-                        <select class="form-select" style="width: auto" name="year" placeholder="Año">
-                            <option selected>2023</option>
-                            <option>2022</option>
-                            <option>2021</option>
-                        </select>
-                    </div>
-                    
-                </li>
-            </ul>
-        </div>
+<div class="row d-md-flex align-items-center">
+    <div class="col">
+        <h4 class="mb-0 fw-semi">Historial de Prevalencia del TDAH</h4>
     </div>
+    <div class="col-auto">
+        <select class="form-select">
+            <option *ngFor="let year of [2023, 2022, 2021]" [value]="year">{{ year }}</option>
+        </select>
+    </div>
+</div>
 
-    <div class="mt-0">
-        <canvas baseChart
-            [datasets]="lineChartDataAF" 
-            [labels]="lineChartLabels"
-            [options]="lineChartOptionsAF" 
-            [type]="lineChartType">
-        </canvas>
-    </div>
+<div style="height: 22rem;">
+    <canvas #canvas></canvas>
 </div>

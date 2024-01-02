@@ -1,0 +1,266 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow bg-white rounded-4">
+            <div class="card-body px-5">
+                <!-- Encabezado y botón Back -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h2 class="pb-0 mb-0">Formulario ASRS</h2>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-outline-primary btn-rounded fs-4 border-2" (click)="cancel()">
+                            <i class="fas fa-angle-left me-2"></i>Regresar
+                        </button>
+                    </div>
+                </div>
+                <div class="my-3 fs-5">
+                    <span>
+                        Responda a las siguientes preguntas evaluándose a sí mismo en cada uno de los criterios indicados utilizando la escala ubicada al 
+                        lado derecho de la página. Cuando responda a cada pregunta, ponga una X en la casilla que mejor describa cómo se ha sentido 
+                        y comportado durante los últimos 6 meses.
+                    </span>
+                </div>
+                <!-- Formulario en tabla -->
+                <div class="table-responsive">
+                    <form [formGroup]="miFormulario" (ngSubmit)="onSubmit()">
+                        <table class="table table-striped border fs-4 mb-4">
+                            <thead class="table-dark text-white">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Parte A</th>
+                                    <th class="text-center">Nunca</th>
+                                    <th class="text-center">Casi Nunca</th>
+                                    <th class="text-center">A Veces</th>
+                                    <th class="text-center">Casi Siempre</th>
+                                    <th class="text-center">Siempre</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-striped border border-dark align-middle fs-4">
+                                <tr>
+                                    <td>1.</td>
+                                    <td class="fw-normal">
+                                        ¿Con qué frecuencia le cuesta concluir los detalles finales de un proyecto una vez que ya ha terminado las partes que constituyen un reto?
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q1" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q1" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q1" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q1" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q1" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>2.</td>
+                                    <td class="fw-normal">
+                                        ¿Con qué frecuencia le cuesta poner las cosas en orden cuando tiene que realizar una tarea que exige organización?
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q2" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q2" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q2" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q2" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q2" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>3.</td>
+                                    <td class="fw-normal">
+                                        ¿Con qué frecuencia tiene problemas para recordar citas u obligaciones?
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q3" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q3" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q3" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q3" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q3" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>4.</td>
+                                    <td class="fw-normal">
+                                        ¿Cuándo tiene que realizar una tarea que exige pensar mucho, ¿con qué frecuencia evita o aplaza su comienzo? 
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q4" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q4" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q4" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q4" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q4" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>5.</td>
+                                    <td class="fw-normal">
+                                        ¿Con qué frecuencia juguetea con o retuerce las manos o los pies cuando tiene que estar sentado por mucho tiempo? 
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q5" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q5" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q5" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q5" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q5" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>6.</td>
+                                    <td class="fw-normal">
+                                        ¿Con qué frecuencia se siente excesivamente activo y empujado a hacer cosas, como si lo impulsara un motor? 
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q6" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q6" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q6" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q6" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q6" value="4"></td>
+                                </tr>   
+                            </tbody>
+                            <thead class="table-dark text-white">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Parte B</th>
+                                    <th class="text-center">Nunca</th>
+                                    <th class="text-center">Casi Nunca</th>
+                                    <th class="text-center">A Veces</th>
+                                    <th class="text-center">Casi Siempre</th>
+                                    <th class="text-center">Siempre</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-striped border border-dark align-middle fs-4">
+                                <tr>
+                                    <td>7.</td>
+                                    <td class="fw-normal">
+                                        ¿Con qué frecuencia comete errores por descuido cuando tiene que trabajar en un proyecto aburrido o difícil? 
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q7" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q7" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q7" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q7" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q7" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>8.</td>
+                                    <td class="fw-normal">
+                                        ¿Con qué frecuencia le cuesta mantener la atención cuando está realizando un trabajo aburrido o repetitivo? 
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q8" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q8" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q8" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q8" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q8" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>9.</td>
+                                    <td class="fw-normal">
+                                        ¿Con qué frecuencia le cuesta concentrarse en lo que otras personas le están diciendo, incluso cuando le hablan directamente? 
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q9" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q9" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q9" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q9" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q9" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>10.</td>
+                                    <td class="fw-normal">
+                                        ¿Con qué frecuencia extravía o le cuesta encontrar cosas en la casa o el trabajo?  
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q10" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q10" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q10" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q10" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q10" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>11.</td>
+                                    <td class="fw-normal">
+                                        ¿Con qué frecuencia se distrae con actividades o ruidos que se producen alrededor suyo?  
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q11" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q11" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q11" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q11" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q11" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>12.</td>
+                                    <td class="fw-normal">
+                                        ¿Con qué frecuencia se levanta de su asiento en reuniones u otras situaciones en las que se espera que se mantenga sentado?  
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q12" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q12" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q12" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q12" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q12" value="4"></td>
+                                </tr>   
+                                <tr>
+                                    <td>13.</td>
+                                    <td class="fw-normal">
+                                        ¿Con qué frecuencia se siente inquieto o agitado? 
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q13" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q13" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q13" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q13" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q13" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>14.</td>
+                                    <td class="fw-normal">
+                                        ¿Con qué frecuencia le cuesta relajarse cuando tiene tiempo para usted? 
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q14" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q14" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q14" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q14" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q14" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>15.</td>
+                                    <td class="fw-normal">
+                                        ¿Con qué frecuencia se da cuenta de que está hablando demasiado en situaciones sociales? 
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q15" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q15" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q15" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q15" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q15" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>16.</td>
+                                    <td class="fw-normal">
+                                        Cuando está teniendo una conversación, ¿con qué frecuencia se da cuenta de que termina las oraciones de las 
+                                        personas con quienes está hablando antes de que las puedan terminar ellas mismas?  
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q16" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q16" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q16" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q16" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q16" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>17.</td>
+                                    <td class="fw-normal">
+                                        ¿Con qué frecuencia le cuesta esperar su turno en situaciones en las que hay que esperar el turno?  
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q17" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q17" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q17" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q17" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q17" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>18.</td>
+                                    <td class="fw-normal">
+                                        ¿Con qué frecuencia interrumpe a otras personas cuando están ocupadas?  
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q18" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q18" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q18" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q18" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q18" value="4"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-secondary btn-rounded border-2 text-white fs-4" (click)="clean()">
+                                <i class="fas fa-eraser me-2"></i>Limpiar
+                            </button>
+                            <button type="submit" class="btn btn-success btn-rounded border-2 fs-4 ms-2">
+                                <i class="fas fa-check me-2"></i>Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

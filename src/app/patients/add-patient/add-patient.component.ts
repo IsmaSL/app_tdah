@@ -17,6 +17,14 @@ export class AddPatientComponent implements OnInit {
     dia = String(this.fecha.getDate()).padStart(2, '0');
     fechaHoy = `${this.anio}-${this.mes}-${this.dia}`;
 
+    cbx1: boolean = false;
+    cbx2: boolean = false;
+    cbx3: boolean = false;
+    cbx4: boolean = false;
+
+    sustances: number = 0;
+    med: number = 0;
+
     // Formulario del Paciente
     paciente = {
         urlImg: 'NULL',
@@ -43,6 +51,15 @@ export class AddPatientComponent implements OnInit {
                 private router: Router) { }
 
     ngOnInit(): void {
+    }
+
+    test() {
+        console.log('add: ' + (this.cbx1 ? 1 : 0));
+        console.log('tb: ' + (this.cbx2 ? 1 : 0));
+        console.log('tu: ' + (this.cbx3 ? 1 : 0));
+        console.log('ta: ' + (this.cbx4 ? 1 : 0));
+        console.log('sus: ' + this.sustances);
+        console.log('med: ' + this.med);
     }
 
     sonTodosLosCamposLlenos(): boolean {

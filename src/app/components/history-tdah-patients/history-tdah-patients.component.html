@@ -1,0 +1,23 @@
+<div class="row d-md-flex align-items-center mb-3">
+    <div class="col">
+        <h4 class="mb-0 fw-semi">Historial de Diagnósticos Realizados</h4>
+    </div>
+    <div class="col">
+        <div class="row d-flex g-1 justify-content-end">
+            <div class="col-auto">
+                <select name="years" class="form-select">
+                    <option value="Enero">Enero</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <select name="months" class="form-select">
+                    <option *ngFor="let year of [2024]" [value]="year">{{ year }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="height: 21rem;">
+    <canvas #canvas></canvas>
+</div>

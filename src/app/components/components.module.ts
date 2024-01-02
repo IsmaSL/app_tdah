@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 
 import { HistoryTdahTestsComponent } from "./history-tdah-tests/history-tdah-tests.component";
-import { RecentPatientsComponent } from "./recent-patients/recent-patients.component";
 import { TableResultsTestComponent } from './table-results-test/table-results-test.component';
 import { EditorComponent } from "./editor/editor.component";
 
@@ -20,15 +19,13 @@ import { EditorComponent } from "./editor/editor.component";
     ],
     exports: [
         HistoryTdahTestsComponent,
-        RecentPatientsComponent,
         TableResultsTestComponent,
         EditorComponent
     ],
     declarations: [
         HistoryTdahTestsComponent,
-        RecentPatientsComponent,
         TableResultsTestComponent,
-        EditorComponent
+        EditorComponent,
     ],
 })
 export class ComponentsModule { }

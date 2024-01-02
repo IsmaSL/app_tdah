@@ -309,6 +309,7 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
     public lineChartOptions: ChartOptions = {
         responsive: true,
         animation: false,
+        parsing: false,
         scales: {
             x: {
                 type: 'realtime',
@@ -325,6 +326,12 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
                     frameRate: 24,
                     delay: 0,
                 },
+                ticks: {
+                    source: 'auto',
+                    // Disabled rotation for performance
+                    maxRotation: 0,
+                    autoSkip: true,
+                }
             },
             y1: {
                 position: 'left',

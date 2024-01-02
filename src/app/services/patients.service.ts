@@ -43,6 +43,10 @@ export class PatientService {
         }
     }
 
+    get_patient_results(data: any): Observable<any> {
+        return this.http.post<any>(this.url_base + '/final_results/', data);
+    }
+
     delete_patient_info(): void {
         localStorage.removeItem(this.key_lost);
         console.error('Data borrado de localStorage');

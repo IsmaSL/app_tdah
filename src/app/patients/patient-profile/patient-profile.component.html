@@ -18,35 +18,35 @@
                     <h4 class="card-subtitle">{{ data.datos_generales.ocupacion }} - {{ calculateAge(data.datos_generales.fechaNacimiento) }} años</h4>
                     <div class="row justify-content-md-center mt-4">
                         <div class="col">
-                            <h4 class="">
+                            <h4 class="mb-0">
                                 <i class="fas fa-stethoscope me-1"></i>Pruebas
-                                <span class="rounded-pill bg-info text-white py-0 px-2">{{ lengthTest }}</span>
+                                <span class="rounded-pill bg-info text-white py-0 px-3">{{ lengthTest }}</span>
                             </h4>
                         </div>
                         <div class="col">   
-                            <h4 class="">
+                            <h4 class="mb-0">
                                 <i class="fas fa-chart-line me-1"></i>Preva.
-                                <span *ngIf="prob===''" class="rounded-pill bg-success text-white py-0 px-2">--%</span>
-                                <span *ngIf="prob!==''" class="rounded-pill bg-success text-white py-0 px-2">{{ this.prob }}%</span>
+                                <span *ngIf="results.prob === null" class="rounded-pill bg-success text-white py-0 px-2">--%</span>
+                                <span *ngIf="results.prob !== null" class="rounded-pill bg-success text-white py-0 px-2">{{ results.prob * 100 }}%</span>
                             </h4>
                         </div>
                         <div class="col">
-                            <h4 class="">
-                                <i class="fas fa-heartbeat me-1"></i>TDAH <br>
+                            <h4 class="mb-0">
+                                <i class="fas fa-heartbeat me-1"></i>TDAH<br>
                                 <span class="rounded-pill bg-info text-white py-0 px-2">
-                                    <ng-container *ngIf="diaf === '' || diaf === null">
+                                    <ng-container *ngIf="results.adhd === null">
                                         --
                                     </ng-container>
-                                    <ng-container *ngIf="diaf === '0'">
+                                    <ng-container *ngIf="results.adhd === 0">
                                         Sin TDAH
                                     </ng-container>
-                                    <ng-container *ngIf="diaf === '1'">
+                                    <ng-container *ngIf="results.adhd === 1">
                                         Inatento
                                     </ng-container>
-                                    <ng-container *ngIf="diaf === '2'">
+                                    <ng-container *ngIf="results.adhd === 2">
                                         Hiperactivo
                                     </ng-container>
-                                    <ng-container *ngIf="diaf === '3'">
+                                    <ng-container *ngIf="results.adhd === 3">
                                         Mixto
                                     </ng-container>
                                 </span>
@@ -59,21 +59,21 @@
                 <hr>
             </div>
             <div class="card-body pt-2">
-                <div class="row g-3">
+                <div class="row g-3 pt-0">
                     <div class="col">
-                        <button type="button" class="btn btn-primary text-white btn-rounded d-block w-100" (click)="open(content)">
+                        <button type="button" class="btn btn-primary text-white btn-rounded fw-medium w-100 fs-4" (click)="open(content)">
                             <i class="fa fas fa-download me-2"></i>Exportar 
                         </button>
                     </div>
                     <div class="col">
-                        <button class="btn btn-success text-white btn-rounded d-block w-100" [disabled]="isEmptyList">
-                            <i class="fas fa-heartbeat me-2"></i>Recalcular
+                        <button class="btn btn-success text-white btn-rounded fw-medium w-100 fs-4" [disabled]="isEmptyList" (click)="get_predict_diag()">
+                            <i class="fas fa-heartbeat me-2"></i>Evaluar
                         </button>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col">
-                        <a href="/app/prepare-test" type="button" class="btn btn-info text-white btn-rounded d-block w-100" (click)="saveDataPatient()">
+                        <a href="/app/prepare-test" type="button" class="btn btn-info text-white btn-rounded fw-medium w-100 fs-4" (click)="saveDataPatient()">
                             <i class="fas fa-stethoscope me-2"></i>Iniciar prueba
                         </a>
                     </div>
@@ -115,18 +115,19 @@
         <div class="card bg-white shadow rounded-4">
             <div class="card-body">
                 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills">
-                    <li *ngIf="lengthTest !== 0" [ngbNavItem]="1">
+                    <!-- *ngIf="lengthTest !== 0" -->
+                    <li [ngbNavItem]="1">
                         <a ngbNavLink class="card-subtitle mb-0 fs-4"><strong>Seguimiento</strong></a>
                         <ng-template ngbNavContent>
-                            <div class="row" style="height: 24.3rem;">
-                                <app-history-tdah-tests></app-history-tdah-tests>
+                            <div class="row pb-0 mb-0" style="height: 24.2rem;">
+                                <app-history-tdah-tests *ngIf="tests" [pruebas]="tests"></app-history-tdah-tests>
                             </div>
                         </ng-template>
                     </li>
                     <li [ngbNavItem]="2">
                         <a ngbNavLink class="card-subtitle mb-0 fs-4"><strong>Perfil</strong></a>
                         <ng-template ngbNavContent>
-                            <div class="card-body overflow-auto fw-normal ps-1 pt-2 pb-0 fs-4" style="height: 24.3rem;">
+                            <div class="card-body overflow-auto fw-normal ps-1 pt-2 pb-0 fs-4" style="height: 24.2rem;">
                                 <div class="row mt-auto">
                                     <div class="col-md-3 col-xs-6 b-r">
                                         <strong>Fecha de registro</strong>
@@ -204,18 +205,20 @@
                     <li [ngbNavItem]="3">
                         <a ngbNavLink class="card-subtitle mb-0 fs-4"><strong>Formularios</strong></a>
                         <ng-template ngbNavContent>
-                            <div class="card-body overflow-auto fw-normal ps-1 pt-2 pb-0 fs-4" style="height: 24.3rem;">
+                            <div class="card-body overflow-auto fw-normal ps-1 pt-2 pb-0 fs-4" style="height: 24.2rem;">
                                 <h3>Formularios para TDAH</h3>
                                 <p>Los siguientes formularios tienen como propósito identificar de mejor manera la prevalencia del TDAH. Se recomienda resolver al menos un formulario previo a la realización de cualquier prueba.</p>
                                 <hr>
-                                <div class="row d-flex justify-content-between">
-                                    <div class="col align-items-center">
-                                        <h3>ASRS</h3>
+                                <div class="row d-flex justify-content-between align-items-center">
+                                    <div class="col">
+                                        <span class="h3 mb-0 me-2">ASRS</span>
+                                        <span class="fs-4">(Score: {{ forms.asrs != null ? forms.asrs : '0' }} pts.)</span>
                                     </div>
-                                    <div class="col text-end align-items-center">
-                                        <button href="" class="btn btn-primary btn-rounded py-1 px-2 fs-4">
+                                    <div class="col text-end">
+                                        <a [routerLink]="['/app/patients/forms/ASRS-form']" 
+                                            class="btn btn-primary btn-rounded py-1 px-2 fs-4">
                                             <i class="fas fa-external-link-alt"></i> Ir al formulario
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                                 <p>
@@ -224,7 +227,8 @@
                                 <hr>
                                 <div class="row d-flex justify-content-between">
                                     <div class="col align-items-center">
-                                        <h3>WURS</h3>
+                                        <span class="h3 mb-0 me-2">WURS</span>
+                                        <span class="fs-4">(Score: {{ forms.wurs != null ? forms.wurs : '0' }} pts.)</span>
                                     </div>
                                     <div class="col text-end align-items-center">
                                         <button href="" class="btn btn-success btn-rounded py-1 px-2 fs-4">
@@ -238,7 +242,8 @@
                                 <hr>
                                 <div class="row d-flex justify-content-between">
                                     <div class="col align-items-center">
-                                        <h3>MDQ</h3>
+                                        <span class="h3 mb-0 me-2">MDQ</span>
+                                        <span class="fs-4">(Score: {{ forms.mdq != null ? forms.mdq : '0' }} pts.)</span>
                                     </div>
                                     <div class="col text-end align-items-center">
                                         <button href="" class="btn btn-secondary btn-rounded text-white py-1 px-2 fs-4">
@@ -252,7 +257,8 @@
                                 <hr>
                                 <div class="row d-flex justify-content-between">
                                     <div class="col align-items-center">
-                                        <h3>CT</h3>
+                                        <span class="h3 mb-0 me-2">CT</span>
+                                        <span class="fs-4">(Score: {{ forms.ct != null ? forms.ct : '0' }} pts.)</span>
                                     </div>
                                     <div class="col text-end align-items-center">
                                         <button href="" class="btn btn-info btn-rounded py-1 px-2 fs-4">
@@ -266,7 +272,8 @@
                                 <hr>
                                 <div class="row d-flex justify-content-between">
                                     <div class="col align-items-center">
-                                        <h3>MADRS</h3>
+                                        <span class="h3 mb-0 me-2">MADRS</span>
+                                        <span class="fs-4">(Score: {{ forms.madrs != null ? forms.madrs : '0' }} pts.)</span>
                                     </div>
                                     <div class="col text-end align-items-center">
                                         <button href="" class="btn btn-warning btn-rounded py-1 px-2 fs-4">
@@ -280,7 +287,8 @@
                                 <hr>
                                 <div class="row d-flex justify-content-between">
                                     <div class="col align-items-center">
-                                        <h3>HADS</h3>
+                                        <span class="h3 mb-0 me-2">HADS</span>
+                                        <span class="fs-4">(Score: {{ forms.hads_a != null ? forms.hads_a : '0' }} pts.)</span>
                                     </div>
                                     <div class="col text-end align-items-center">
                                         <button href="" class="btn btn-dark btn-rounded py-1 px-2 fs-4">

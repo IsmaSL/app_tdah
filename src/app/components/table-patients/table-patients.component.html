@@ -36,27 +36,8 @@
                 </td>
                 <td>
                     <span>TDAH - Mixto</span>
-                    <!-- <span class="badge rounded-pill font-medium" 
-                          [ngClass]="{
-                                        'bg-secondary':patient.Diagnosis==='Normal',
-                                        'bg-success':patient.Diagnosis==='Mixto',
-                                        'bg-primary':patient.Diagnosis==='Hiperactivo',
-                                        'bg-info':patient.Diagnosis==='Inatento'
-                                    }">{{client.Diagnosis}}</span> -->
                 </td>
-                <!-- <td class="text-center">
-                    <ngb-highlight [result]="client.LastDate" [term]="csearchTerm"></ngb-highlight>
-                </td> -->
-                <!-- <td class="text-center">
-                    <span class="badge rounded-pill font-medium" 
-                          [ngClass]="{
-                                        'bg-success':client.Status==='Activo'
-                                    }">{{client.Status}}</span>
-                </td> -->
                 <td class="text-center">
-                    <!-- <a type="button" class="btn btn-rounded btn-outline-primary me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Realizar prueba">
-                        <i class="fas fas fa-file-medical-alt"></i> 
-                    </a> -->
                     <a [routerLink]="['/app/patients/patient-profile', patient.idUsuario]" 
                         type="button" class="btn btn-rounded btn-outline-info">
                         Ver perfil <i class="fas fa-angle-right ms-2"></i> 

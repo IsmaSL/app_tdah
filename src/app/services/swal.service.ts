@@ -176,4 +176,85 @@ export class SwalService {
             },
         });
     }
+
+    swalScoreFormUpdated(score: number) {
+        Swal.fire({
+            icon: "success",
+            title: "Puntaje obtenido: " + score + " pts.",
+            text: "La información se guardó correctamente.",
+            customClass: {
+                title: 'my-0',
+                htmlContainer: 'my-0',
+            },
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            allowOutsideClick: false,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+    }
+
+    swalScoreFormNotUpdated(error: string) {
+        Swal.fire({
+            icon: "error",
+            title: "Ups...",
+            text: "No se pudo guardar la información",
+            html: error,
+            customClass: {
+                title: 'my-0',
+                htmlContainer: 'my-0',
+            },
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            allowOutsideClick: false,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+    }
+
+    swalPredictSuccess() {
+        Swal.fire({
+            icon: "success",
+            title: "Diagnóstico generado con éxito",
+            text: "Se ha guardado la información en el perfil del paciente.",
+            customClass: {
+                title: 'my-0',
+                htmlContainer: 'my-0',
+            },
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            allowOutsideClick: false,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+    }
+
+    swalPredictNotSuccess() {
+        Swal.fire({
+            icon: "error",
+            title: "No se pudo generar el diagnóstico final",
+            text: "Intente de nuevo más tarde.",
+            customClass: {
+                title: 'my-0',
+                htmlContainer: 'my-0',
+            },
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            allowOutsideClick: false,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+    }
 }

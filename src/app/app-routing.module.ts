@@ -42,6 +42,10 @@ const Approutes: Routes = [
                             }
                         ]
                     },
+                    {
+                        path: 'forms',
+                        loadChildren: () => import('./patients/forms/forms.module').then(m => m.FormsTestModule)
+                    }
                 ]
             },
             {
