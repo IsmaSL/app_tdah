@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit, OnDestroy, ElementRef } from '@angular/core';
-import { Chart, registerables, ChartDataset, ChartConfiguration } from 'chart.js';
+import { Chart, registerables, ChartDataset } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 Chart.register(ChartDataLabels);

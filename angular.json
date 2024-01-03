@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "adminwrap-admin-angular": {
+        "app-tdah": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -20,7 +20,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/adminwrap-admin-angular",
+                        "outputPath": "dist/app-tdah",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -33,17 +33,11 @@
                         ],
                         "styles": [
                             "node_modules/bootstrap/dist/css/bootstrap.min.css",
-                            "node_modules/chartist/dist/chartist.min.css",
-                            "node_modules/flatpickr/dist/flatpickr.css",
                             "node_modules/c3/c3.min.css",
                             "node_modules/datatables.net-dt/css/jquery.dataTables.css",
                             "node_modules/ngx-toastr/toastr.css",
                             "node_modules/quill/dist/quill.snow.css",
                             "node_modules/quill/dist/quill.bubble.css",
-                            "node_modules/angular-calendar/css/angular-calendar.css",
-                            "node_modules/@swimlane/ngx-datatable/index.css",
-                            "node_modules/@swimlane/ngx-datatable/themes/material.css",
-                            "node_modules/@swimlane/ngx-datatable/assets/icons.css",
                             "src/assets/vendor/css-chart.css",
                             "src/assets/scss/style.scss",
                             "src/styles.scss"
@@ -54,7 +48,8 @@
                             "chart.js",
                             "quill",
                             "muse-js",
-                            "moment"
+                            "moment",
+                            "sweetalert2"
                         ]
                     },
                     "configurations": {
@@ -94,10 +89,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "adminwrap-admin-angular:build:production"
+                            "browserTarget": "app-tdah:build:production"
                         },
                         "development": {
-                            "browserTarget": "adminwrap-admin-angular:build:development"
+                            "browserTarget": "app-tdah:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -105,7 +100,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "adminwrap-admin-angular:build"
+                        "browserTarget": "app-tdah:build"
                     }
                 },
                 "test": {
