@@ -81,7 +81,8 @@ export class PatientProfileComponent implements OnInit, AfterViewInit {
                     prob: response.datos_clinicos === null ? null:response.datos_clinicos.prob,
                     adhd: response.datos_clinicos === null ? null:response.datos_clinicos.adhd,
                 }
-                console.log(this.results);
+                
+                this.saveDataPatient();
                 
             }, (error) => {
                 this.loading = false;
@@ -190,7 +191,7 @@ export class PatientProfileComponent implements OnInit, AfterViewInit {
         return age;
     }
 
-    async saveDataPatient() {
+    saveDataPatient() {
         this.current_patient.num_pruebas_prev = this.lengthTest;
         this.patientService.set_patient_info(this.current_patient);
     }

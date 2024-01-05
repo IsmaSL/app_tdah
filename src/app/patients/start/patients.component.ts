@@ -14,10 +14,10 @@ export class PatientsComponent implements OnInit {
     patientList: any[];
     loading = false;
 
-    constructor(config: NgbModalConfig, 
-                private modalService: NgbModal,
-                private patientService: PatientService,
-                private fireService: FirebaseService) {
+    constructor(config: NgbModalConfig,
+        private modalService: NgbModal,
+        private patientService: PatientService,
+        private fireService: FirebaseService) {
         config.backdrop = 'static';
         config.keyboard = false;
         config.centered = false;
@@ -38,7 +38,7 @@ export class PatientsComponent implements OnInit {
         this.patientService.get_all_patients().subscribe(
             (response) => {
                 this.loading = false;
-                this.patientList = response;   
+                this.patientList = response;
                 // console.log(this.patientList);
                 this.get_pic_profile();
             }, (error) => {
@@ -51,19 +51,19 @@ export class PatientsComponent implements OnInit {
     get_pic_profile() {
         this.patientList.forEach(
             patient => {
-                if(patient.urlImg !== 'NULL' || patient.urlImg !== '' || patient.urlImg !== null) {
-                    this.fireService.getProfileUrl(patient.idUsuario).then(
-                        url => {
-                            patient.urlImg = url;
-                        }
-                    ).catch(
-                        error => {
+                patient.urlImg = 'assets/images/gif/loading.gif';  // Imagen de carga
+
+                if (patient.urlImgFirebase !== 'NULL' && patient.urlImgFirebase !== '' && patient.urlImgFirebase !== null) {
+                    this.fireService.getProfileUrl(patient.idUsuario)
+                        .then(url => {
+                            patient.urlImg = url;  // Actualizar con la imagen de Firebase
+                        })
+                        .catch(error => {
                             console.error('Error al obtener la URL del perfil:', error);
-                            patient.urlImg = 'assets/images/users/user4.jpg';
-                        }
-                    );
+                            patient.urlImg = 'assets/images/users/user4.jpg';  // Imagen por defecto
+                        });
                 } else {
-                    patient.urlImg = 'assets/images/users/user4.jpg';
+                    patient.urlImg = 'assets/images/users/user4.jpg';  // Imagen por defecto
                 }
             }
         );

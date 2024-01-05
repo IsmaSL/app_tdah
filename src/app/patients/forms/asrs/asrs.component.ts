@@ -66,6 +66,7 @@ export class AsrsComponent implements OnInit {
             this.formToUpdate.idPaciente = this.id_current_patient;
             this.formToUpdate.form = 'asrs';
             this.formToUpdate.score = this.calcularTotal();
+            
             console.log(this.formToUpdate);
             
             // Hace la solicitud

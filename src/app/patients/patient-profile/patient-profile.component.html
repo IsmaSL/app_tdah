@@ -116,7 +116,7 @@
             <div class="card-body">
                 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills">
                     <!-- *ngIf="lengthTest !== 0" -->
-                    <li [ngbNavItem]="1">
+                    <li *ngIf="tests" [ngbNavItem]="1">
                         <a ngbNavLink class="card-subtitle mb-0 fs-4"><strong>Seguimiento</strong></a>
                         <ng-template ngbNavContent>
                             <div class="row pb-0 mb-0" style="height: 24.2rem;">

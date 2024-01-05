@@ -18,13 +18,13 @@ export class RecentPatientsComponent implements OnInit {
 
     ngOnInit(): void {
         this.get_recent_patients();
-        this.get_pic_profile();
     }
 
     get_recent_patients() {
         this.patientServ.get_recent_patients().subscribe(
             (response) => {
                 this.data = response;
+                this.get_pic_profile();
             }, (error) => {
                 console.log(error);
             }
