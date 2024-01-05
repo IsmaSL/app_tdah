@@ -33,7 +33,12 @@
                     <ngb-highlight [result]="patient.fechaRegistro" [term]="csearchTerm"></ngb-highlight>
                 </td>
                 <td class="text-center">
-                    <span>{{ patient.datos_clinicos ? patient.datos_clinicos.fecha_diagnostico : "No realizado" }}</span>
+                    <div *ngIf="patient.datos_clinicos === null">
+                        <span>No realizado</span>
+                    </div>
+                    <div *ngIf="patient.datos_clinicos !== null">
+                        <span>{{ patient.datos_clinicos.fecha_diagnostico !== null ? patient.datos_clinicos.fecha_diagnostico : "No realizado" }}</span>
+                    </div>
                 </td>
                 <td class="text-center">
                     <div *ngIf="patient.datos_clinicos">

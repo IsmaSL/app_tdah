@@ -13,7 +13,10 @@ export class FilterPipe implements PipeTransform {
 
         return items.filter(item => {
             return Object.keys(item).some(key => {
-                return item[key].toString().toLowerCase().includes(searchText);
+                // Verifica si la propiedad es nula o indefinida antes de llamar a toString()
+                const value = item[key];
+                return value != null && value.toString().toLowerCase().includes(searchText);
+                // return item[key].toString().toLowerCase().includes(searchText);
             });
         });
     }

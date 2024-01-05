@@ -125,13 +125,13 @@
                             <div class="col-12 col-md-6">
                                 <label for="">¿Consume medicamentos para tratar algunos de los trastornos mencionados? (Si es que aplica):</label>
                                 <input type="radio" class="form-check-input border border-1 me-2" name="med" [(ngModel)]="med" value="1">Sí
-                                <input type="radio" class="form-check-input border border-1 me-2 ms-3" name="med" [(ngModel)]="med" value="0" checked>No
+                                <input type="radio" class="form-check-input border border-1 me-2 ms-3" name="med" [(ngModel)]="med" value="0">No
                             </div>
                         </div>
                     </div>
                     <div class="row mb-3 pt-3">
                         <div class="col-12 text-end">
-                            <button type="button" (click)="test()">Test</button>
+                            <!-- <button type="button" (click)="test()">Test</button> -->
                             <button type="submit" class="btn btn-rounded btn-primary me-2 fs-4" (click)="cleanForm()">
                                 <i class="fas fa-eraser me-2"></i>Limpiar
                             </button>

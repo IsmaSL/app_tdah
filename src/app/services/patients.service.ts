@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PatientService {
 
-    private url_base = "http://localhost:8000/patients";
-    key_lost: string = 'current_patient'
+    private apiBaseUrl = environment.apiBaseUrl;
+    private url_base = this.apiBaseUrl + '/patients';
+    key_lost: string = 'current_patient';
 
     constructor(private http: HttpClient) { }
 
@@ -18,6 +21,10 @@ export class PatientService {
 
     get_all_patients(): Observable<any> {
         return this.http.get<any>(this.url_base + '/get-patients');
+    }
+
+    get_recent_patients(): Observable<any> {
+        return this.http.get<any>(this.url_base + '/get-recente-patients');
     }
 
     get_info_patient(id: string): Observable<any> {

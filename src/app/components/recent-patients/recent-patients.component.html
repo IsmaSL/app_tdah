@@ -2,27 +2,28 @@
     <div class="p-4 rounded-4 rounded-bottom bg-info">
         <div class="align-items-center">
             <div class="text-center">
-                <h4 class="mb-0 fw-semi text-white">Pacientes Atendidos Recientemente</h4>
+                <h4 class="mb-0 fw-semi text-white">Pacientes Añadidos Recientemente</h4>
             </div>
         </div>
     </div>
-    <div class="card-body rounded-top rounded-4 bg-light py-2">
-        <li class="d-flex align-items-center py-3" *ngFor="let e of earning">
-            <img [src]="e.img" class="rounded-circle" width="60" />
-            <div class="ms-3">
-                <h4 class="fw-normal mb-0">{{e.name}}</h4>
-                <span class="text-muted">{{e.date}}</span>
-            </div>
-            <div class="ms-auto">
-                <a href="/app/patients/patient-profile">
-                    <h2 class="mb-0 text-info font-medium">
-                        <i [ngClass]="[e.icon]"></i>
-                    </h2>
-                </a>
-            </div>
-        </li>
-        <div class="py-3">
-            <a href="/app/patients" type="button" class="btn btn-rounded btn-outline-info d-block w-100 fs-4">Ver todos los pacientes</a>
+    <div class="card-body rounded-top rounded-4 bg-white p-0">
+        <div class="list-group mt-3 mb-4">
+            <a *ngFor="let d of data" [routerLink]="['/app/patients/patient-profile', d.idUsuario]" 
+                class="d-flex align-items-center list-group-item list-group-item-action list-group-item-light px-4 my-1">
+                <div>
+                    <img [src]="d.urlImg" class="rounded-circle" width="60" />
+                </div>
+                <div class="ms-3">
+                    <h4 class="fw-normal mb-0">{{ d.nombre }} {{ d.apellidoP }} {{ d.apellidoM }}</h4>
+                    <span class="text-muted fs-4">{{ d.fechaRegistro }}</span>
+                </div>
+                <div class="ms-auto">
+                    <i class="fas fa-chevron-right text-info fw-bold fs-5"></i>
+                </div>
+            </a>
+        </div>
+        <div class="px-4 pb-4">
+            <span class="btn btn-rounded btn-outline-info d-block w-100 fs-4">Ver Lista Completa de Pacientes</span>
         </div>
     </div>
 </div>

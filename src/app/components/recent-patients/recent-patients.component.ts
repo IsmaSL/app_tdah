@@ -1,33 +1,54 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+
+import { PatientService } from 'src/app/services/patients.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
-  selector: 'app-recent-patients',
-  templateUrl: './recent-patients.component.html',
-  styleUrls: ['./recent-patients.component.scss']
+    selector: 'app-recent-patients',
+    templateUrl: './recent-patients.component.html',
+    styleUrls: ['./recent-patients.component.scss']
 })
-export class RecentPatientsComponent {
+export class RecentPatientsComponent implements OnInit {
 
-  constructor() { }
+    data: any;
+    isLoading: boolean = false;
 
-  earning: Object[] = [
-    {
-      img: 'assets/images/users/user_1.jpg',
-      name: 'Adolfo Meza Romero',
-      date: '10-11-2022',
-      icon: 'mdi mdi-open-in-new'
-    },
-    {
-      img: 'assets/images/users/user_2.jpg',
-      name: 'Brandon Azael Muciño Santiesteban',
-      date: '01-11-2022',
-      icon: 'mdi mdi-open-in-new'
-    },
-    {
-      img: 'assets/images/users/user_3.jpg',
-      name: 'Lissete Rosete Rosas',
-      date: '26-03-2023',
-      icon: 'mdi mdi-open-in-new'
+    constructor(private patientServ: PatientService,
+                private fireService: FirebaseService) { }
+
+    ngOnInit(): void {
+        this.get_recent_patients();
+        this.get_pic_profile();
     }
-  ];
+
+    get_recent_patients() {
+        this.patientServ.get_recent_patients().subscribe(
+            (response) => {
+                this.data = response;
+            }, (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    get_pic_profile() {
+        this.data.forEach(patient => {
+        // Establecer la imagen de carga inicialmente
+        patient.urlImg = 'assets/images/gif/loading.gif';  // Imagen de carga
+
+        if (patient.urlImgFirebase !== 'NULL' && patient.urlImgFirebase !== '' && patient.urlImgFirebase !== null) {
+            this.fireService.getProfileUrl(patient.idUsuario)
+                .then(url => {
+                    patient.urlImg = url;  // Actualizar con la imagen de Firebase
+                })
+                .catch(error => {
+                    console.error('Error al obtener la URL del perfil:', error);
+                    patient.urlImg = 'assets/images/users/user4.jpg';  // Imagen por defecto
+                });
+        } else {
+            patient.urlImg = 'assets/images/users/user4.jpg';  // Imagen por defecto
+        }
+    });
+    }
 
 }

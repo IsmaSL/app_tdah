@@ -4,11 +4,14 @@ import { Observable } from 'rxjs';
 
 import { MuseFormModel } from '../test/muse-js/muse-js.model';
 
+import { environment } from 'src/environments/environment';
+
 @Injectable({
     providedIn: 'root'
 })
 export class TestService {
-    private url_base = "http://localhost:8000/tests";
+    private apiBaseUrl = environment.apiBaseUrl;
+    private url_base = this.apiBaseUrl + '/tests';
 
     constructor(private http: HttpClient) { } 
 

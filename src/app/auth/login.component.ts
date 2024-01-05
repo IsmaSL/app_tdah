@@ -43,7 +43,7 @@ export class LoginComponent {
             );
         }, error => {
             console.log("status: " + error.status + " - " + error.statusText + "\n" + error.error.message);
-            alert("Ups... " + error.error.message)
+            alert("Error: Login -> " + error.error.message)
         });
     }
 
@@ -54,7 +54,7 @@ export class LoginComponent {
                 this.authService.setUser(response);
             }, error => {
                 console.log(error);
-                alert("Ups... " + error)
+                alert("Error: Get.Info.User ->" + error.error.message)
             }
         )
     }

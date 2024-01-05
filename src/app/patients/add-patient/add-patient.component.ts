@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AddPatientModel } from './add-patient.model';
 import { SwalService } from 'src/app/services/swal.service';
 import { PatientService } from 'src/app/services/patients.service';
 
@@ -22,11 +23,11 @@ export class AddPatientComponent implements OnInit {
     cbx3: boolean = false;
     cbx4: boolean = false;
 
-    sustances: number = 0;
-    med: number = 0;
+    sustances: number;
+    med: number;
 
     // Formulario del Paciente
-    paciente = {
+    paciente: AddPatientModel = {
         urlImg: 'NULL',
         nombre: '',
         apellidoP: '',
@@ -43,6 +44,14 @@ export class AddPatientComponent implements OnInit {
             numTelefono: '',
             numTelefonoFam: '',
             ocupacion: ''
+        },
+        datos_clinicos: {
+            add: 0,
+            bipolar: 0,
+            unipolar: 0,
+            anxiety: 0,
+            substance: 0,
+            med: 0
         }
     }
 
@@ -54,12 +63,16 @@ export class AddPatientComponent implements OnInit {
     }
 
     test() {
-        console.log('add: ' + (this.cbx1 ? 1 : 0));
-        console.log('tb: ' + (this.cbx2 ? 1 : 0));
-        console.log('tu: ' + (this.cbx3 ? 1 : 0));
-        console.log('ta: ' + (this.cbx4 ? 1 : 0));
-        console.log('sus: ' + this.sustances);
-        console.log('med: ' + this.med);
+        this.paciente.datos_clinicos = {
+            add: (this.cbx1 ? 1 : 0),
+            bipolar: (this.cbx2 ? 1 : 0),
+            unipolar: (this.cbx3 ? 1 : 0),
+            anxiety: (this.cbx4 ? 1 : 0),
+            substance: parseInt(this.sustances.toString()),
+            med: parseInt(this.med.toString()),
+        };
+
+        console.log(this.paciente);
     }
 
     sonTodosLosCamposLlenos(): boolean {
@@ -82,6 +95,14 @@ export class AddPatientComponent implements OnInit {
 
     savePatient() {
         if(this.sonTodosLosCamposLlenos()) {
+            this.paciente.datos_clinicos = {
+                add: (this.cbx1 ? 1 : 0),
+                bipolar: (this.cbx2 ? 1 : 0),
+                unipolar: (this.cbx3 ? 1 : 0),
+                anxiety: (this.cbx4 ? 1 : 0),
+                substance: parseInt(this.sustances.toString()),
+                med: parseInt(this.med.toString()),
+            };
             this.patientService.add_patient(this.paciente).subscribe(
                 (response) => {
                     console.log(response);
@@ -117,8 +138,26 @@ export class AddPatientComponent implements OnInit {
                 numTelefono: '',
                 numTelefonoFam: '',
                 ocupacion: ''
+            },
+            datos_clinicos: {
+                add: 0,
+                bipolar: 0,
+                unipolar: 0,
+                anxiety: 0,
+                substance: 0,
+                med: 0
             }
-        }
+        };
+
+        this.cbx1 = false;
+        this.cbx2 = false;
+        this.cbx3 = false;
+        this.cbx4 = false;
+
+        this.sustances = 0;
+        this.med = 0;
+
+        
         this.swal.swalCleanData();
     }
 
