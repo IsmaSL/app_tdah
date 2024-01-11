@@ -68,7 +68,7 @@ export class HistoryTdahTestsComponent implements OnInit, AfterViewInit, OnDestr
         const datasets = this.tiposDiagnostico.map((tipo, index) => {
             const data = labels.map(label => {
                 const prueba = this.pruebas.find(p => this.parsearYFormatearFecha(p.fecha_prueba) === label && Number(p.diagnosticoFinal) === index);
-                return prueba ? prueba.probabilidad * 100 : 1;
+                return prueba ? prueba.probabilidad * 100 : 0;
             });
         
             return {

@@ -1,1 +1,215 @@
-<p>hads works!</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow bg-white rounded-4">
+            <div class="card-body px-5">
+                <!-- Encabezado y botón Back -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h2 class="pb-0 mb-0">Formulario HADS</h2>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-outline-primary btn-rounded fs-4 border-2" (click)="cancel()">
+                            <i class="fas fa-angle-left me-2"></i>Regresar
+                        </button>
+                    </div>
+                </div>
+                <div class="my-3 fs-5">
+                    <span>
+                        La Escala Hospitalaria de Ansiedad y Depresión (HADS) es un instrumento de evaluación para evaluar la gravedad del 
+                        estado actual de ansiedad y depresión. La escala consta de 14 ítems, siete de los cuales evalúan el nivel de ansiedad 
+                        (HADS-A) y siete el nivel de depresión (HADS-D). Cada dimensión da una puntuación total entre 0 y 21, y las puntuaciones 
+                        inferiores a 8 indican la ausencia de síntomas en relación con la enfermedad en cuestión.
+                    </span>
+                </div>
+                <!-- Formulario en tabla -->
+                <div class="table-responsive">
+                    <form [formGroup]="hads" *ngIf="!turnForm">
+                        <table class="table table-striped border fs-4 mb-4">
+                            <thead class="table-dark text-white">
+                                <tr>
+                                    <th>#</th>
+                                    <th>HADS-A</th>
+                                    <th class="text-center">Nunca</th>
+                                    <th class="text-center">Casi Nunca</th>
+                                    <th class="text-center">Casi Siempre</th>
+                                    <th class="text-center">Siempre</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-striped border border-dark align-middle fs-4">
+                                <tr>
+                                    <td>A1.</td>
+                                    <td class="fw-normal">
+                                        Me siento tenso/a o nervioso/a:
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a1" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a1" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a1" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a1" value="3"></td>
+                                </tr>
+                                <tr>
+                                    <td>A2.</td>
+                                    <td class="fw-normal">
+                                        Siento una especie de temor como si algo malo fuera a suceder:
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a2" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a2" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a2" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a2" value="3"></td>
+                                </tr>
+                                <tr>
+                                    <td>A3.</td>
+                                    <td class="fw-normal">
+                                        Tengo la cabeza llena de preocupaciones:
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a3" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a3" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a3" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a3" value="3"></td>
+                                </tr>
+                                <tr>
+                                    <td>A4.</td>
+                                    <td class="fw-normal">
+                                        Soy capaz de permanecer sentado/a tranquilo/a y relajado/a:
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a4" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a4" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a4" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a4" value="3"></td>
+                                </tr>
+                                <tr>
+                                    <td>A5.</td>
+                                    <td class="fw-normal">
+                                        Experimento una desagradable sensación de «nervios y hormigueos» en el estómago:
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a5" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a5" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a5" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a5" value="3"></td>
+                                </tr>
+                                <tr>
+                                    <td>A6.</td>
+                                    <td class="fw-normal">
+                                        Me siento inquieto/a como si no pudiera parar de moverme:
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a6" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a6" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a6" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a6" value="3"></td>
+                                </tr>
+                                <tr>
+                                    <td>A7.</td>
+                                    <td class="fw-normal">
+                                        Experimento de repente sensaciones de gran angustia o temor:
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a7" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a7" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a7" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="a7" value="3"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-success btn-rounded border-2 fs-4" (click)="turnForm = !turnForm">
+                                <i class="fas fa-arrow-right me-2"></i>Siguiente
+                            </button>
+                        </div>
+                    </form>
+                    <form [formGroup]="hads" *ngIf="turnForm" (ngSubmit)="onSubmit()">
+                        <table class="table table-striped border fs-4 mb-4">
+                            <thead class="table-dark text-white">
+                                <tr>
+                                    <th>#</th>
+                                    <th>HADS-D</th>
+                                    <th class="text-center">Nunca</th>
+                                    <th class="text-center">Casi Nunca</th>
+                                    <th class="text-center">Casi Siempre</th>
+                                    <th class="text-center">Siempre</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-striped border border-dark align-middle fs-4">
+                                <tr>
+                                    <td>D1.</td>
+                                    <td class="fw-normal">
+                                        Sigo disfrutando de las cosas como siempre:
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d1" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d1" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d1" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d1" value="3"></td>
+                                </tr>
+                                <tr>
+                                    <td>D2.</td>
+                                    <td class="fw-normal">
+                                        Soy capaz de reírme y ver el lado gracioso de las cosas:
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d2" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d2" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d2" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d2" value="3"></td>
+                                </tr>
+                                <tr>
+                                    <td>D3.</td>
+                                    <td class="fw-normal">
+                                        Me siento alegre:
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d3" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d3" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d3" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d3" value="3"></td>
+                                </tr>
+                                <tr>
+                                    <td>D4.</td>
+                                    <td class="fw-normal">
+                                        Me siento lento/a y torpe:
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d4" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d4" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d4" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d4" value="3"></td>
+                                </tr>
+                                <tr>
+                                    <td>D5.</td>
+                                    <td class="fw-normal">
+                                        He perdido el interés por mi aspecto personal:
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d5" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d5" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d5" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d5" value="3"></td>
+                                </tr>
+                                <tr>
+                                    <td>D6.</td>
+                                    <td class="fw-normal">
+                                        Espero las cosas con ilusión:
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d6" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d6" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d6" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d6" value="3"></td>
+                                </tr>
+                                <tr>
+                                    <td>D7.</td>
+                                    <td class="fw-normal">
+                                        Soy capaz de disfrutar con un buen libro o con un buen programa de radio o televisión:
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d7" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d7" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d7" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="d7" value="3"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-secondary btn-rounded border-2 text-white fs-4" (click)="turnForm = !turnForm">
+                                <i class="fas fa-arrow-left me-2"></i>Regresar
+                            </button>
+                            <button type="submit" class="btn btn-success btn-rounded border-2 fs-4 ms-2">
+                                <i class="fas fa-check me-2"></i>Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

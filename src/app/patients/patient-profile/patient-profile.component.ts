@@ -105,6 +105,9 @@ export class PatientProfileComponent implements OnInit, AfterViewInit {
     }
 
     load_pic_profile(id: string) {
+        // Establecer la imagen de carga inicialmente
+        this.profileUrl = 'assets/images/gif/loading.gif';
+
         this.firebaseService.getProfileUrl(id).then(url => {
             this.profileUrl = url;
         }).catch(error => {

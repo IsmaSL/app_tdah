@@ -1,15 +1,11 @@
 import { Component, EventEmitter, Output, OnInit } from "@angular/core";
-import {
-    NgbModal,
-    ModalDismissReasons,
-    NgbPanelChangeEvent,
-    NgbCarouselConfig,
-} from "@ng-bootstrap/ng-bootstrap";
-import { PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
-import { TranslateService } from '@ngx-translate/core';
-
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Router } from "@angular/router";
+import { PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
+
+import { TranslateService } from '@ngx-translate/core';
 import { UsersService } from "src/app/services/users.service";
+import { DarkModeService } from "src/app/services/DarkMode.service";
 
 declare var $: any;
 
@@ -31,7 +27,11 @@ export class VerticalNavigationComponent implements OnInit {
 
     emitEvent() {
         this.darkMode.emit('dark');
-        this.iconLight = !this.iconLight;
+        // this.iconLight = !this.iconLight;
+        
+        const isDarkMode = !this.iconLight;
+        this.dark.setDarkMode(isDarkMode);
+        this.iconLight = isDarkMode;
     }
 
     // This is for Notifications
@@ -130,8 +130,10 @@ export class VerticalNavigationComponent implements OnInit {
     constructor(private modalService: NgbModal, 
                 private translate: TranslateService,
                 private router: Router,
-                private userServ: UsersService) {
+                private userServ: UsersService,
+                private dark: DarkModeService) {
         translate.setDefaultLang('es');
+        this.iconLight = this.dark.getDarkMode();
     }
 
     changeLanguage(lang: any) {

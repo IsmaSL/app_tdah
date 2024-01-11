@@ -5,10 +5,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { TestService } from 'src/app/services/tests.service';
 import { SwalService } from 'src/app/services/swal.service';
 // Chart.js
-import { Chart } from 'chart.js';
-import zoomPlugin from 'chartjs-plugin-zoom';
-import 'chartjs-plugin-annotation';
-Chart.register(zoomPlugin);
+import { Chart, registerables } from 'chart.js';
+// import zoomPlugin from 'chartjs-plugin-zoom';
+import annotationPlugin from 'chartjs-plugin-annotation';
+
+// Chart.register(zoomPlugin);
+Chart.register(...registerables, annotationPlugin);
 
 @Component({
     selector: 'app-reports',
@@ -235,21 +237,24 @@ export class ReportsComponent implements OnInit, AfterViewInit {
                     },
                 },
                 plugins: {
-                    zoom: {
-                        zoom: {
-                            wheel: {
-                                enabled: true,
-                            },
-                            pinch: {
-                                enabled: true,
-                            },
-                            drag: {
-                                enabled: true,
-                            },
-                            mode: 'x',
-                            scaleMode: 'x'
-                        }
+                    datalabels: {
+                        display: false,
                     },
+                    // zoom: {
+                    //     zoom: {
+                    //         wheel: {
+                    //             enabled: true,
+                    //         },
+                    //         pinch: {
+                    //             enabled: true,
+                    //         },
+                    //         drag: {
+                    //             enabled: true,
+                    //         },
+                    //         mode: 'x',
+                    //         scaleMode: 'x'
+                    //     }
+                    // },
                     legend: {
                         align: 'center',
                         labels: {

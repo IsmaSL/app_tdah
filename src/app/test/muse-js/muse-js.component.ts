@@ -418,6 +418,9 @@ export class MuseJsComponent implements OnInit, OnDestroy, AfterViewInit {
             title: {
                 display: false,
             },
+            datalabels: {
+                display: false,
+            },
             legend: {
                 labels: {
                     usePointStyle: true,

@@ -36,7 +36,7 @@
                         </ng-container>
                     </td>
                     <td class="text-center">
-                        <ng-container *ngIf="test.diagnosticoFinal === '' || test.diagnosticoFinal === null">
+                        <ng-container *ngIf="test.diagnosticoFinal === '' || test.diagnosticoFinal === null || test.diagnosticoFinal === 'NULL'">
                             <span class="rounded-4 text-white px-2 bg-danger py-1">No Evaluado</span>
                         </ng-container>
                         <ng-container *ngIf="test.diagnosticoFinal === '0'">
@@ -53,8 +53,8 @@
                         </ng-container>
                     </td>
                     <td class="text-center">
-                        <span *ngIf="test.diagnosticoFinal===''" class="rounded-pill bg-success text-white py-1 px-2 fw-semi">No Evaluado</span>
-                        <span *ngIf="test.diagnosticoFinal!==''" class="rounded-pill bg-success text-white py-1 px-2 fw-semi">{{ test.probabilidad * 100 }}%</span>
+                        <span *ngIf="test.probabilidad === 0.0" class="rounded-pill bg-success text-white py-1 px-2 fw-semi">No Evaluado</span>
+                        <span *ngIf="test.probabilidad > 0.0" class="rounded-pill bg-success text-white py-1 px-2 fw-semi">{{ test.probabilidad * 100 }}%</span>
                     </td>
                     <td class="text-center">
                         <button [routerLink]="['/app/patients/patient-profile/reports', test.idDetallePrueba]" 

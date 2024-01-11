@@ -13,6 +13,7 @@ export class VerticalSidebarComponent {
     showMenu = '';
     public sidebarnavItems: RouteInfo[] = [];
     path = '';
+    btnName = 'Cerrar Sesión';
 
     constructor(private menuServise: VerticalSidebarService, 
                 private router: Router,

@@ -273,4 +273,14 @@ export class SwalService {
             }
         });
     }
+
+    swalNotUserFound() {
+        Swal.fire({
+            icon: "error",
+            title: "Usuario no encontrado",
+            text: "El usuario o la contraseña son incorrectos, vuelve a intentarlo",
+            showConfirmButton: true,
+            allowOutsideClick: false,
+        });
+    }
 }

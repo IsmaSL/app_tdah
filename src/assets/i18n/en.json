@@ -1,5 +1,6 @@
 {
-  "Inicio": "Home",
-  "Pacientes": "Patients",
-  "Dispositivos": "Devices"
+    "Inicio": "Home",
+    "Pacientes": "Patients",
+    "Dispositivos": "Devices",
+    "Cerrar Sesión": "Log Out"
 }

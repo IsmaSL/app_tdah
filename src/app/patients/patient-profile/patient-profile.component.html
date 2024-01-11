@@ -10,6 +10,7 @@
         <div class="card bg-white shadow rounded-4">
             <div class="card-body pb-0">
                 <div class=" mt-1 mb-2 text-center">
+                    
                     <img [src]="profileUrl" alt="Imagen de perfil" class="rounded-circle" width="150"/>
 
                     <h3 class="card-title font-medium mt-3">
@@ -66,7 +67,7 @@
                         </button>
                     </div>
                     <div class="col">
-                        <button class="btn btn-success text-white btn-rounded fw-medium w-100 fs-4" [disabled]="isEmptyList" (click)="get_predict_diag()">
+                        <button class="btn btn-success text-white btn-rounded fw-medium w-100 fs-4" [disabled]="!tests" (click)="get_predict_diag()">
                             <i class="fas fa-heartbeat me-2"></i>Evaluar
                         </button>
                     </div>
@@ -116,14 +117,6 @@
             <div class="card-body">
                 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills">
                     <!-- *ngIf="lengthTest !== 0" -->
-                    <li *ngIf="tests" [ngbNavItem]="1">
-                        <a ngbNavLink class="card-subtitle mb-0 fs-4"><strong>Seguimiento</strong></a>
-                        <ng-template ngbNavContent>
-                            <div class="row pb-0 mb-0" style="height: 24.2rem;">
-                                <app-history-tdah-tests *ngIf="tests" [pruebas]="tests"></app-history-tdah-tests>
-                            </div>
-                        </ng-template>
-                    </li>
                     <li [ngbNavItem]="2">
                         <a ngbNavLink class="card-subtitle mb-0 fs-4"><strong>Perfil</strong></a>
                         <ng-template ngbNavContent>
@@ -202,6 +195,14 @@
                             </div>
                         </ng-template>
                     </li>
+                    <li [ngbNavItem]="1" *ngIf="lengthTest > 0">
+                        <a ngbNavLink class="card-subtitle mb-0 fs-4"><strong>Seguimiento</strong></a>
+                        <ng-template ngbNavContent>
+                            <div class="row pb-0 mb-0" style="height: 24.2rem;">
+                                <app-history-tdah-tests *ngIf="tests" [pruebas]="tests"></app-history-tdah-tests>
+                            </div>
+                        </ng-template>
+                    </li>
                     <li [ngbNavItem]="3">
                         <a ngbNavLink class="card-subtitle mb-0 fs-4"><strong>Formularios</strong></a>
                         <ng-template ngbNavContent>
@@ -215,7 +216,7 @@
                                         <span class="fs-4">(Score: {{ forms.asrs != null ? forms.asrs : '0' }} pts.)</span>
                                     </div>
                                     <div class="col text-end">
-                                        <a [routerLink]="['/app/patients/forms/ASRS-form']" 
+                                        <a href="/app/patients/forms/ASRS-form" 
                                             class="btn btn-primary btn-rounded py-1 px-2 fs-4">
                                             <i class="fas fa-external-link-alt"></i> Ir al formulario
                                         </a>
@@ -231,9 +232,10 @@
                                         <span class="fs-4">(Score: {{ forms.wurs != null ? forms.wurs : '0' }} pts.)</span>
                                     </div>
                                     <div class="col text-end align-items-center">
-                                        <button href="" class="btn btn-success btn-rounded py-1 px-2 fs-4">
+                                        <a href="/app/patients/forms/WURS-form"
+                                            class="btn btn-success btn-rounded py-1 px-2 fs-4">
                                             <i class="fas fa-external-link-alt"></i> Ir al formulario
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                                 <p>
@@ -243,12 +245,13 @@
                                 <div class="row d-flex justify-content-between">
                                     <div class="col align-items-center">
                                         <span class="h3 mb-0 me-2">MDQ</span>
-                                        <span class="fs-4">(Score: {{ forms.mdq != null ? forms.mdq : '0' }} pts.)</span>
+                                        <span class="fs-4">(Score: {{ forms.mdq != null && forms.mdq === 1 ? 'Positivo' : 'Negativo' }})</span>
                                     </div>
                                     <div class="col text-end align-items-center">
-                                        <button href="" class="btn btn-secondary btn-rounded text-white py-1 px-2 fs-4">
+                                        <a href="/app/patients/forms/MDQ-form"
+                                            class="btn btn-secondary btn-rounded text-white py-1 px-2 fs-4">
                                             <i class="fas fa-external-link-alt"></i> Ir al formulario
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                                 <p>
@@ -261,13 +264,14 @@
                                         <span class="fs-4">(Score: {{ forms.ct != null ? forms.ct : '0' }} pts.)</span>
                                     </div>
                                     <div class="col text-end align-items-center">
-                                        <button href="" class="btn btn-info btn-rounded py-1 px-2 fs-4">
+                                        <a href="/app/patients/forms/CT-form"
+                                            class="btn btn-info btn-rounded py-1 px-2 fs-4">
                                             <i class="fas fa-external-link-alt"></i> Ir al formulario
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                                 <p>
-                                    La escala de temperamento ciclotímico (TC) es una escala de autoevaluación de 21 ítems, que evalúa la inestabilidad emocional y la hipersensibilidad a los estímulos externos típicamente asociadas a este trastorno del espectro bipolar. La TC forma parte originalmente del cuestionario TEMP-A exhaustivo. 
+                                    La escala de Temperamento Ciclotímico (TC) es una escala de autoevaluación de 21 ítems, que evalúa la inestabilidad emocional y la hipersensibilidad a los estímulos externos típicamente asociadas a este trastorno del espectro bipolar. La TC forma parte originalmente del cuestionario TEMP-A exhaustivo. 
                                 </p>
                                 <hr>
                                 <div class="row d-flex justify-content-between">
@@ -276,9 +280,10 @@
                                         <span class="fs-4">(Score: {{ forms.madrs != null ? forms.madrs : '0' }} pts.)</span>
                                     </div>
                                     <div class="col text-end align-items-center">
-                                        <button href="" class="btn btn-warning btn-rounded py-1 px-2 fs-4">
+                                        <a href="/app/patients/forms/MADRS-form" 
+                                            class="btn btn-warning btn-rounded py-1 px-2 fs-4">
                                             <i class="fas fa-external-link-alt"></i> Ir al formulario
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                                 <p>
@@ -288,12 +293,13 @@
                                 <div class="row d-flex justify-content-between">
                                     <div class="col align-items-center">
                                         <span class="h3 mb-0 me-2">HADS</span>
-                                        <span class="fs-4">(Score: {{ forms.hads_a != null ? forms.hads_a : '0' }} pts.)</span>
+                                        <span class="fs-4">(Score: {{ forms.hads_a != null ? forms.hads_a + ' | ' + forms.hads_d : '0' }} pts.)</span>
                                     </div>
                                     <div class="col text-end align-items-center">
-                                        <button href="" class="btn btn-dark btn-rounded py-1 px-2 fs-4">
+                                        <a href="/app/patients/forms/HADS-form"
+                                            class="btn btn-dark btn-rounded py-1 px-2 fs-4">
                                             <i class="fas fa-external-link-alt"></i> Ir al formulario
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                                 <p>

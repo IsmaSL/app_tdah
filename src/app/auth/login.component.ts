@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { SwalService } from '../services/swal.service';
 
 @Component({
     selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent {
     credentials = { username: '', password: '' };
 
     constructor(private router: Router, 
-                private authService: AuthService) {
+                private authService: AuthService,
+                private swal: SwalService) {
                     if(this.authService.isLoggedIn()) {
                         this.router.navigate(['/app/home']);
                     }
@@ -43,7 +45,8 @@ export class LoginComponent {
             );
         }, error => {
             console.log("status: " + error.status + " - " + error.statusText + "\n" + error.error.message);
-            alert("Error: Login -> " + error.error.message)
+            // alert("Error: Login -> " + error.error.message)
+            this.swal.swalNotUserFound();
         });
     }
 

@@ -1,1 +1,156 @@
-<p>mdq works!</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow bg-white rounded-4">
+            <div class="card-body px-5">
+                <!-- Encabezado y botón Back -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h2 class="pb-0 mb-0">Formulario MDQ</h2>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-outline-primary btn-rounded fs-4 border-2" (click)="cancel()">
+                            <i class="fas fa-angle-left me-2"></i>Regresar
+                        </button>
+                    </div>
+                </div>
+                <div class="my-3 fs-5">
+                    <span>
+                        El Cuestionario de Trastornos del Estado de Ánimo (MDQ, por sus siglas en inglés) es un instrumento de evaluación de 
+                        autoinforme de 13 ítems que se puede utilizar para identificar a los clientes con más probabilidades de tener trastorno 
+                        bipolar. El MDQ ayuda a identificar el trastorno bipolar y a distinguirlo de otras alteraciones del estado de ánimo en 
+                        poblaciones clínicas.
+                    </span>
+                </div>
+                <!-- Formulario en tabla -->
+                <div class="table-responsive">
+                    <form [formGroup]="miFormulario" (ngSubmit)="onSubmit()">
+                        <table class="table table-striped border fs-4 mb-4">
+                            <thead class="table-dark text-white">
+                                <tr>
+                                    <th>#</th>
+                                    <th>¿Ha habido alguna vez un periodo de tiempo en el que no fuera usted mismo y...</th>
+                                    <th class="text-center">Sí</th>
+                                    <th class="text-center">No</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-striped border border-dark align-middle fs-4">
+                                <tr>
+                                    <td>1.</td>
+                                    <td class="fw-normal">
+                                        ...te sentías tan bien o tan hiperactivo que los demás pensaban que no eras tú mismo o estabas tan hiperactivo que te metías en líos?
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q1" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q1" value="0"></td>
+                                </tr>
+                                <tr>
+                                    <td>2.</td>
+                                    <td class="fw-normal">
+                                        ...estabas tan irritable que gritabas a la gente o iniciabas peleas o discusiones?
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q2" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q2" value="0"></td>
+                                </tr>
+                                <tr>
+                                    <td>3.</td>
+                                    <td class="fw-normal">
+                                        ...te sentías mucho más seguro de ti mismo que de costumbre? 
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q3" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q3" value="0"></td>
+                                </tr>
+                                <tr>
+                                    <td>4.</td>
+                                    <td class="fw-normal">
+                                        ...has dormido mucho menos de lo habitual y no lo has echado de menos?
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q4" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q4" value="0"></td>
+                                </tr>
+                                <tr>
+                                    <td>5.</td>
+                                    <td class="fw-normal">
+                                        ...estaba mucho más hablador o hablaba más rápido de lo habitual?
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q5" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q5" value="0"></td>
+                                </tr>
+                                <tr>
+                                    <td>6.</td>
+                                    <td class="fw-normal">
+                                        ...los pensamientos se agolpan en su cabeza o no puede frenar su mente?
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q6" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q6" value="0"></td>
+                                </tr>
+                                <tr>
+                                    <td>7.</td>
+                                    <td class="fw-normal">
+                                        ...te distraías tan fácilmente con las cosas que te rodeaban que te costaba concentrarte o no perder el hilo? 
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q7" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q7" value="0"></td>
+                                </tr>
+                                <tr>
+                                    <td>8.</td>
+                                    <td class="fw-normal">
+                                        ...tenía mucha más energía de lo habitual? 
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q8" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q8" value="0"></td>
+                                </tr>
+                                <tr>
+                                    <td>9.</td>
+                                    <td class="fw-normal">
+                                        ...era mucho más activo o hacía muchas más cosas de lo habitual?
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q9" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q9" value="0"></td>
+                                </tr>
+                                <tr>
+                                    <td>10.</td>
+                                    <td class="fw-normal">
+                                        ...era mucho más sociable o extrovertido de lo habitual, por ejemplo, llamaba por teléfono a sus amigos en mitad de la noche?
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q10" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q10" value="0"></td>
+                                </tr>
+                                <tr>
+                                    <td>11.</td>
+                                    <td class="fw-normal">
+                                        ...estaba mucho más interesado en el sexo de lo habitual?
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q11" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q11" value="0"></td>
+                                </tr>
+                                <tr>
+                                    <td>12.</td>
+                                    <td class="fw-normal">
+                                        ...hizo cosas que no eran habituales en usted o que otras personas podrían haber considerado excesivas, insensatas o arriesgadas?
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q12" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q12" value="0"></td>
+                                </tr>
+                                <tr>
+                                    <td>13.</td>
+                                    <td class="fw-normal">
+                                        ...gastar dinero te ha metido a ti o a tu familia en problemas?
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q13" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q13" value="0"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-secondary btn-rounded border-2 text-white fs-4" (click)="clean()">
+                                <i class="fas fa-eraser me-2"></i>Limpiar
+                            </button>
+                            <button type="submit" class="btn btn-success btn-rounded border-2 fs-4 ms-2">
+                                <i class="fas fa-check me-2"></i>Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

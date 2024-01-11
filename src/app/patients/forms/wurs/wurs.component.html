@@ -1,1 +1,344 @@
-<p>wurs works!</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow bg-white rounded-4">
+            <div class="card-body px-5">
+                <!-- Encabezado y botón Back -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h2 class="pb-0 mb-0">Formulario WURS</h2>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-outline-primary btn-rounded fs-4 border-2" (click)="cancel()">
+                            <i class="fas fa-angle-left me-2"></i>Regresar
+                        </button>
+                    </div>
+                </div>
+                <div class="my-3 fs-5">
+                    <span>
+                        La Escala de Calificación de Wender Utah – versión de 25 ítems (WURS-25) es un instrumento de autoinforme que 
+                        está diseñado para evaluar retrospectivamente la presencia y gravedad de los síntomas infantiles del TDAH en adultos. 
+                        El WURS-25 es un complemento importante para el diagnóstico del TDAH en adultos dado el requisito de inicio en la infancia 
+                        (American Psychiatric Association, 2013). Esta escala es útil para la detección y el diagnóstico del TDAH entre adultos de 
+                        +18 años y puede ser particularmente útil cuando se usa junto con el ASRS para proporcionar información clínica adicional.
+                    </span>
+                </div>
+                <!-- Formulario en tabla -->
+                <div class="table-responsive">
+                    <form [formGroup]="miFormulario" (ngSubmit)="onSubmit()">
+                        <table class="table table-striped border fs-4 mb-4">
+                            <thead class="table-dark text-white">
+                                <tr>
+                                    <th>#</th>
+                                    <th>De niño fui (o tuve):</th>
+                                    <th class="text-center">Nunca</th>
+                                    <th class="text-center">Casi Nunca</th>
+                                    <th class="text-center">A Veces</th>
+                                    <th class="text-center">Casi Siempre</th>
+                                    <th class="text-center">Siempre</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-striped border border-dark align-middle fs-4">
+                                <tr>
+                                    <td>1.</td>
+                                    <td class="fw-normal">
+                                        Problemas de concentración, se distrae con facilidad
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q1" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q1" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q1" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q1" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q1" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>2.</td>
+                                    <td class="fw-normal">
+                                        Ansioso, preocupado
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q2" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q2" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q2" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q2" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q2" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>3.</td>
+                                    <td class="fw-normal">
+                                        Nervioso, inquieto
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q3" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q3" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q3" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q3" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q3" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>4.</td>
+                                    <td class="fw-normal">
+                                        Desatento, sueña despierto
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q4" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q4" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q4" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q4" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q4" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>5.</td>
+                                    <td class="fw-normal">
+                                        Irascible o irascible, punto de ebullición bajo
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q5" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q5" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q5" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q5" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q5" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>6.</td>
+                                    <td class="fw-normal">
+                                        Arrebatos, rabietas
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q6" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q6" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q6" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q6" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q6" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>7.</td>
+                                    <td class="fw-normal">
+                                        Problemas de perseverancia, no seguir adelante, no terminar las cosas empezadas
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q7" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q7" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q7" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q7" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q7" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>8.</td>
+                                    <td class="fw-normal">
+                                        Terco, testarudo
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q8" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q8" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q8" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q8" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q8" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>9.</td>
+                                    <td class="fw-normal">
+                                        Triste o melancólico, deprimido, infeliz
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q9" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q9" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q9" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q9" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q9" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>10.</td>
+                                    <td class="fw-normal">
+                                        Desobediente con los padres, rebelde, descarado
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q10" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q10" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q10" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q10" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q10" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>11.</td>
+                                    <td class="fw-normal">
+                                        Baja opinión de mí mismo
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q11" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q11" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q11" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q11" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q11" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>12.</td>
+                                    <td class="fw-normal">
+                                        Irritable
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q12" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q12" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q12" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q12" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q12" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>13.</td>
+                                    <td class="fw-normal">
+                                        Malhumorado, altibajos
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q13" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q13" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q13" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q13" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q13" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>14.</td>
+                                    <td class="fw-normal">
+                                        Enfadado
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q14" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q14" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q14" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q14" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q14" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>15.</td>
+                                    <td class="fw-normal">
+                                        Actuar sin pensar, impulsivo
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q15" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q15" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q15" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q15" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q15" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>16.</td>
+                                    <td class="fw-normal">
+                                        Tendencia a la inmadurez
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q16" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q16" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q16" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q16" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q16" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>17.</td>
+                                    <td class="fw-normal">
+                                        Sentimientos de culpa, arrepentimiento
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q17" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q17" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q17" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q17" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q17" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>18.</td>
+                                    <td class="fw-normal">
+                                        Perder el control de mí mismo
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q18" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q18" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q18" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q18" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q18" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>19.</td>
+                                    <td class="fw-normal">
+                                        Tendencia a ser o actuar de forma irracional
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q19" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q19" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q19" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q19" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q19" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>20.</td>
+                                    <td class="fw-normal">
+                                        Impopular con otros niños, no conservaba amigos por mucho tiempo no se llevaba bien con otros niños
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q20" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q20" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q20" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q20" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q20" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>21.</td>
+                                    <td class="fw-normal">
+                                        Problemas para ver las cosas desde el punto de vista de otra persona
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q21" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q21" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q21" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q21" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q21" value="4"></td>
+                                </tr>
+                            </tbody>
+                            <thead class="table-dark text-white">
+                                <tr>
+                                    <th>#</th>
+                                    <th>De niño en la escuela era (o tenía):</th>
+                                    <th class="text-center">Nunca</th>
+                                    <th class="text-center">Casi Nunca</th>
+                                    <th class="text-center">A Veces</th>
+                                    <th class="text-center">Casi Siempre</th>
+                                    <th class="text-center">Siempre</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-striped border border-dark align-middle fs-4">
+                                <tr>
+                                    <td>22.</td>
+                                    <td class="fw-normal">
+                                        Problemas con las autoridades, problemas con la escuela, visitas al la oficina del director
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q22" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q22" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q22" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q22" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q22" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>23.</td>
+                                    <td class="fw-normal">
+                                        Mal estudiante en general, aprende despacio
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q23" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q23" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q23" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q23" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q23" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>24.</td>
+                                    <td class="fw-normal">
+                                        Problemas con las matemáticas o los números
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q24" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q24" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q24" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q24" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q24" value="4"></td>
+                                </tr>
+                                <tr>
+                                    <td>25.</td>
+                                    <td class="fw-normal">
+                                        No alcanza su potencial
+                                    </td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q25" value="0"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q25" value="1"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q25" value="2"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q25" value="3"></td>
+                                    <td class="text-center"><input class="form-check-input border border-2" type="radio" formControlName="q25" value="4"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-secondary btn-rounded border-2 text-white fs-4" (click)="clean()">
+                                <i class="fas fa-eraser me-2"></i>Limpiar
+                            </button>
+                            <button type="submit" class="btn btn-success btn-rounded border-2 fs-4 ms-2">
+                                <i class="fas fa-check me-2"></i>Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
